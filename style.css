@@ -1,0 +1,432 @@
+/* =========================================================
+   Романтический интерактивный сайт для Мадины
+   style.css — премиальный стиль: glassmorphism, liquid glass,
+   градиенты, свечения, плавные анимации.
+   ========================================================= */
+
+/* ---------- Переменные и базовый сброс ---------- */
+:root {
+  --bg-1: #0b0620;      /* глубокий космос */
+  --bg-2: #1a0b33;      /* фиолетовая ночь */
+  --bg-3: #2a0f4a;
+  --pink: #ff5c8a;
+  --pink-soft: #ff9ec4;
+  --violet: #a86bff;
+  --cyan: #6be7ff;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-brd: rgba(255, 255, 255, 0.18);
+  --text: #f5f0ff;
+  --text-dim: rgba(245, 240, 255, 0.75);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* мягкий "выезд" */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Montserrat", -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  /* Базовый романтичный градиент космоса */
+  background:
+    radial-gradient(1200px 800px at 20% 10%, #23103f 0%, transparent 60%),
+    radial-gradient(1000px 700px at 85% 90%, #3a1250 0%, transparent 55%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  user-select: none;
+}
+
+/* ---------- Северное сияние (движущиеся размытые пятна) ---------- */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  filter: blur(60px);
+  pointer-events: none;
+}
+.aurora__blob {
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  border-radius: 50%;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.aurora__blob--1 {
+  background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+  top: -10%; left: -5%;
+  animation: drift1 22s var(--ease) infinite alternate;
+}
+.aurora__blob--2 {
+  background: radial-gradient(circle, var(--violet) 0%, transparent 70%);
+  top: 30%; right: -10%;
+  animation: drift2 26s var(--ease) infinite alternate;
+}
+.aurora__blob--3 {
+  background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+  bottom: -15%; left: 20%;
+  animation: drift3 30s var(--ease) infinite alternate;
+}
+.aurora__blob--4 {
+  background: radial-gradient(circle, var(--pink-soft) 0%, transparent 70%);
+  bottom: 10%; right: 25%;
+  animation: drift1 28s var(--ease) infinite alternate-reverse;
+}
+@keyframes drift1 { to { transform: translate(12vw, 10vh) scale(1.2); } }
+@keyframes drift2 { to { transform: translate(-14vw, 8vh) scale(1.15); } }
+@keyframes drift3 { to { transform: translate(8vw, -12vh) scale(1.25); } }
+
+/* ---------- Канвасы (частицы и конфетти) ---------- */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+#confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* ---------- Фоновые сердечки ---------- */
+.bg-hearts {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-hearts span {
+  position: absolute;
+  bottom: -40px;
+  font-size: 20px;
+  opacity: 0;
+  color: var(--pink-soft);
+  filter: drop-shadow(0 0 8px rgba(255, 120, 170, 0.5));
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) scale(0.6) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.5; }
+  90%  { opacity: 0.35; }
+  100% { transform: translateY(-110vh) scale(1) rotate(40deg); opacity: 0; }
+}
+
+/* ---------- Кнопка музыки ---------- */
+.music-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 80;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-brd);
+  background: var(--glass);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.music-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px rgba(255, 120, 170, 0.5); }
+.music-btn__off {
+  position: absolute;
+  font-size: 14px;
+  color: var(--pink);
+  transform: translate(10px, -10px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+/* Класс is-muted включается скриптом, когда музыка выключена */
+.music-btn.is-muted .music-btn__off { opacity: 1; }
+.music-btn.is-muted .music-btn__icon { opacity: 0.4; }
+.music-btn.is-playing { animation: musicPulse 2s ease-in-out infinite; }
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 120, 170, 0); }
+  50%      { box-shadow: 0 0 22px rgba(255, 120, 170, 0.55); }
+}
+
+/* ---------- Сцены ---------- */
+.stage {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.96) translateY(20px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  pointer-events: none;
+}
+.scene.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+/* Сцена, которая уходит вверх (для эффекта глубины) */
+.scene.is-leaving {
+  transform: scale(1.04) translateY(-30px);
+  opacity: 0;
+}
+
+/* ---------- Стеклянная карточка ---------- */
+.card {
+  position: relative;
+  width: min(560px, 92vw);
+  padding: clamp(28px, 5vw, 52px);
+  border-radius: 28px;
+  text-align: center;
+  overflow: hidden;
+  animation: cardIn 0.9s var(--ease) both;
+}
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+  border: 1px solid var(--glass-brd);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+/* Блик "liquid glass" сверху */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -30%;
+  width: 160%;
+  height: 120%;
+  background: radial-gradient(closest-side, rgba(255,255,255,0.22), transparent 70%);
+  pointer-events: none;
+  transform: rotate(8deg);
+}
+/* Мягкое свечение внутри карточки */
+.card__glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 50% 120%, rgba(255, 92, 138, 0.35), transparent 60%);
+  pointer-events: none;
+  animation: glowShift 8s ease-in-out infinite alternate;
+}
+@keyframes glowShift {
+  from { transform: translateY(10px); opacity: 0.6; }
+  to   { transform: translateY(-10px); opacity: 1; }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+/* ---------- Типографика ---------- */
+.title {
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+  background: linear-gradient(120deg, #fff, var(--pink-soft), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 20px rgba(255, 120, 170, 0.35));
+}
+.text {
+  position: relative;
+  font-size: clamp(15px, 2.6vw, 18px);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+.text--lg { font-size: clamp(20px, 4.5vw, 30px); font-weight: 500; color: var(--text); line-height: 1.5; }
+.text--xl { font-size: clamp(22px, 5vw, 34px); font-weight: 600; color: var(--text); line-height: 1.45; }
+
+/* Плавно пульсирующее свечение текста */
+.glow-text {
+  animation: textGlow 3.5s ease-in-out infinite;
+}
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(255, 158, 196, 0.25); }
+  50%      { text-shadow: 0 0 26px rgba(255, 158, 196, 0.7), 0 0 40px rgba(168, 107, 255, 0.4); }
+}
+
+/* Пульсирующее сердечко в заголовке */
+.beat { display: inline-block; animation: beat 1.3s ease-in-out infinite; }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  15%      { transform: scale(1.3); }
+  30%      { transform: scale(1); }
+  45%      { transform: scale(1.2); }
+}
+
+/* ---------- Кнопки ---------- */
+.actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.btn {
+  position: relative;
+  font-family: inherit;
+  font-size: clamp(15px, 2.5vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: #fff;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease), box-shadow 0.35s var(--ease), background 0.35s;
+  will-change: transform;
+}
+.btn:active { transform: scale(0.96); }
+
+.btn--primary {
+  background: linear-gradient(120deg, var(--pink), var(--violet));
+  box-shadow: 0 10px 30px rgba(255, 92, 138, 0.45), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.btn--primary::after {
+  /* бегущий блик по кнопке */
+  content: "";
+  position: absolute;
+  top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: skewX(-20deg);
+  animation: sheen 3.2s ease-in-out infinite;
+}
+@keyframes sheen { 0% { left: -120%; } 60%, 100% { left: 160%; } }
+.btn--primary:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 16px 40px rgba(255, 92, 138, 0.6), 0 0 30px rgba(168, 107, 255, 0.5);
+}
+.btn--big { padding: 18px 42px; font-size: clamp(16px, 3vw, 19px); }
+
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-brd);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-dim);
+}
+/* Убегающая кнопка "Нет" */
+.btn--runaway {
+  transition: transform 0.35s var(--ease), left 0.35s var(--ease), top 0.35s var(--ease);
+  z-index: 20;
+}
+.btn--runaway.is-loose {
+  position: fixed;
+  margin: 0;
+}
+
+/* ---------- Финальный экран ---------- */
+.scene--final { padding: 20px; }
+.final {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  max-width: 720px;
+}
+.heart {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: grid;
+  place-items: center;
+}
+.heart__core {
+  font-size: 120px;
+  line-height: 1;
+  animation: heartBeat 1.2s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(255, 60, 120, 0.8));
+  z-index: 2;
+}
+.heart__glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle, rgba(255, 70, 130, 0.6), transparent 65%);
+  border-radius: 50%;
+  animation: heartGlow 1.2s ease-in-out infinite;
+  z-index: 1;
+}
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  20%      { transform: scale(1.18); }
+  40%      { transform: scale(0.98); }
+  60%      { transform: scale(1.1); }
+}
+@keyframes heartGlow {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  30%      { transform: scale(1.35); opacity: 0.9; }
+}
+.final__title {
+  font-size: clamp(26px, 6vw, 46px);
+  font-weight: 700;
+  line-height: 1.3;
+  min-height: 1.3em;
+  background: linear-gradient(120deg, #fff, var(--pink-soft) 60%, var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 24px rgba(255, 120, 170, 0.5));
+}
+.final__sub {
+  font-size: clamp(15px, 3vw, 20px);
+  font-weight: 400;
+  color: var(--text-dim);
+  min-height: 1.4em;
+}
+/* Мигающий курсор для эффекта печати */
+.caret::after {
+  content: "|";
+  margin-left: 2px;
+  animation: caret 0.8s steps(1) infinite;
+  color: var(--pink-soft);
+  -webkit-text-fill-color: var(--pink-soft);
+}
+@keyframes caret { 50% { opacity: 0; } }
+
+/* ---------- Адаптивность ---------- */
+@media (max-width: 480px) {
+  .actions { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; }
+  .btn--runaway.is-loose { width: auto; }
+  .heart { width: 130px; height: 130px; }
+  .heart__core { font-size: 96px; }
+}
+
+/* Уважение к пользователям, отключившим анимации */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; }
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Для Мадины ❤️</title>
+
+  <!-- Шрифт Montserrat подключаем локально через Google Fonts CSS.
+       Если интернета нет — используется системный запасной шрифт. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== Фоновые слои ===== -->
+  <!-- Анимированные градиентные "пятна" северного сияния -->
+  <div class="aurora">
+    <span class="aurora__blob aurora__blob--1"></span>
+    <span class="aurora__blob aurora__blob--2"></span>
+    <span class="aurora__blob aurora__blob--3"></span>
+    <span class="aurora__blob aurora__blob--4"></span>
+  </div>
+
+  <!-- Канвас со звёздами и светящимися частицами -->
+  <canvas id="particles"></canvas>
+
+  <!-- Едва заметные плывущие сердечки на фоне -->
+  <div class="bg-hearts" id="bgHearts" aria-hidden="true"></div>
+
+  <!-- Канвас для конфетти (поверх всего, но без перехвата кликов) -->
+  <canvas id="confetti"></canvas>
+
+  <!-- ===== Кнопка музыки ===== -->
+  <button id="musicToggle" class="music-btn" aria-label="Включить или выключить музыку" title="Музыка">
+    <span class="music-btn__icon">🎵</span>
+    <span class="music-btn__off">✕</span>
+  </button>
+
+  <!-- ===== Сцены ===== -->
+  <main id="stage" class="stage">
+
+    <!-- ---------- Экран 1 ---------- -->
+    <section class="scene is-active" data-scene="intro">
+      <div class="card glass">
+        <div class="card__glow"></div>
+        <h1 class="title">Привет, Мадина <span class="beat">❤️</span></h1>
+        <p class="text">
+          Перед тобой небольшое путешествие.<br />
+          Оно расскажет тебе то, что невозможно описать одним сообщением.
+        </p>
+        <div class="actions">
+          <button class="btn btn--primary" data-action="start">❤️ Начать</button>
+          <button class="btn btn--ghost btn--runaway" id="noBtn">🙈 Нет</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Экран 2 ---------- -->
+    <section class="scene" data-scene="ask">
+      <div class="card glass">
+        <div class="card__glow"></div>
+        <p class="text text--lg glow-text">
+          Ты хочешь узнать,<br />
+          кто ты для меня?
+        </p>
+        <div class="actions">
+          <button class="btn btn--primary" data-action="next">✨ Хочу</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Цепочка карточек (генерируется скриптом) ---------- -->
+    <section class="scene" data-scene="chain">
+      <div class="card glass">
+        <div class="card__glow"></div>
+        <p class="text text--lg glow-text" id="chainText"></p>
+        <div class="actions">
+          <button class="btn btn--primary" id="chainNext" data-action="chain-next">Дальше →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Предпоследний экран ---------- -->
+    <section class="scene" data-scene="prefinal">
+      <div class="card glass">
+        <div class="card__glow"></div>
+        <p class="text text--xl glow-text">
+          А хочешь узнать,<br />
+          кем ты являешься для меня<br />
+          на самом деле?
+        </p>
+        <div class="actions">
+          <button class="btn btn--primary btn--big" data-action="final">❤️ Хочу узнать</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Финальный экран ---------- -->
+    <section class="scene scene--final" data-scene="final">
+      <div class="final">
+        <div class="heart" id="bigHeart" aria-hidden="true">
+          <div class="heart__core">❤️</div>
+          <div class="heart__glow"></div>
+        </div>
+        <h2 class="final__title" id="typeMain"></h2>
+        <p class="final__sub" id="typeSub"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
