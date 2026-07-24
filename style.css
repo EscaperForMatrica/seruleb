@@ -242,6 +242,11 @@ body {
   from { opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); }
   to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
+/* Появление каждой новой фразы в цепочке карточек */
+@keyframes phraseIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
 
 /* ---------- Типографика ---------- */
 .title {
@@ -274,8 +279,15 @@ body {
   50%      { text-shadow: 0 0 26px rgba(255, 158, 196, 0.7), 0 0 40px rgba(168, 107, 255, 0.4); }
 }
 
-/* Пульсирующее сердечко в заголовке */
-.beat { display: inline-block; animation: beat 1.3s ease-in-out infinite; }
+/* Пульсирующее сердечко в заголовке.
+   Заголовок залит градиентом через background-clip: text, из-за чего
+   эмодзи стало бы прозрачным — возвращаем ему собственный цвет. */
+.beat {
+  display: inline-block;
+  animation: beat 1.3s ease-in-out infinite;
+  -webkit-text-fill-color: initial;
+  color: initial;
+}
 @keyframes beat {
   0%, 100% { transform: scale(1); }
   15%      { transform: scale(1.3); }

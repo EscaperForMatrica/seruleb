@@ -1,0 +1,10 @@
+# Заголовки для Cloudflare Pages.
+# Формат: путь, затем заголовки с отступом в 2 пробела.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  X-Frame-Options: SAMEORIGIN
+  # Сайт личный — просим поисковики не индексировать его.
+  # Удалите строку ниже, если хотите, чтобы сайт попадал в поиск.
+  X-Robots-Tag: noindex, nofollow

@@ -404,13 +404,14 @@ const Confetti = (() => {
   const chainText = $("#chainText");
   const chainScene = byName("chain");
 
-  /** Показывает текущую фразу цепочки с анимацией появления. */
+  /** Показывает текущую фразу цепочки с анимацией появления.
+      Меняем текст и перезапускаем CSS-анимацию одним махом — так фраза
+      не может «потеряться», даже если нажимать «Дальше» очень быстро. */
   function showChainPhrase() {
     chainText.textContent = chain[chainIndex];
-    // Мини-анимация всплытия текста
     chainText.style.animation = "none";
-    void chainText.offsetWidth;
-    chainText.style.animation = "cardIn 0.7s cubic-bezier(0.22,1,0.36,1) both";
+    void chainText.offsetWidth; // принудительный reflow перезапускает анимацию
+    chainText.style.animation = "phraseIn 0.65s cubic-bezier(0.22,1,0.36,1) both";
   }
 
   async function enterChain() {
@@ -423,20 +424,7 @@ const Confetti = (() => {
     Sound.blip(rand(600, 820));
     chainIndex++;
     if (chainIndex < chain.length) {
-      // Плавно меняем фразу внутри той же карточки
-      chainText.style.opacity = "0";
-      chainText.style.transform = "translateY(14px)";
-      await sleep(220);
-      chainText.style.transition = "opacity .6s ease, transform .6s ease";
       showChainPhrase();
-      requestAnimationFrame(() => {
-        chainText.style.opacity = "1";
-        chainText.style.transform = "translateY(0)";
-      });
-      // На последней фразе меняем текст кнопки
-      if (chainIndex === chain.length - 1) {
-        $("#chainNext").textContent = "Дальше →";
-      }
     } else {
       await goto("prefinal");
     }
