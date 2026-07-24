@@ -1,10 +1,13 @@
-# Заголовки для Cloudflare Pages.
-# Формат: путь, затем заголовки с отступом в 2 пробела.
-
 /*
   X-Content-Type-Options: nosniff
-  Referrer-Policy: no-referrer
   X-Frame-Options: SAMEORIGIN
-  # Сайт личный — просим поисковики не индексировать его.
-  # Удалите строку ниже, если хотите, чтобы сайт попадал в поиск.
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Личная страница на /madina/ — вне индексации поисковиков.
+# К сайту Seruleb это правило не относится.
+/madina/*
   X-Robots-Tag: noindex, nofollow

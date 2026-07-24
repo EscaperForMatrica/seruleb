@@ -1,41 +1,10 @@
-# === Посторонние папки, не относящиеся к этому проекту ===
+# Из проекта Seruleb
+dist/
+node_modules/
+uploads/
+.DS_Store
+*.log
+
+# Посторонняя папка, не относящаяся к этому проекту.
 # Лежит рядом на диске, но в репозиторий seruleb не входит.
 makka/
-
-# === macOS ===
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-Icon?
-
-# === Windows ===
-Thumbs.db
-Desktop.ini
-
-# === Редакторы ===
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# === Логи ===
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# === Node (если позже появятся инструменты сборки) ===
-node_modules/
-.cache/
-.parcel-cache/
-
-# === Секреты и переменные окружения ===
-.env
-.env.*
-!.env.example
-.dev.vars
-
-# === Cloudflare / Wrangler ===
-.wrangler/

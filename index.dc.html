@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Seruleb — заработок на нейросетях, розыгрыши и продвижение бизнеса</title>
+<meta name="description" content="Seruleb — бизнес-сообщество и продвижение в WhatsApp, Telegram и Instagram. Обучение заработку на нейросетях, розыгрыши, реклама, разработка сайтов и услуги под ключ.">
+<meta property="og:title" content="Seruleb">
+<meta property="og:description" content="Заработок на нейросетях, розыгрыши и продвижение бизнеса в мессенджерах.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seruleb.com/">
+<link rel="canonical" href="https://seruleb.com/">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#000000;}
+body{font-family:'Montserrat',sans-serif;}
+a{color:#ffb780;text-decoration:none;}
+a:hover{color:#ffffff;}
+::selection{background:rgba(255,183,128,.35);}
+</style>
+</helmet>
+<div style="min-height:100vh; background: radial-gradient(130% 90% at 50% -25%, #201709 0%, #0d0a04 48%, #000000 100%); color:#ffffff; position:relative; overflow:hidden; --gblur: {{ glassBlurCss }}; --grad: {{ radiusCss }}; --accent: {{ accentColor }};">
+  <div style="position:absolute; top:-20%; right:-5%; width:55%; height:120%; background:linear-gradient(200deg, rgba(255,217,106,.09), rgba(255,217,106,0) 60%); transform:rotate(8deg); pointer-events:none;"></div>
+
+  <header style="position:relative; z-index:5; display:flex; align-items:center; gap:16px; padding:32px clamp(16px,4vw,48px) 0; max-width:1200px; margin:0 auto; box-sizing:border-box;">
+    <div onClick="{{ openMenu }}" style="width:44px; height:44px; border-radius:12px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; box-shadow:inset 0 1px 0 rgba(255,231,168,.26);" style-hover="border-color:rgba(255,217,106,.45);">
+      <div style="width:18px; height:2px; border-radius:2px; background:#ffffff;"></div>
+      <div style="width:18px; height:2px; border-radius:2px; background:#ffffff;"></div>
+      <div style="width:18px; height:2px; border-radius:2px; background:#ffffff;"></div>
+    </div>
+  </header>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMenu }}" style="position:fixed; inset:0; z-index:60;">
+      <div onClick="{{ stopClick }}" style="position:absolute; top:88px; left:clamp(16px,4vw,48px); min-width:220px; background:rgba(24,24,24,.92); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,213,138,.24); border-radius:18px; padding:10px; box-shadow:0 24px 60px rgba(0,0,0,.5); display:flex; flex-direction:column; gap:2px;">
+        <a href="video.dc.html" style="display:block; padding:14px 18px; border-radius:14px; font-size:16px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">Видео</a>
+        <a href="obuchenie.dc.html" style="display:block; padding:14px 18px; border-radius:14px; font-size:16px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">Обучение</a>
+        <a href="https://t.me/+poiUb7z8ShE3Yzcy" onClick="{{ closeMenu }}" style="display:block; padding:14px 18px; border-radius:14px; font-size:16px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">Telegram</a>
+        <a href="https://wa.me/79896500005" onClick="{{ closeMenu }}" style="display:block; padding:14px 18px; border-radius:14px; font-size:16px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">WhatsApp</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <main style="position:relative; z-index:4; max-width:1200px; margin:0 auto; padding:48px clamp(16px,4vw,48px) 80px; box-sizing:border-box; display:flex; flex-direction:column; gap:clamp(8px,2vw,24px);">
+
+    <section style="display:flex; flex-direction:column; gap:12px; position:relative;">
+      <div style="display:flex; justify-content:center; gap:28px;">
+        <sc-for list="{{ netLinks }}" as="nl" hint-placeholder-count="3">
+          <a href="{{ nl.href }}" style="font-size:clamp(11px,1.3vw,14px); font-weight:400; color:#e3e3e3; letter-spacing:.04em;" style-hover="color:#ffffff;">{{ nl.name }}</a>
+        </sc-for>
+      </div>
+      <div onClick="{{ openRaffles }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2.2vw,22px); padding:clamp(14px,2.4vw,28px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+        <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1.2vw,14px) 0 clamp(4px,1vw,10px);">
+          <svg style="width:clamp(30px,4.5vw,48px); height:clamp(30px,4.5vw,48px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
+          <div style="width:120px; max-width:40%; height:clamp(8px,1.4vw,16px); border-radius:50%; background:linear-gradient(180deg, #ffb780, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.8vw,8px);"></div>
+        </div>
+        <div style="text-align:center; font-size:clamp(13px,1.8vw,18px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Розыгрыши от Seruleb</div>
+      </div>
+    </section>
+
+    <section style="display:flex; flex-direction:column; gap:28px; position:relative;">
+      <div style="{{ gridStyle }}">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="3">
+          <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:16px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2.2vw,22px); padding:clamp(10px,1.8vw,24px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); box-shadow:inset 0 1px 0 rgba(255,255,255,.20), 0 24px 56px rgba(0,0,0,.32);">
+            <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1.2vw,14px) 0 clamp(4px,1vw,10px);">
+              <svg style="width:clamp(30px,4.5vw,48px); height:clamp(30px,4.5vw,48px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
+              <div style="width:58%; height:clamp(8px,1.4vw,16px); border-radius:50%; background:linear-gradient(180deg, #ffb780, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.8vw,8px);"></div>
+            </div>
+            <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.3vw,15px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ s.title }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <sc-if value="{{ rafflesOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeRaffles }}" style="position:fixed; inset:0; z-index:49; background:rgba(0,0,0,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:12px;">
+      <div onClick="{{ stopClick }}" style="width:min(620px, 100%); background:rgba(24,24,24,.9); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(20px,3.5vw,32px) clamp(16px,3vw,26px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:18px; position:relative;">
+        <div onClick="{{ closeRaffles }}" style="position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.45);">✕</div>
+        <div style="font-size:22px; font-weight:700; line-height:1.3; color:#ffffff; padding-right:40px;">Розыгрыши от Seruleb</div>
+
+        <sc-if value="{{ showRaffleCats }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(10px,2vw,16px);">
+            <div onClick="{{ pickFree }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(97,206,112,.18), rgba(97,206,112,.04)); border:1px solid rgba(97,206,112,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(160,240,180,.22); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(97,206,112,.6); background:linear-gradient(160deg, rgba(97,206,112,.26), rgba(97,206,112,.08));">
+              <div style="background:#61ce70; color:#0e2a15; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Бесплатно</div>
+              <svg style="width:clamp(30px,4.5vw,42px); height:clamp(30px,4.5vw,42px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
+              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Бесплатные розыгрыши</div>
+            </div>
+            <div onClick="{{ pickPaid }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.18), rgba(255,255,255,.03)); border:1px solid rgba(255,213,138,.36); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(255,231,168,.30); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.6); background:linear-gradient(160deg, rgba(255,217,106,.26), rgba(255,255,255,.06));">
+              <div style="background:linear-gradient(180deg, #ffd96a, #c98c5d); color:#2a1c07; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Платно</div>
+              <svg style="width:clamp(30px,4.5vw,42px); height:clamp(30px,4.5vw,42px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
+              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Платные розыгрыши</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showFreeList }}" hint-placeholder-val="{{ false }}">
+          <div style="background:linear-gradient(160deg, rgba(97,206,112,.16), rgba(97,206,112,.04)); border:1px solid rgba(97,206,112,.32); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(160,240,180,.20);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div onClick="{{ backToCats }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-size:13px; color:#e3e3e3;" style-hover="color:#ffffff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>Назад</div>
+              <div style="background:#61ce70; color:#0e2a15; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Бесплатно</div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.5vw,14px);">
+              <sc-for list="{{ freeRaffles }}" as="s" hint-placeholder-count="2">
+                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:rgba(97,206,112,.10); border:1px solid rgba(97,206,112,.28); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(160,240,180,.22); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(97,206,112,.55); background:rgba(97,206,112,.18);">
+                  <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
+                    <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
+                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #61ce70, #3f9e51); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(160,240,180,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
+                  </div>
+                  <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ s.title }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showPaidList }}" hint-placeholder-val="{{ false }}">
+          <div style="background:linear-gradient(160deg, rgba(255,217,106,.16), rgba(255,255,255,.03)); border:1px solid rgba(255,213,138,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(255,231,168,.28);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div onClick="{{ backToCats }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-size:13px; color:#e3e3e3;" style-hover="color:#ffffff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>Назад</div>
+              <div style="background:linear-gradient(180deg, #ffd96a, #c98c5d); color:#2a1c07; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Платно</div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.5vw,14px);">
+              <sc-for list="{{ paidRaffles }}" as="s" hint-placeholder-count="2">
+                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.14), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.30); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.30), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.55); background:linear-gradient(160deg, rgba(255,217,106,.22), rgba(255,255,255,.06));">
+                  <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
+                    <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
+                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #ffd96a, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
+                  </div>
+                  <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ s.title }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ reelsOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeReels }}" style="position:fixed; inset:0; z-index:55; background:rgba(0,0,0,.7); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:12px;">
+      <div onClick="{{ stopClick }}" style="width:min(400px, 100%); background:rgba(24,24,24,.92); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(16px,3vw,22px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.5); display:flex; flex-direction:column; gap:14px; position:relative; max-height:92vh; overflow-y:auto;">
+        <div onClick="{{ closeReels }}" style="position:absolute; top:16px; right:16px; z-index:3; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.45); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.65);">✕</div>
+        <div style="position:relative; width:100%; aspect-ratio:9/16; max-height:64vh; border-radius:14px; overflow:hidden; background:#000;">
+          <video controls="controls" playsinline preload="metadata" poster="assets/video/kamil-poster.jpg" onClick="{{ toggleReels }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; cursor:pointer;">
+            <source src="assets/video/kamil.mp4" type="video/mp4">
+          </video>
+          <sc-if value="{{ reelsShowPlay }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ playReels }}" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; cursor:pointer; background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.35));">
+              <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,183,128,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(0,0,0,.4); transition:transform .2s ease;" style-hover="transform:scale(1.08);">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#101010" stroke="none"><path d="M8 5.5v13l11-6.5z"></path></svg>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        <div style="font-family:'Oswald',sans-serif; font-size:18px; font-weight:600; color:#ffffff; text-transform:uppercase; padding:0 4px;">Камиль — reels-продюсер</div>
+        <div style="{{ reelsDescStyle }}">{{ reelsDesc }}</div>
+        <div onClick="{{ toggleReelsDesc }}" style="cursor:pointer; align-self:flex-start; font-size:13px; font-weight:600; color:var(--accent); padding:0 4px;" style-hover="color:#ffffff;">{{ reelsDescLabel }}</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:50; background:rgba(0,0,0,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:12px;">
+      <div onClick="{{ stopClick }}" style="width:min(620px, 100%); max-height:92vh; overflow-y:auto; background:rgba(24,24,24,.9); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(20px,3.5vw,32px) clamp(16px,3vw,26px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:18px; position:relative;">
+        <div onClick="{{ closeModal }}" style="position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.45);">✕</div>
+        <div style="font-size:22px; font-weight:700; line-height:1.3; color:#ffffff; padding-right:40px;">{{ modal.title }}</div>
+        <div style="font-size:15px; line-height:1.65; color:#f0f0f0;">{{ modal.details }}</div>
+
+        <sc-if value="{{ modal.extras }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:clamp(8px,1.5vw,14px);">
+            <sc-for list="{{ modal.extras }}" as="ex" hint-placeholder-count="3">
+              <sc-if value="{{ ex.reels }}" hint-placeholder-val="{{ false }}">
+                <div onClick="{{ openReels }}" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,18px) clamp(8px,1.5vw,14px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.45);">
+                  <div style="flex-shrink:0; width:42px; height:42px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ex.icon }}"></path></svg>
+                  </div>
+                  <div style="font-size:clamp(12px,1.5vw,14px); font-weight:600; line-height:1.35; color:#ffffff;">{{ ex.label }}</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ ex.href }}" hint-placeholder-val="{{ true }}">
+                <a href="{{ ex.href }}" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,18px) clamp(8px,1.5vw,14px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.45);">
+                  <div style="flex-shrink:0; width:42px; height:42px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ex.icon }}"></path></svg>
+                  </div>
+                  <div style="font-size:clamp(12px,1.5vw,14px); font-weight:600; line-height:1.35; color:#ffffff;">{{ ex.label }}</div>
+                </a>
+              </sc-if>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ modal.list }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:clamp(8px,1.5vw,14px);">
+            <sc-for list="{{ modal.list }}" as="li" hint-placeholder-count="3">
+              <a href="{{ li.href }}" style="display:flex; flex-direction:column; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2vw,20px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+                <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
+                  <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ li.icon }}"></path></svg>
+                  <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #ffb780, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
+                </div>
+                <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ li.label }}</div>
+              </a>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ modalFooter }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+            <a href="{{ modal.href }}" style="background:var(--accent); color:#000000; font-weight:700; font-size:15px; padding:14px 28px; border-radius:999px;" style-hover="filter:brightness(1.06);">{{ modal.cta }}</a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;glassBlur&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 22, &quot;min&quot;: 0, &quot;max&quot;: 40, &quot;step&quot;: 1, &quot;unit&quot;: &quot;px&quot;, &quot;section&quot;: &quot;Liquid Glass&quot;},
+  &quot;cardRadius&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 15, &quot;min&quot;: 8, &quot;max&quot;: 56, &quot;step&quot;: 1, &quot;unit&quot;: &quot;px&quot;, &quot;section&quot;: &quot;Liquid Glass&quot;},
+  &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
+}">
+class Component extends DCLogic {
+  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, menuOpen: false };
+  renderVals() {
+    const p = this.props;
+    const wa = 'https://wa.me/79896500005';
+    const tg = 'https://t.me/+poiUb7z8ShE3Yzcy';
+    const ig = 'https://www.instagram.com/seruleb/';
+    const waText = (t) => 'https://wa.me/79896500005?text=' + encodeURIComponent(t);
+    const icons = {
+      phone: 'M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z M6 6h12 M6 18h12 M10.5 20h3',
+      car: 'M3 13l1.8-4.6A2 2 0 0 1 6.7 7h10.6a2 2 0 0 1 1.9 1.4L21 13 M3 13h18v5H3z M3 18v2h3v-2 M18 18v2h3v-2 M6.5 15.5h.01 M17.5 15.5h.01',
+      home: 'M4 10.5 12 4l8 6.5 M6 9.5V20h12V9.5 M10 20v-5h4v5',
+      edu: 'M12 4 2 9l10 5 10-5-10-5Z M6 11.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5 M22 9v5',
+      promo: 'M3 11l14-5v12L3 13v-2z M6.5 13.5V18a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-3.5 M18 9a3 3 0 0 1 0 6',
+      wrench: 'M3 11 12 4l9 7 M5 9.8V20h14V9.8 M13.8 12.8a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0Z M12 14.6v2.8',
+      umrah: 'M12 3l7 4.2V21H5V7.2L12 3Z M5 11h14 M10.5 21v-4.5a1.5 1.5 0 0 1 3 0V21',
+    };
+    const all = [
+      { title: 'Розыгрыш iPhone', net: 'WhatsApp', netHref: wa, icon: icons.phone, details: 'Регулярные розыгрыши техники Apple среди участников сообщества. Подпишитесь на Telegram-канал, чтобы узнать условия участия и не пропустить розыгрыш.', cta: 'Участвовать', href: tg },
+      { title: 'Розыгрыш автомобиля', net: 'Telegram', netHref: tg, icon: icons.car, details: 'Крупный платный розыгрыш — автомобиль. Подпишитесь на Telegram-канал, чтобы узнать условия участия и стоимость билета.', cta: 'Участвовать', href: tg },
+      { title: 'Розыгрыш квартиры', net: 'Instagram', netHref: ig, icon: icons.home, details: 'Главный приз — квартира! Платный розыгрыш сообщества. Подпишитесь на Telegram-канал, чтобы узнать условия участия.', cta: 'Участвовать', href: tg },
+      { title: 'Розыгрыш Умры', net: 'WhatsApp', netHref: wa, icon: icons.umrah, details: 'Розыгрыш поездки на Умру среди участников сообщества Seruleb. Подпишитесь на Telegram-канал, чтобы узнать условия участия и следить за результатами.', cta: 'Участвовать', href: tg },
+      { title: 'Ремонт под ключ', net: 'WhatsApp', netHref: wa, icon: icons.wrench, details: 'Полный цикл ремонта квартир, домов и коммерческих помещений. Выберите нужную услугу — и напишите нам в WhatsApp.',
+        list: [
+          { label: 'Утепление крыши', icon: 'M2 12 12 4l10 8 M6 20v-6h12v6 M6 17h12', href: waText('Здравствуйте! Хочу заказать утепление крыши.') },
+          { label: 'Установка ворот', icon: 'M4 21V8l2-2 2 2v13 M16 21V8l2-2 2 2v13 M8 12h8 M8 17h8', href: waText('Здравствуйте! Хочу заказать установку ворот.') },
+          { label: 'Сборка мебели', icon: 'M6 3h12v18H6z M6 12h12 M10 8h.5 M10 16h.5', href: waText('Здравствуйте! Хочу заказать сборку мебели.') },
+        ] },
+      { title: 'Обучение заработку', net: 'Telegram', netHref: tg, icon: icons.edu, page: 'obuchenie.dc.html' },
+      { title: 'Продвижение бизнеса', net: 'Instagram', netHref: ig, icon: icons.promo, details: 'Комплексное продвижение бренда, рекламы и продаж. Выберите направление:',
+        extras: [
+          { label: 'Разработка сайтов', icon: 'M3 5h18v12H3z M3 9h18 M6 7h.5 M8.5 7h.5 M9 21h6 M12 17v4', href: waText('Здравствуйте! Хочу заказать разработку сайта.') },
+          { label: 'Увеличение просмотров в WhatsApp', icon: 'M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z M14.5 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z', href: waText('Здравствуйте! Хочу увеличить просмотры в WhatsApp.') },
+          { label: 'Продвижение Instagram', icon: 'M4 8h3l2-3h6l2 3h3v12H4z M15.5 13.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z', href: waText('Здравствуйте! Хочу заказать продвижение Instagram.') },
+          { label: 'Рилс', reels: true, icon: 'M3 5h18v14H3z M3 9h18 M7.5 5 5.5 9 M12.5 5l-2 4 M17.5 5l-2 4 M10 12.5v4l3.5-2z' },
+        ] },
+    ].map((s, i) => ({ ...s, open: () => s.page ? (window.location.href = s.page) : this.setState({ open: i, rafflesOpen: false }) }));
+
+    const vw = (typeof window !== 'undefined' ? window.innerWidth : 1200);
+    return {
+      glassBlurCss: (p.glassBlur ?? 22) + 'px',
+      radiusCss: (p.cardRadius ?? 15) + 'px',
+      accentColor: p.accentColor ?? '#ffb780',
+      gridStyle: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(8px,2vw,24px)' },
+      raffles: all.slice(0, 4),
+      freeRaffles: [all[0], all[3]],
+      paidRaffles: [all[1], all[2]],
+      services: all.slice(4),
+      netLinks: [
+        { name: 'WhatsApp', href: wa },
+        { name: 'Telegram', href: tg },
+        { name: 'Instagram', href: ig },
+      ],
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      stopClick: (e) => e.stopPropagation(),
+      rafflesOpen: this.state.rafflesOpen,
+      showRaffleCats: this.state.raffleCat == null,
+      showFreeList: this.state.raffleCat === 'free',
+      showPaidList: this.state.raffleCat === 'paid',
+      pickFree: () => this.setState({ raffleCat: 'free' }),
+      pickPaid: () => this.setState({ raffleCat: 'paid' }),
+      backToCats: () => this.setState({ raffleCat: null }),
+      openRaffles: () => this.setState({ rafflesOpen: true, raffleCat: null }),
+      closeRaffles: () => this.setState({ rafflesOpen: false }),
+      reelsOpen: this.state.reelsOpen,
+      openReels: () => this.setState({ reelsOpen: true, reelsPlay: false, reelsExpanded: false }),
+      closeReels: () => this.setState({ reelsOpen: false }),
+      reelsShowPlay: !this.state.reelsPlay,
+      playReels: (e) => {
+        const vid = e.currentTarget.parentElement.querySelector('video');
+        if (vid) { vid.play(); }
+        this.setState({ reelsPlay: true });
+      },
+      toggleReels: (e) => {
+        const vid = e.currentTarget;
+        if (vid.paused) { vid.play(); this.setState({ reelsPlay: true }); }
+        else { vid.pause(); }
+      },
+      reelsDesc: 'Меня зовут Камиль. Я reels-продюсер — создаю короткий видеоконтент, который не просто красиво смотрится, а реально работает: удерживает внимание, вызывает доверие и приносит результат.\n\nМой путь начался с монтажа — я учился на практике, снимая и монтируя сотни роликов. Со временем пришло понимание, что хороший рилс — это не только качественный монтаж, а целая система: идея, сценарий, съёмка, подача и монтаж, работающие вместе. Так я и стал продюсером — человеком, который отвечает за весь процесс создания видео от начала до конца.\n\nЗа время работы я построил аудиторию в десятки тысяч человек, изучил, что действительно заставляет людей досматривать видео до конца, и продолжаю развиваться в этой сфере каждый день.\n\nВ своей работе я ценю честность и качество — без хайпа ради хайпа и без обмана аудитории. Я верю, что доверие — это главный актив в контенте, и строю свою репутацию именно на нём.',
+      reelsDescStyle: 'font-size:13px; line-height:1.6; color:#e3e3e3; white-space:pre-line; overflow:hidden; padding:0 4px; transition:max-height .5s cubic-bezier(.2,.6,.2,1); max-height:' + (this.state.reelsExpanded ? '1400px' : '62px') + '; -webkit-mask-image:' + (this.state.reelsExpanded ? 'none' : 'linear-gradient(180deg, #000 55%, transparent 100%)') + '; mask-image:' + (this.state.reelsExpanded ? 'none' : 'linear-gradient(180deg, #000 55%, transparent 100%)') + ';',
+      reelsDescLabel: this.state.reelsExpanded ? 'Свернуть' : 'Читать полностью',
+      toggleReelsDesc: () => this.setState(s => ({ reelsExpanded: !s.reelsExpanded })),
+      modal: this.state.open == null ? null : all[this.state.open],
+      modalFooter: this.state.open != null && !all[this.state.open].list && !all[this.state.open].extras,
+      closeModal: () => this.setState({ open: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>
