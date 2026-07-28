@@ -150,7 +150,7 @@ a:hover{color:#ffffff;}
       <div onClick="{{ stopClick }}" style="width:min(400px, 100%); background:rgba(24,24,24,.92); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(16px,3vw,22px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.5); display:flex; flex-direction:column; gap:14px; position:relative; max-height:92vh; overflow-y:auto;">
         <div onClick="{{ closeReels }}" style="position:absolute; top:16px; right:16px; z-index:3; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.45); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.65);">✕</div>
         <div style="position:relative; width:100%; aspect-ratio:9/16; max-height:64vh; border-radius:14px; overflow:hidden; background:#000;">
-          <video controls="controls" playsinline preload="metadata" poster="assets/video/kamil-poster.jpg" onClick="{{ toggleReels }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; cursor:pointer;">
+          <video controls="controls" playsinline preload="metadata" poster="assets/video/kamil-poster.webp" onClick="{{ toggleReels }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; cursor:pointer;">
             <source src="assets/video/kamil.mp4" type="video/mp4">
           </video>
           <sc-if value="{{ reelsShowPlay }}" hint-placeholder-val="{{ true }}">
@@ -244,7 +244,7 @@ a:hover{color:#ffffff;}
             <div style="font-size:14.5px; line-height:1.7; color:#e3e3e3;">{{ modal.store.desc }}</div>
 
             <div style="position:relative; width:min(320px,100%); align-self:center; aspect-ratio:9/16; max-height:60vh; border-radius:16px; overflow:hidden; background:#000; border:1px solid rgba(255,213,138,.22);">
-              <video controls="controls" playsinline preload="metadata" poster="assets/video/best-poster.jpg" onClick="{{ toggleBest }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; cursor:pointer;">
+              <video controls="controls" playsinline preload="metadata" poster="assets/video/best-poster.webp" onClick="{{ toggleBest }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; cursor:pointer;">
                 <source src="assets/video/best.mp4" type="video/mp4">
               </video>
               <sc-if value="{{ bestShowPlay }}" hint-placeholder-val="{{ true }}">
@@ -376,8 +376,8 @@ class Component extends DCLogic {
         store: {
           name: 'Best',
           desc: 'Best — магазин брендовой одежды и обуви с тщательно отобранными моделями. Оригинальный стиль, качественные материалы и актуальные новинки сезона. Выбирайте понравившееся и пишите нам — поможем с размером и оформим заказ.',
-          wear: ['assets/img/best/wear1.png', 'assets/img/best/wear2.png', 'assets/img/best/wear3.png', 'assets/img/best/wear4.png', 'assets/img/best/wear5.png', 'assets/img/best/wear6.png'],
-          shoes: ['assets/img/best/shoe1.jpg', 'assets/img/best/shoe2.jpg', 'assets/img/best/shoe3.jpg', 'assets/img/best/shoe4.jpg', 'assets/img/best/shoe5.jpg', 'assets/img/best/shoe6.jpg'],
+          wear: ['assets/img/best/wear1.webp', 'assets/img/best/wear2.webp', 'assets/img/best/wear3.webp', 'assets/img/best/wear4.webp', 'assets/img/best/wear5.webp', 'assets/img/best/wear6.webp'],
+          shoes: ['assets/img/best/shoe1.webp', 'assets/img/best/shoe2.webp', 'assets/img/best/shoe3.webp', 'assets/img/best/shoe4.webp', 'assets/img/best/shoe5.webp', 'assets/img/best/shoe6.webp'],
           href: waText('Здравствуйте! Интересует магазин Best — одежда и обувь.'),
         } },
       { title: 'Авто', net: 'WhatsApp', netHref: wa, icon: icons.car, details: 'Всё для авто — аренда, продажа, рассрочка и детские электромобили. Выберите нужное:',
