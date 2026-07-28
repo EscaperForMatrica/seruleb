@@ -24,6 +24,7 @@ body{font-family:'Montserrat',sans-serif;}
 a{color:#ffb780;text-decoration:none;}
 a:hover{color:#ffffff;}
 ::selection{background:rgba(255,183,128,.35);}
+[data-slider]::-webkit-scrollbar{display:none;}
 </style>
 </helmet>
 <div style="min-height:100vh; background: radial-gradient(130% 90% at 50% -25%, #201709 0%, #0d0a04 48%, #000000 100%); color:#ffffff; position:relative; overflow:hidden; --gblur: {{ glassBlurCss }}; --grad: {{ radiusCss }}; --accent: {{ accentColor }};">
@@ -211,6 +212,92 @@ a:hover{color:#ffffff;}
           </div>
         </sc-if>
 
+        <sc-if value="{{ modal.sections }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <sc-for list="{{ modal.sections }}" as="sec" hint-placeholder-count="2">
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <sc-if value="{{ sec.title }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-family:'Oswald',sans-serif; font-size:15px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--accent);">{{ sec.title }}</div>
+                </sc-if>
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:clamp(8px,1.5vw,14px);">
+                  <sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="3">
+                    <a href="{{ it.href }}" style="display:flex; flex-direction:column; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2vw,20px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+                      <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
+                        <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ it.icon }}"></path></svg>
+                        <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #ffb780, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
+                      </div>
+                      <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ it.label }}</div>
+                    </a>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ modal.store }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:22px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="font-family:'Oswald',sans-serif; font-size:clamp(26px,4vw,34px); font-weight:700; letter-spacing:.02em; color:var(--accent); text-transform:uppercase; line-height:1;">{{ modal.store.name }}</div>
+              <div style="background:linear-gradient(160deg, rgba(255,217,106,.2), rgba(255,255,255,.05)); border:1px solid rgba(255,213,138,.34); border-radius:999px; padding:6px 14px; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#ffffff;">Магазин</div>
+            </div>
+            <div style="font-size:14.5px; line-height:1.7; color:#e3e3e3;">{{ modal.store.desc }}</div>
+
+            <div style="position:relative; width:min(320px,100%); align-self:center; aspect-ratio:9/16; max-height:60vh; border-radius:16px; overflow:hidden; background:#000; border:1px solid rgba(255,213,138,.22);">
+              <video controls="controls" playsinline preload="metadata" poster="assets/video/best-poster.jpg" onClick="{{ toggleBest }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; cursor:pointer;">
+                <source src="assets/video/best.mp4" type="video/mp4">
+              </video>
+              <sc-if value="{{ bestShowPlay }}" hint-placeholder-val="{{ true }}">
+                <div onClick="{{ playBest }}" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; cursor:pointer; background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.34));">
+                  <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,183,128,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(0,0,0,.4); transition:transform .2s ease;" style-hover="transform:scale(1.08);">
+                    <svg width="27" height="27" viewBox="0 0 24 24" fill="#101010" stroke="none"><path d="M8 5.5v13l11-6.5z"></path></svg>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div style="font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:#ffffff;">Верхняя одежда</div>
+              <div style="position:relative;">
+                <div onClick="{{ scrollPrev }}" style="position:absolute; left:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+                </div>
+                <div onClick="{{ scrollNext }}" style="position:absolute; right:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                </div>
+                <div data-slider="wear" style="display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; padding:2px 0;">
+                  <sc-for list="{{ modal.store.wear }}" as="img" hint-placeholder-count="4">
+                    <div style="flex:0 0 auto; width:clamp(160px,60%,220px); scroll-snap-align:center;">
+                      <img src="{{ img }}" alt="Верхняя одежда Best" loading="lazy" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:16px; border:1px solid rgba(255,213,138,.22); display:block;">
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div style="font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:#ffffff;">Обувь</div>
+              <div style="position:relative;">
+                <div onClick="{{ scrollPrev }}" style="position:absolute; left:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+                </div>
+                <div onClick="{{ scrollNext }}" style="position:absolute; right:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                </div>
+                <div data-slider="shoes" style="display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; padding:2px 0;">
+                  <sc-for list="{{ modal.store.shoes }}" as="img" hint-placeholder-count="4">
+                    <div style="flex:0 0 auto; width:clamp(160px,60%,220px); scroll-snap-align:center;">
+                      <img src="{{ img }}" alt="Обувь Best" loading="lazy" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:16px; border:1px solid rgba(255,213,138,.22); display:block;">
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <a href="{{ modal.store.href }}" style="align-self:flex-start; background:var(--accent); color:#000000; font-weight:700; font-size:15px; padding:14px 30px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35);" style-hover="filter:brightness(1.06);">Написать в Best</a>
+          </div>
+        </sc-if>
+
         <sc-if value="{{ modalFooter }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
             <a href="{{ modal.href }}" style="background:var(--accent); color:#000000; font-weight:700; font-size:15px; padding:14px 28px; border-radius:999px;" style-hover="filter:brightness(1.06);">{{ modal.cta }}</a>
@@ -227,7 +314,7 @@ a:hover{color:#ffffff;}
   &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, menuOpen: false };
+  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false };
   renderVals() {
     const p = this.props;
     const wa = 'https://wa.me/79896500005';
@@ -242,6 +329,14 @@ class Component extends DCLogic {
       promo: 'M3 11l14-5v12L3 13v-2z M6.5 13.5V18a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-3.5 M18 9a3 3 0 0 1 0 6',
       wrench: 'M3 11 12 4l9 7 M5 9.8V20h14V9.8 M13.8 12.8a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0Z M12 14.6v2.8',
       umrah: 'M12 3l7 4.2V21H5V7.2L12 3Z M5 11h14 M10.5 21v-4.5a1.5 1.5 0 0 1 3 0V21',
+      realty: 'M3 21h18 M5 21V8l7-5 7 5v13 M9 21v-5h6v5 M9 11h1.5 M13.5 11H15',
+      shoe: 'M2 16.5v-3l3-1 2 2c.7.6 1.6.9 2.6.9H15c2.2 0 4 .8 5.4 1.9.8.6.4 1.8-.6 1.8H3a1 1 0 0 1-1-1v-1.5Z M6 12.5l1 1.3 M9 11.5l1 1.3',
+      apt: 'M5 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17 M15 21V10h3a1 1 0 0 1 1 1v10 M8 7h1.5 M11 7h1.5 M8 11h1.5 M11 11h1.5 M8 15h1.5 M11 15h1.5',
+      room: 'M3 12V8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4 M2 17h20 M2 17v3 M22 17v3 M6 12V10h6v2',
+      shop: 'M4 9 5.5 4h13L20 9 M5 9v12h14V9 M4 9h16 M9 21v-6h6v6',
+      land: 'M12 21s-6-5.5-6-10a6 6 0 0 1 12 0c0 4.5-6 10-6 10Z M12 12.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
+      key: 'M15 7a3 3 0 1 1-2.9 3.7L7 15.8V18H5v-2H3v-2.2l6.3-6.3A3 3 0 0 1 15 7Z',
+      card: 'M3 6h18v12H3z M3 10h18 M6 15h4',
     };
     const all = [
       { title: 'Розыгрыш iPhone', net: 'WhatsApp', netHref: wa, icon: icons.phone, details: 'Регулярные розыгрыши техники Apple среди участников сообщества. Подпишитесь на Telegram-канал, чтобы узнать условия участия и не пропустить розыгрыш.', cta: 'Участвовать', href: tg },
@@ -262,7 +357,39 @@ class Component extends DCLogic {
           { label: 'Продвижение Instagram', icon: 'M4 8h3l2-3h6l2 3h3v12H4z M15.5 13.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z', href: waText('Здравствуйте! Хочу заказать продвижение Instagram.') },
           { label: 'Рилс', reels: true, icon: 'M3 5h18v14H3z M3 9h18 M7.5 5 5.5 9 M12.5 5l-2 4 M17.5 5l-2 4 M10 12.5v4l3.5-2z' },
         ] },
-    ].map((s, i) => ({ ...s, open: () => s.page ? (window.location.href = s.page) : this.setState({ open: i, rafflesOpen: false }) }));
+      { title: 'Недвижимость', net: 'WhatsApp', netHref: wa, icon: icons.realty, details: 'Аренда и продажа недвижимости — выберите категорию, и мы подберём подходящий вариант.',
+        sections: [
+          { title: 'Аренда', items: [
+            { label: 'Квартиры', icon: icons.apt, href: waText('Здравствуйте! Интересует аренда квартиры.') },
+            { label: 'Комнаты', icon: icons.room, href: waText('Здравствуйте! Интересует аренда комнаты.') },
+            { label: 'Дома', icon: icons.home, href: waText('Здравствуйте! Интересует аренда дома.') },
+            { label: 'Коммерция', icon: icons.shop, href: waText('Здравствуйте! Интересует аренда коммерческой недвижимости.') },
+          ] },
+          { title: 'Продажа', items: [
+            { label: 'Квартиры', icon: icons.apt, href: waText('Здравствуйте! Интересует покупка квартиры.') },
+            { label: 'Дома', icon: icons.home, href: waText('Здравствуйте! Интересует покупка дома.') },
+            { label: 'Участки', icon: icons.land, href: waText('Здравствуйте! Интересует покупка участка.') },
+            { label: 'Коммерция', icon: icons.shop, href: waText('Здравствуйте! Интересует покупка коммерческой недвижимости.') },
+          ] },
+        ] },
+      { title: 'Одежда', net: 'WhatsApp', netHref: wa, icon: icons.shoe,
+        store: {
+          name: 'Best',
+          desc: 'Best — магазин брендовой одежды и обуви с тщательно отобранными моделями. Оригинальный стиль, качественные материалы и актуальные новинки сезона. Выбирайте понравившееся и пишите нам — поможем с размером и оформим заказ.',
+          wear: ['assets/img/best/wear1.png', 'assets/img/best/wear2.png', 'assets/img/best/wear3.png', 'assets/img/best/wear4.png', 'assets/img/best/wear5.png', 'assets/img/best/wear6.png'],
+          shoes: ['assets/img/best/shoe1.jpg', 'assets/img/best/shoe2.jpg', 'assets/img/best/shoe3.jpg', 'assets/img/best/shoe4.jpg', 'assets/img/best/shoe5.jpg', 'assets/img/best/shoe6.jpg'],
+          href: waText('Здравствуйте! Интересует магазин Best — одежда и обувь.'),
+        } },
+      { title: 'Авто', net: 'WhatsApp', netHref: wa, icon: icons.car, details: 'Всё для авто — аренда, продажа, рассрочка и детские электромобили. Выберите нужное:',
+        sections: [
+          { title: '', items: [
+            { label: 'Детские электромобили', icon: icons.car, href: waText('Здравствуйте! Интересуют детские электромобили.') },
+            { label: 'Аренда авто', icon: icons.key, href: waText('Здравствуйте! Интересует аренда авто.') },
+            { label: 'Продажа авто', icon: icons.car, href: waText('Здравствуйте! Интересует продажа авто.') },
+            { label: 'Рассрочка авто', icon: icons.card, href: waText('Здравствуйте! Интересует рассрочка на авто.') },
+          ] },
+        ] },
+    ].map((s, i) => ({ ...s, open: () => s.page ? (window.location.href = s.page) : this.setState({ open: i, rafflesOpen: false, bestPlay: false }) }));
 
     const vw = (typeof window !== 'undefined' ? window.innerWidth : 1200);
     return {
@@ -311,7 +438,12 @@ class Component extends DCLogic {
       reelsDescLabel: this.state.reelsExpanded ? 'Свернуть' : 'Читать полностью',
       toggleReelsDesc: () => this.setState(s => ({ reelsExpanded: !s.reelsExpanded })),
       modal: this.state.open == null ? null : all[this.state.open],
-      modalFooter: this.state.open != null && !all[this.state.open].list && !all[this.state.open].extras,
+      modalFooter: this.state.open != null && !all[this.state.open].list && !all[this.state.open].extras && !all[this.state.open].sections && !all[this.state.open].store,
+      scrollPrev: (e) => { const s = e.currentTarget.parentElement.querySelector('[data-slider]'); if (s) s.scrollBy({ left: -s.clientWidth * 0.7, behavior: 'smooth' }); },
+      scrollNext: (e) => { const s = e.currentTarget.parentElement.querySelector('[data-slider]'); if (s) s.scrollBy({ left: s.clientWidth * 0.7, behavior: 'smooth' }); },
+      bestShowPlay: !this.state.bestPlay,
+      playBest: (e) => { const vid = e.currentTarget.parentElement.querySelector('video'); if (vid) vid.play(); this.setState({ bestPlay: true }); },
+      toggleBest: (e) => { const vid = e.currentTarget; if (vid.paused) { vid.play(); this.setState({ bestPlay: true }); } else { vid.pause(); } },
       closeModal: () => this.setState({ open: null }),
     };
   }
