@@ -1,0 +1,69 @@
+name: Публикация на seruleb.com
+
+# Запускается при каждом push в main, плюс вручную из вкладки Actions.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Два деплоя одновременно не запускаем: параллельный rsync с --delete
+# мог бы залить на сервер смесь из двух сборок.
+concurrency:
+  group: deploy-seruleb
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Забрать код
+        uses: actions/checkout@v4
+
+      - name: Установить Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Собрать сайт
+        run: node build.js
+
+      - name: Проверить сборку
+        # Если сборка пустая или битая, лучше остановиться здесь,
+        # чем затереть рабочий сайт на хостинге.
+        run: |
+          for f in dist/index.html dist/obuchenie.html dist/video.html \
+                   dist/.htaccess dist/madina/index.html; do
+            [ -s "$f" ] || { echo "ОШИБКА: нет или пуст $f"; exit 1; }
+          done
+          echo "Файлов в сборке: $(find dist -type f | wc -l)"
+
+      - name: Настроить SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.BEGET_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Залить на Beget
+        run: |
+          rsync -az --delete --exclude 'cgi-bin' --stats \
+            -e "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" \
+            dist/ "${{ secrets.BEGET_HOST }}:seruleb.com/public_html/"
+
+      - name: Выставить права
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes "${{ secrets.BEGET_HOST }}" \
+            'find ~/seruleb.com/public_html -type d -exec chmod 755 {} \; ; \
+             find ~/seruleb.com/public_html -type f -exec chmod 644 {} \;'
+
+      - name: Проверить сайт
+        run: |
+          FAIL=0
+          for p in / /obuchenie /video /madina/; do
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "https://seruleb.com$p")
+            echo "  $p -> $CODE"
+            [ "$CODE" = "200" ] || FAIL=1
+          done
+          [ $FAIL -eq 0 ] || { echo "ОШИБКА: не все страницы отвечают 200"; exit 1; }
+          echo "Сайт опубликован: https://seruleb.com"
