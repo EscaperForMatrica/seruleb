@@ -1,0 +1,81 @@
+# Конфигурация Apache для хостинга Beget.
+# На Cloudflare те же задачи решает файл _headers, здесь он не читается.
+
+AddDefaultCharset UTF-8
+DirectoryIndex index.html
+Options -Indexes
+
+# WebP на случай, если сервер не знает этот тип
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+
+# ---------- Служебные файлы наружу не отдаём ----------
+<FilesMatch "^(_headers|_redirects|\.htaccess)$">
+  Require all denied
+</FilesMatch>
+
+# ---------- Чистые URL ----------
+# /obuchenie вместо /obuchenie.html — как указано в canonical и sitemap.xml.
+# SSL терминируется на nginx, Apache видит обычный http, поэтому
+# схему в редиректах задаём явно — иначе получается переход на http://.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # /madina/index.html -> /madina/  (каталог, а не /madina/index)
+  RewriteCond %{THE_REQUEST} \s/+(.*?)index\.html[\s?] [NC]
+  RewriteRule ^ https://%{HTTP_HOST}/%1 [R=301,L,NE]
+
+  # /obuchenie.html -> /obuchenie
+  RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+  RewriteRule ^ https://%{HTTP_HOST}/%1 [R=301,L,NE]
+
+  # Каталог -> его index.html (страховка, если DirectoryIndex не отработает)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*?)/?$ /$1/index.html [L]
+
+  # /obuchenie -> отдаём obuchenie.html, не меняя адрес в браузере
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>
+
+# ---------- Заголовки ----------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Запрет индексации для /madina/ задан отдельным файлом madina/.htaccess
+
+# ---------- Кэширование ----------
+# Картинки и видео — надолго; HTML всегда перепроверяется,
+# чтобы правки появлялись на сайте сразу после заливки.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType video/mp4                 "access plus 1 year"
+  ExpiresByType text/javascript           "access plus 1 week"
+  ExpiresByType application/javascript    "access plus 1 week"
+  ExpiresByType text/css                  "access plus 1 week"
+  ExpiresByType text/html                 "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ---------- Сжатие ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>

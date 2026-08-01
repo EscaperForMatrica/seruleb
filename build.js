@@ -11,7 +11,8 @@ const OUT = 'dist';
 const RUNTIME = ['support.js'];
 // 'madina' — отдельный статический сайт, живёт на /madina/ и копируется как есть.
 const ASSET_DIRS = ['assets', 'madina'];
-const PASSTHROUGH = ['_headers', '_redirects', 'robots.txt', 'sitemap.xml'];
+// .htaccess нужен хостингу Beget (Apache); на Cloudflare он просто не используется.
+const PASSTHROUGH = ['_headers', '_redirects', 'robots.txt', 'sitemap.xml', '.htaccess'];
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });

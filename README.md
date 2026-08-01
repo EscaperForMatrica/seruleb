@@ -37,22 +37,36 @@
 
 node build.js — соберёт dist/ с чистыми URL (/, /obuchenie, /video).
 
-Хостинг — Cloudflare Workers, подключённый к этому GitHub-репозиторию
-(проект заводился под Pages, но фактически подключены Workers Builds):
-- Build command: node build.js
-- Deploy command: npx wrangler deploy
-- Каталог раздачи задан в wrangler.jsonc: dist
-- Каждый git push в main -> автоматический деплой.
+### Боевой сайт — seruleb.com (хостинг Beget)
 
-Локальная проверка: node build.js && python3 -m http.server 8000 --directory dist
+Node на хостинге нет, поэтому сборка идёт локально, а наверх уезжает
+готовый dist/. Публикация одной командой:
 
-Чистые URL (/obuchenie вместо /obuchenie.html) обеспечивает сам Cloudflare —
-локальный python-сервер так не умеет, там открывайте /obuchenie.html.
+    ./deploy.sh
+
+Скрипт собирает проект, заливает по rsync в ~/seruleb.com/public_html/,
+выставляет права и проверяет ответы страниц. Нужен SSH-доступ по ключу
+(ключ добавлен в ~/.ssh/authorized_keys на сервере).
+
+Чистые URL, заголовки безопасности и кэширование на Beget задаёт .htaccess
+(Apache). Файл _headers там не читается — это формат Cloudflare.
+
+### Запасная площадка — Cloudflare Workers
+
+seruleb.petrandreevich4.workers.dev пересобирается сам при git push в main
+(Build command: node build.js, конфиг в wrangler.jsonc). Держится как
+резервная копия; на боевой домен не влияет.
+
+### Локальная проверка
+
+    node build.js && python3 -m http.server 8000 --directory dist
+
+Чистые URL локальный python-сервер не умеет — открывайте /obuchenie.html.
 
 ## Работа через Claude Code
 
-Открой проект, попроси изменения — правки вносятся в *.dc.html, затем
-git commit + git push, и Cloudflare публикует обновление сам.
+Открой проект, попроси изменения — правки вносятся в *.dc.html.
+Затем ./deploy.sh (боевой сайт) и git commit + git push (репозиторий).
 
 ## Изображения
 

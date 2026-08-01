@@ -1,0 +1,5 @@
+# Личная страница — вне индексации поисковиков.
+# К сайту Seruleb это правило отношения не имеет.
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
