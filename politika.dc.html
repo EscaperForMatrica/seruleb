@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Политика конфиденциальности — Seruleb</title>
+<meta name="description" content="Политика конфиденциальности сайта seruleb.com: какие данные обрабатываются при посещении сайта и какие права есть у посетителя.">
+<meta property="og:title" content="Политика конфиденциальности — Seruleb">
+<meta property="og:description" content="Как сайт seruleb.com обращается с данными посетителей.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seruleb.com/politika">
+<link rel="canonical" href="https://seruleb.com/politika">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#000000;}
+body{font-family:'Montserrat Alternates',sans-serif;}
+a{color:#ffb780;text-decoration:none;}
+a:hover{color:#ffffff;}
+::selection{background:rgba(255,183,128,.35);}
+</style>
+</helmet>
+<div style="min-height:100vh; background: radial-gradient(130% 90% at 50% -25%, #201709 0%, #0d0a04 48%, #000000 100%); color:#ffffff;">
+  <header style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px clamp(16px,4vw,40px); max-width:800px; margin:0 auto; box-sizing:border-box;">
+    <a href="index.dc.html" style="display:flex; align-items:center; gap:8px; font-family:'Oswald',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:#ffb780; border:1px solid #ffb780; border-radius:3px; padding:8px 16px;" style-hover="border-color:#ffffff; color:#ffffff;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>
+      На главную
+    </a>
+    <div style="font-size:13px; letter-spacing:.14em; color:#b1b1b1; font-weight:600;">SERULEB</div>
+  </header>
+
+  <main data-screen-label="Политика конфиденциальности" style="max-width:800px; margin:0 auto; padding:clamp(20px,4vw,40px) clamp(16px,4vw,32px) 80px; box-sizing:border-box; display:flex; flex-direction:column; gap:clamp(20px,3vw,30px);">
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <h1 style="font-family:'Oswald',sans-serif; font-size:clamp(22px,4.5vw,32px); font-weight:600; line-height:1.25; margin:0; text-transform:uppercase; color:#ffffff;">Политика <span style="color:#ffb780;">конфиденциальности</span></h1>
+      <div style="font-size:13px; color:#b1b1b1;">Действует с {{ updatedAt }}</div>
+    </div>
+
+    <p style="font-size:clamp(14px,1.9vw,15px); line-height:1.7; color:#e3e3e3; margin:0;">{{ intro }}</p>
+
+    <sc-for list="{{ sections }}" as="s" hint-placeholder-count="7">
+      <section style="background:linear-gradient(160deg, rgba(255,217,106,.10), rgba(255,255,255,.03)); border:1px solid rgba(255,213,138,.22); border-radius:clamp(14px,2.2vw,18px); padding:clamp(16px,2.6vw,24px); display:flex; flex-direction:column; gap:12px;">
+        <h2 style="font-family:'Oswald',sans-serif; font-size:clamp(16px,2.6vw,20px); font-weight:600; line-height:1.3; margin:0; text-transform:uppercase; color:#ffb780;">{{ s.title }}</h2>
+        <sc-for list="{{ s.paragraphs }}" as="pg" hint-placeholder-count="2">
+          <p style="font-size:clamp(13px,1.8vw,15px); line-height:1.7; color:#e3e3e3; margin:0;">{{ pg }}</p>
+        </sc-for>
+      </section>
+    </sc-for>
+
+    <div style="display:flex; flex-direction:column; gap:14px; align-items:center; text-align:center; padding-top:6px;">
+      <p style="font-size:clamp(13px,1.8vw,15px); line-height:1.7; color:#e3e3e3; margin:0;">По любым вопросам об обработке данных напишите нам.</p>
+      <a href="{{ wa }}" style="font-family:'Oswald',sans-serif; font-size:clamp(16px,2.6vw,20px); font-weight:500; text-transform:uppercase; color:#ffb780; border:1px solid #ffb780; border-radius:3px; padding:12px 24px;" style-hover="border-color:#ffffff; color:#ffffff;">Написать в WhatsApp</a>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
+}">
+class Component extends DCLogic {
+  renderVals() {
+    // Весь текст политики собран здесь — это самое удобное место для правок.
+    // Если появятся формы обратной связи, аналитика или cookie-баннер,
+    // разделы 2 и 4 нужно будет обновить: сейчас там сказано, что их нет.
+    const sections = [
+      {
+        title: '1. Общие положения',
+        paragraphs: [
+          'Настоящая Политика объясняет, какие данные обрабатываются в связи с использованием сайта seruleb.com и как обеспечивается их защита.',
+          'Оператором данных выступает владелец сайта seruleb.com. Используя сайт, вы соглашаетесь с условиями настоящей Политики.',
+        ],
+      },
+      {
+        title: '2. Какие данные мы собираем',
+        paragraphs: [
+          'Сайт не содержит форм обратной связи, полей ввода и регистрации. Мы не запрашиваем и не собираем через сайт имя, телефон, адрес электронной почты или иные персональные данные.',
+          'Как и любой сайт, seruleb.com размещён на сервере хостинг-провайдера, который ведёт служебные журналы обращений. В них фиксируются технические сведения: IP-адрес, тип и язык браузера, дата и время запроса, адрес запрошенной страницы. Эти записи используются только для обеспечения работы и безопасности сайта.',
+        ],
+      },
+      {
+        title: '3. Файлы cookie и аналитика',
+        paragraphs: [
+          'Сайт не использует файлы cookie, локальное хранилище браузера и системы веб-аналитики. Мы не отслеживаем ваши действия на сайте и не составляем профиль посетителя.',
+        ],
+      },
+      {
+        title: '4. Сторонние сервисы',
+        paragraphs: [
+          'Для оформления страниц сайт подключает шрифты Google Fonts и программные библиотеки с сервиса unpkg.com. При загрузке страницы браузер обращается к этим сервисам напрямую, и им становятся доступны технические сведения о запросе, включая IP-адрес. Обработка этих данных регулируется политиками соответствующих сервисов.',
+          'Кнопки и ссылки ведут в WhatsApp, Telegram и Instagram. Переходя по ним, вы покидаете сайт: дальнейшая переписка и обработка данных происходят по правилам этих сервисов, на которые мы не влияем.',
+        ],
+      },
+      {
+        title: '5. Цели обработки',
+        paragraphs: [
+          'Технические сведения обрабатываются для того, чтобы сайт корректно открывался, оставался доступным и был защищён от сбоев и злоупотреблений.',
+          'Если вы сами напишете нам в мессенджер, сообщённые вами сведения будут использованы исключительно для ответа на обращение и обсуждения услуг.',
+        ],
+      },
+      {
+        title: '6. Передача данных третьим лицам',
+        paragraphs: [
+          'Мы не продаём, не публикуем и не передаём данные посетителей третьим лицам, за исключением случаев, прямо предусмотренных законодательством Российской Федерации, а также случаев, описанных в разделе 4 настоящей Политики.',
+        ],
+      },
+      {
+        title: '7. Ваши права',
+        paragraphs: [
+          'Вы вправе запросить сведения об обработке ваших данных, потребовать их уточнения, блокирования или удаления, а также отозвать ранее данное согласие на обработку.',
+          'Для этого напишите нам в WhatsApp по номеру, указанному на сайте. Мы ответим в разумный срок.',
+        ],
+      },
+      {
+        title: '8. Изменения Политики',
+        paragraphs: [
+          'Мы можем обновлять настоящую Политику — например, при появлении на сайте новых форм или сервисов. Актуальная редакция всегда размещена на этой странице; дата вступления в силу указана вверху.',
+        ],
+      },
+    ];
+
+    return {
+      updatedAt: '2 августа 2026 года',
+      intro: 'Мы уважаем ваше право на неприкосновенность частной жизни и стремимся собирать как можно меньше данных. Ниже честно описано, что происходит с данными при посещении этого сайта.',
+      sections,
+      wa: 'https://wa.me/79896500005',
+    };
+  }
+}
+</script>
+</body>
+</html>
