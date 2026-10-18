@@ -91,31 +91,31 @@ a:hover{color:#ffffff;}
 
         <sc-if value="{{ showRaffleCats }}" hint-placeholder-val="{{ true }}">
           <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(10px,2vw,16px);">
-            <div onClick="{{ pickFree }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(97,206,112,.18), rgba(97,206,112,.04)); border:1px solid rgba(97,206,112,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(160,240,180,.22); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(97,206,112,.6); background:linear-gradient(160deg, rgba(97,206,112,.26), rgba(97,206,112,.08));">
-              <div style="background:#61ce70; color:#0e2a15; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Бесплатно</div>
+            <div onClick="{{ pickGirls }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(255,143,199,.20), rgba(255,143,199,.05)); border:1px solid rgba(255,143,199,.38); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(255,200,225,.24); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,143,199,.65); background:linear-gradient(160deg, rgba(255,143,199,.30), rgba(255,143,199,.10));">
+              <div style="background:#ff8fc7; color:#3d0d25; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Девушки</div>
               <svg style="width:clamp(30px,4.5vw,42px); height:clamp(30px,4.5vw,42px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
-              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Бесплатные розыгрыши</div>
+              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Розыгрыш для девушек</div>
             </div>
-            <div onClick="{{ pickPaid }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.18), rgba(255,255,255,.03)); border:1px solid rgba(255,213,138,.36); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(255,231,168,.30); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.6); background:linear-gradient(160deg, rgba(255,217,106,.26), rgba(255,255,255,.06));">
-              <div style="background:linear-gradient(180deg, #ffd96a, #c98c5d); color:#2a1c07; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Платно</div>
+            <div onClick="{{ pickMen }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(110,198,255,.20), rgba(110,198,255,.05)); border:1px solid rgba(110,198,255,.38); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(190,230,255,.24); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(110,198,255,.65); background:linear-gradient(160deg, rgba(110,198,255,.30), rgba(110,198,255,.10));">
+              <div style="background:#6ec6ff; color:#06273d; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Мужчины</div>
               <svg style="width:clamp(30px,4.5vw,42px); height:clamp(30px,4.5vw,42px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
-              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Платные розыгрыши</div>
+              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Розыгрыш для мужчин</div>
             </div>
           </div>
         </sc-if>
 
-        <sc-if value="{{ showFreeList }}" hint-placeholder-val="{{ false }}">
-          <div style="background:linear-gradient(160deg, rgba(97,206,112,.16), rgba(97,206,112,.04)); border:1px solid rgba(97,206,112,.32); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(160,240,180,.20);">
+        <sc-if value="{{ showGirlsList }}" hint-placeholder-val="{{ false }}">
+          <div style="background:linear-gradient(160deg, rgba(255,143,199,.18), rgba(255,143,199,.05)); border:1px solid rgba(255,143,199,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(255,200,225,.22);">
             <div style="display:flex; align-items:center; gap:12px;">
               <div onClick="{{ backToCats }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-size:13px; color:#e3e3e3;" style-hover="color:#ffffff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>Назад</div>
-              <div style="background:#61ce70; color:#0e2a15; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Бесплатно</div>
+              <div style="background:#ff8fc7; color:#3d0d25; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Девушки</div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.5vw,14px);">
-              <sc-for list="{{ freeRaffles }}" as="s" hint-placeholder-count="2">
-                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:rgba(97,206,112,.10); border:1px solid rgba(97,206,112,.28); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(160,240,180,.22); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(97,206,112,.55); background:rgba(97,206,112,.18);">
+              <sc-for list="{{ girlsRaffles }}" as="s" hint-placeholder-count="2">
+                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:rgba(255,143,199,.12); border:1px solid rgba(255,143,199,.30); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(255,200,225,.24); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,143,199,.58); background:rgba(255,143,199,.20);">
                   <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
                     <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
-                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #61ce70, #3f9e51); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(160,240,180,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
+                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #ff8fc7, #e0559a); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,200,225,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
                   </div>
                   <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ s.title }}</div>
                 </div>
@@ -124,18 +124,18 @@ a:hover{color:#ffffff;}
           </div>
         </sc-if>
 
-        <sc-if value="{{ showPaidList }}" hint-placeholder-val="{{ false }}">
-          <div style="background:linear-gradient(160deg, rgba(255,217,106,.16), rgba(255,255,255,.03)); border:1px solid rgba(255,213,138,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(255,231,168,.28);">
+        <sc-if value="{{ showMenList }}" hint-placeholder-val="{{ false }}">
+          <div style="background:linear-gradient(160deg, rgba(110,198,255,.18), rgba(110,198,255,.05)); border:1px solid rgba(110,198,255,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(190,230,255,.22);">
             <div style="display:flex; align-items:center; gap:12px;">
               <div onClick="{{ backToCats }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-size:13px; color:#e3e3e3;" style-hover="color:#ffffff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>Назад</div>
-              <div style="background:linear-gradient(180deg, #ffd96a, #c98c5d); color:#2a1c07; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Платно</div>
+              <div style="background:#6ec6ff; color:#06273d; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Мужчины</div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.5vw,14px);">
-              <sc-for list="{{ paidRaffles }}" as="s" hint-placeholder-count="2">
-                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.14), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.30); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.30), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.55); background:linear-gradient(160deg, rgba(255,217,106,.22), rgba(255,255,255,.06));">
+              <sc-for list="{{ menRaffles }}" as="s" hint-placeholder-count="2">
+                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:rgba(110,198,255,.12); border:1px solid rgba(110,198,255,.30); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(190,230,255,.24), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(110,198,255,.58); background:rgba(110,198,255,.20);">
                   <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
                     <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
-                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #ffd96a, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
+                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #6ec6ff, #2f93d6); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(190,230,255,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
                   </div>
                   <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ s.title }}</div>
                 </div>
@@ -400,8 +400,8 @@ class Component extends DCLogic {
       accentColor: p.accentColor ?? '#ffb780',
       gridStyle: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(8px,2vw,24px)' },
       raffles: all.slice(0, 4),
-      freeRaffles: [all[0], all[3]],
-      paidRaffles: [all[1], all[2]],
+      girlsRaffles: [all[0], all[3]],
+      menRaffles: [all[1], all[2]],
       services: all.slice(4),
       netLinks: [
         { name: 'WhatsApp', href: wa },
@@ -414,10 +414,10 @@ class Component extends DCLogic {
       stopClick: (e) => e.stopPropagation(),
       rafflesOpen: this.state.rafflesOpen,
       showRaffleCats: this.state.raffleCat == null,
-      showFreeList: this.state.raffleCat === 'free',
-      showPaidList: this.state.raffleCat === 'paid',
-      pickFree: () => this.setState({ raffleCat: 'free' }),
-      pickPaid: () => this.setState({ raffleCat: 'paid' }),
+      showGirlsList: this.state.raffleCat === 'girls',
+      showMenList: this.state.raffleCat === 'men',
+      pickGirls: () => this.setState({ raffleCat: 'girls' }),
+      pickMen: () => this.setState({ raffleCat: 'men' }),
       backToCats: () => this.setState({ raffleCat: null }),
       openRaffles: () => this.setState({ rafflesOpen: true, raffleCat: null }),
       closeRaffles: () => this.setState({ rafflesOpen: false }),
