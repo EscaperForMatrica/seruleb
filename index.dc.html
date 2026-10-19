@@ -168,6 +168,46 @@ a:hover{color:#ffffff;}
     </div>
   </sc-if>
 
+  <sc-if value="{{ girlsOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeGirls }}" style="position:fixed; inset:0; z-index:58; background:rgba(0,0,0,.7); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:12px;">
+      <div onClick="{{ stopClick }}" style="width:min(640px, 100%); max-height:92vh; overflow-y:auto; background:#000000; border:1px solid rgba(255,143,199,.32); border-radius:var(--grad); padding:clamp(18px,3.5vw,32px) clamp(16px,3.5vw,32px) clamp(24px,4vw,36px); box-shadow:0 32px 80px rgba(0,0,0,.6); display:flex; flex-direction:column; gap:22px; position:relative; font-family:'Montserrat Alternates',sans-serif;">
+        <div onClick="{{ closeGirls }}" style="position:absolute; top:calc(clamp(18px,3.5vw,32px) + 15px); right:calc(clamp(16px,3.5vw,32px) + 12px); z-index:2; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.55); border:1px solid rgba(255,143,199,.45); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(255,143,199,.25);">✕</div>
+
+        <div style="flex-shrink:0; background:#ff8fc7; border-radius:15px; padding:10px 52px; text-align:center;">
+          <div style="font-family:'Oswald',sans-serif; font-size:clamp(24px,5vw,32px); font-weight:600; color:#ffffff; letter-spacing:.12em;">SERULEB</div>
+        </div>
+
+        <h1 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(21px,4.6vw,28px); line-height:1.3;">{{ girls.titleEmoji }} Женское WhatsApp-сообщество <span style="color:#ff8fc7;">Seruleb</span></h1>
+        <div style="font-size:clamp(14px,2vw,16px); font-weight:600; line-height:1.6; color:#ff8fc7; text-align:center;">{{ girls.lead }}</div>
+
+        <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
+
+        <sc-for list="{{ girls.blocks }}" as="bl" hint-placeholder-count="3">
+          <div style="background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:15px; padding:18px 20px; display:flex; flex-direction:column; gap:10px;">
+            <div style="font-family:'Oswald',sans-serif; font-size:clamp(16px,3.4vw,19px); font-weight:600; text-transform:uppercase; color:#ff8fc7;">{{ bl.title }}</div>
+            <p style="font-size:14px; line-height:1.7; color:#ffffff; margin:0;">{{ bl.text }}</p>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
+
+        <h2 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(20px,4.6vw,28px); line-height:1.3;">{{ girls.rulesTitle }}</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <sc-for list="{{ girls.rules }}" as="rl" hint-placeholder-count="4">
+            <div style="display:flex; align-items:flex-start; gap:14px;">
+              <div style="flex-shrink:0; width:30px; height:30px; border-radius:7px; background:#ff8fc7; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; color:#3d0d25;">{{ rl.n }}</div>
+              <div style="font-size:14px; line-height:1.55; color:#ffffff; padding-top:4px;">{{ rl.t }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:#ff8fc7; border-radius:10px; padding:16px 18px; font-size:14px; font-weight:700; line-height:1.6; color:#3d0d25;">{{ girls.important }}</div>
+        <div style="font-size:15px; font-weight:600; line-height:1.6; color:#ff8fc7; text-align:center;">{{ girls.closing }}</div>
+        <a href="{{ girlsCta }}" style="align-self:center; font-family:'Oswald',sans-serif; font-size:clamp(18px,3.8vw,26px); font-weight:500; text-transform:uppercase; color:#ff8fc7; border:1px solid #ff8fc7; border-radius:3px; padding:12px 24px; text-align:center;" style-hover="border-color:#ffffff; color:#ffffff;">💗 Вступить в женское сообщество</a>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ tshirtOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeTshirt }}" style="position:fixed; inset:0; z-index:58; background:rgba(0,0,0,.7); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:12px;">
       <div onClick="{{ stopClick }}" style="width:min(680px, 100%); max-height:92vh; overflow-y:auto; background:#000000; border:1px solid rgba(255,183,128,.28); border-radius:var(--grad); padding:clamp(18px,3.5vw,32px) clamp(16px,3.5vw,32px) clamp(24px,4vw,36px); box-shadow:0 32px 80px rgba(0,0,0,.6); display:flex; flex-direction:column; gap:24px; position:relative; font-family:'Montserrat Alternates',sans-serif;">
@@ -405,7 +445,7 @@ a:hover{color:#ffffff;}
   &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false, tshirtOpen: false };
+  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false };
   renderVals() {
     const p = this.props;
     const wa = 'https://wa.me/79896500005';
@@ -504,7 +544,30 @@ class Component extends DCLogic {
       showRaffleCats: this.state.raffleCat == null,
       showGirlsList: this.state.raffleCat === 'girls',
       showMenList: this.state.raffleCat === 'men',
-      pickGirls: () => this.setState({ raffleCat: 'girls' }),
+      // «Розыгрыш для девушек» открывает поп-ап женского сообщества, а не список призов
+      pickGirls: () => this.setState({ girlsOpen: true }),
+      girlsOpen: this.state.girlsOpen,
+      closeGirls: () => this.setState({ girlsOpen: false }),
+      // TODO: если появится ссылка-приглашение в сообщество (chat.whatsapp.com/...), поставить её сюда
+      girlsCta: waText('Здравствуйте! Хочу вступить в женское WhatsApp-сообщество Seruleb.'),
+      girls: {
+        titleEmoji: '🎀',
+        lead: '💗 Это сообщество создано исключительно для женской аудитории.',
+        blocks: [
+          { title: '🔒 Безопасность и конфиденциальность', text: 'Участницы не видят номера друг друга. Вся информация о розыгрышах публикуется в сообществе.' },
+          { title: '🌸 Наши спонсоры', text: 'В этом сообществе представлены только женские спонсоры. Все контакты спонсоров, которые вы будете сохранять, относятся исключительно к женской аудитории.' },
+          { title: '📈 Польза для вас', text: 'Сохраняя контакты спонсоров, вы расширяете свою женскую аудиторию. При взаимном сохранении номеров ваши статусы WhatsApp смогут видеть больше заинтересованных женщин, что поможет увеличить просмотры.' },
+        ],
+        rulesTitle: '🎁 Условия участия в розыгрышах:',
+        rules: [
+          { n: '1', t: 'Сохраните номер Seruleb и контакты наших спонсоров.' },
+          { n: '2', t: '📹 Видеоролики для публикации в ваших статусах WhatsApp мы будем отправлять прямо в это сообщество. Для участия в розыгрышах вам необходимо публиковать их в своих статусах на 24 часа.' },
+          { n: '3', t: 'Примерно через 20 часов после публикации сделайте скриншот статуса.' },
+          { n: '4', t: 'Не удаляйте скриншоты! Они понадобятся во время розыгрыша, чтобы подтвердить, что вы выполнили все условия участия.' },
+        ],
+        important: '⚠️ Важно: выполнение всех условий обязательно для участия в розыгрышах.',
+        closing: '🎉 Участвуйте бесплатно, расширяйте свою женскую аудиторию и выигрывайте подарки!',
+      },
       pickMen: () => this.setState({ raffleCat: 'men' }),
       // Слайдер с фото в футболках Seruleb. Порядок массива = порядок слайдов.
       teamPhotos: ['assets/img/team/team-01.webp', 'assets/img/team/team-02.webp', 'assets/img/team/team-03.webp', 'assets/img/team/team-04.webp', 'assets/img/team/team-05.webp', 'assets/img/team/team-06.webp', 'assets/img/team/team-07.webp', 'assets/img/team/team-08.webp', 'assets/img/team/team-09.webp', 'assets/img/team/team-10.webp', 'assets/img/team/team-11.webp'],
