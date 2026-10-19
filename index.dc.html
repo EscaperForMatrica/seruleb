@@ -162,6 +162,7 @@ a:hover{color:#ffffff;}
                 </div>
               </sc-for>
             </div>
+            <a href="{{ menCta }}" style="align-self:stretch; text-align:center; background:#ffd96a; color:#2a1c07; font-weight:700; font-size:clamp(13.5px,1.8vw,15px); padding:13px 20px; border-radius:999px; box-shadow:0 10px 26px rgba(0,0,0,.3);" style-hover="filter:brightness(1.06);">👨 Вступить в мужское сообщество</a>
           </div>
         </sc-if>
       </div>
@@ -548,8 +549,9 @@ class Component extends DCLogic {
       pickGirls: () => this.setState({ girlsOpen: true }),
       girlsOpen: this.state.girlsOpen,
       closeGirls: () => this.setState({ girlsOpen: false }),
-      // TODO: если появится ссылка-приглашение в сообщество (chat.whatsapp.com/...), поставить её сюда
-      girlsCta: waText('Здравствуйте! Хочу вступить в женское WhatsApp-сообщество Seruleb.'),
+      // Ссылки-приглашения в WhatsApp-сообщества
+      girlsCta: 'https://chat.whatsapp.com/Cw7T2jj9MYz4LbQJ3XcIIu',
+      menCta: 'https://chat.whatsapp.com/CAzCwaRIHfv0ooJ1nAVwSH',
       girls: {
         titleEmoji: '🎀',
         lead: '💗 Это сообщество создано исключительно для женской аудитории.',
