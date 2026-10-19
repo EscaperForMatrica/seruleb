@@ -125,46 +125,6 @@ a:hover{color:#ffffff;}
           </div>
         </sc-if>
 
-        <sc-if value="{{ showGirlsList }}" hint-placeholder-val="{{ false }}">
-          <div style="background:linear-gradient(160deg, rgba(255,143,199,.18), rgba(255,143,199,.05)); border:1px solid rgba(255,143,199,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(255,200,225,.22);">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div onClick="{{ backToCats }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-size:13px; color:#e3e3e3;" style-hover="color:#ffffff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>Назад</div>
-              <div style="background:#ff8fc7; color:#3d0d25; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Девушки</div>
-            </div>
-            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.5vw,14px);">
-              <sc-for list="{{ girlsRaffles }}" as="s" hint-placeholder-count="2">
-                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:rgba(255,143,199,.12); border:1px solid rgba(255,143,199,.30); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(255,200,225,.24); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,143,199,.58); background:rgba(255,143,199,.20);">
-                  <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
-                    <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
-                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #ff8fc7, #e0559a); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,200,225,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
-                  </div>
-                  <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ s.title }}</div>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-        </sc-if>
-
-        <sc-if value="{{ showMenList }}" hint-placeholder-val="{{ false }}">
-          <div style="background:linear-gradient(160deg, rgba(255,217,106,.18), rgba(255,217,106,.05)); border:1px solid rgba(255,217,106,.34); border-radius:clamp(14px,2vw,20px); padding:clamp(14px,2.2vw,20px); display:flex; flex-direction:column; gap:14px; box-shadow:inset 0 1px 0 rgba(255,231,168,.22);">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div onClick="{{ backToCats }}" style="cursor:pointer; display:flex; align-items:center; gap:6px; font-size:13px; color:#e3e3e3;" style-hover="color:#ffffff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>Назад</div>
-              <div style="background:#ffd96a; color:#2a1c07; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">Мужчины</div>
-            </div>
-            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.5vw,14px);">
-              <sc-for list="{{ menRaffles }}" as="s" hint-placeholder-count="2">
-                <div onClick="{{ s.open }}" style="cursor:pointer; display:flex; flex-direction:column; gap:10px; background:rgba(255,217,106,.12); border:1px solid rgba(255,217,106,.30); border-radius:clamp(12px,1.8vw,18px); padding:clamp(10px,1.6vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.24), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, background .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.58); background:rgba(255,217,106,.20);">
-                  <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1vw,12px) 0 clamp(4px,0.8vw,8px);">
-                    <svg style="width:clamp(26px,3.5vw,38px); height:clamp(26px,3.5vw,38px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg>
-                    <div style="width:58%; height:clamp(6px,1vw,12px); border-radius:50%; background:linear-gradient(180deg, #ffd96a, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.7vw,7px);"></div>
-                  </div>
-                  <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.2vw,13px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">{{ s.title }}</div>
-                </div>
-              </sc-for>
-            </div>
-            <a href="{{ menCta }}" style="align-self:stretch; text-align:center; background:#ffd96a; color:#2a1c07; font-weight:700; font-size:clamp(13.5px,1.8vw,15px); padding:13px 20px; border-radius:999px; box-shadow:0 10px 26px rgba(0,0,0,.3);" style-hover="filter:brightness(1.06);">👨 Вступить в мужское сообщество</a>
-          </div>
-        </sc-if>
       </div>
     </div>
   </sc-if>
@@ -195,9 +155,19 @@ a:hover{color:#ffffff;}
         <h2 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(20px,4.6vw,28px); line-height:1.3;">{{ girls.rulesTitle }}</h2>
         <div style="display:flex; flex-direction:column; gap:16px;">
           <sc-for list="{{ girls.rules }}" as="rl" hint-placeholder-count="4">
-            <div style="display:flex; align-items:flex-start; gap:14px;">
-              <div style="flex-shrink:0; width:30px; height:30px; border-radius:7px; background:#ff8fc7; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; color:#3d0d25;">{{ rl.n }}</div>
-              <div style="font-size:14px; line-height:1.55; color:#ffffff; padding-top:4px;">{{ rl.t }}</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; align-items:flex-start; gap:14px;">
+                <div style="flex-shrink:0; width:30px; height:30px; border-radius:7px; background:#ff8fc7; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; color:#3d0d25;">{{ rl.n }}</div>
+                <div style="font-size:14px; line-height:1.55; color:#ffffff; padding-top:4px;">{{ rl.t }}</div>
+              </div>
+              <sc-if value="{{ rl.phones }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; flex-wrap:wrap; gap:8px; padding-left:44px;">
+                  <sc-for list="{{ organizerPhones }}" as="ph" hint-placeholder-count="2">
+                    <a href="{{ ph.tel }}" style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,143,199,.35); border-radius:999px; padding:8px 14px; font-size:13px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,143,199,.18); border-color:#ff8fc7;">📞 {{ ph.label }}</a>
+                  </sc-for>
+                </div>
+                <div style="font-size:13px; line-height:1.5; color:#b1b1b1; padding-left:44px;">{{ rl.note }}</div>
+              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -205,6 +175,56 @@ a:hover{color:#ffffff;}
         <div style="background:#ff8fc7; border-radius:10px; padding:16px 18px; font-size:14px; font-weight:700; line-height:1.6; color:#3d0d25;">{{ girls.important }}</div>
         <div style="font-size:15px; font-weight:600; line-height:1.6; color:#ff8fc7; text-align:center;">{{ girls.closing }}</div>
         <a href="{{ girlsCta }}" style="align-self:center; font-family:'Oswald',sans-serif; font-size:clamp(18px,3.8vw,26px); font-weight:500; text-transform:uppercase; color:#ff8fc7; border:1px solid #ff8fc7; border-radius:3px; padding:12px 24px; text-align:center;" style-hover="border-color:#ffffff; color:#ffffff;">💗 Вступить в женское сообщество</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ menOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMen }}" style="position:fixed; inset:0; z-index:58; background:rgba(0,0,0,.7); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:max(28px, calc(env(safe-area-inset-top) + 16px)) 12px max(28px, calc(env(safe-area-inset-bottom) + 16px));">
+      <div onClick="{{ stopClick }}" style="width:min(640px, 100%); margin:auto 0; box-sizing:border-box; background:#000000; border:1px solid rgba(255,217,106,.32); border-radius:var(--grad); padding:clamp(18px,3.5vw,32px) clamp(16px,3.5vw,32px) clamp(24px,4vw,36px); box-shadow:0 32px 80px rgba(0,0,0,.6); display:flex; flex-direction:column; gap:22px; position:relative; font-family:'Montserrat Alternates',sans-serif;">
+        <div onClick="{{ closeMen }}" style="position:absolute; top:calc(clamp(18px,3.5vw,32px) + 15px); right:calc(clamp(16px,3.5vw,32px) + 12px); z-index:2; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.55); border:1px solid rgba(255,217,106,.45); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(255,217,106,.25);">✕</div>
+
+        <div style="flex-shrink:0; background:#ffd96a; border-radius:15px; padding:10px 52px; text-align:center;">
+          <div style="font-family:'Oswald',sans-serif; font-size:clamp(24px,5vw,32px); font-weight:600; color:#ffffff; letter-spacing:.12em;">SERULEB</div>
+        </div>
+
+        <h1 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(21px,4.6vw,28px); line-height:1.3;">{{ men.titleEmoji }} Мужское WhatsApp-сообщество <span style="color:#ffd96a;">Seruleb</span></h1>
+        <div style="font-size:clamp(14px,2vw,16px); font-weight:600; line-height:1.6; color:#ffd96a; text-align:center;">{{ men.lead }}</div>
+
+        <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
+
+        <sc-for list="{{ men.blocks }}" as="bl" hint-placeholder-count="3">
+          <div style="background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:15px; padding:18px 20px; display:flex; flex-direction:column; gap:10px;">
+            <div style="font-family:'Oswald',sans-serif; font-size:clamp(16px,3.4vw,19px); font-weight:600; text-transform:uppercase; color:#ffd96a;">{{ bl.title }}</div>
+            <p style="font-size:14px; line-height:1.7; color:#ffffff; margin:0;">{{ bl.text }}</p>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
+
+        <h2 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(20px,4.6vw,28px); line-height:1.3;">{{ men.rulesTitle }}</h2>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <sc-for list="{{ men.rules }}" as="rl" hint-placeholder-count="4">
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; align-items:flex-start; gap:14px;">
+                <div style="flex-shrink:0; width:30px; height:30px; border-radius:7px; background:#ffd96a; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; color:#2a1c07;">{{ rl.n }}</div>
+                <div style="font-size:14px; line-height:1.55; color:#ffffff; padding-top:4px;">{{ rl.t }}</div>
+              </div>
+              <sc-if value="{{ rl.phones }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; flex-wrap:wrap; gap:8px; padding-left:44px;">
+                  <sc-for list="{{ organizerPhones }}" as="ph" hint-placeholder-count="2">
+                    <a href="{{ ph.tel }}" style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,217,106,.35); border-radius:999px; padding:8px 14px; font-size:13px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,217,106,.18); border-color:#ffd96a;">📞 {{ ph.label }}</a>
+                  </sc-for>
+                </div>
+                <div style="font-size:13px; line-height:1.5; color:#b1b1b1; padding-left:44px;">{{ rl.note }}</div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:#ffd96a; border-radius:10px; padding:16px 18px; font-size:14px; font-weight:700; line-height:1.6; color:#2a1c07;">{{ men.important }}</div>
+        <div style="font-size:15px; font-weight:600; line-height:1.6; color:#ffd96a; text-align:center;">{{ men.closing }}</div>
+        <a href="{{ menCta }}" style="align-self:center; font-family:'Oswald',sans-serif; font-size:clamp(18px,3.8vw,26px); font-weight:500; text-transform:uppercase; color:#ffd96a; border:1px solid #ffd96a; border-radius:3px; padding:12px 24px; text-align:center;" style-hover="border-color:#ffffff; color:#ffffff;">👨 Вступить в мужское сообщество</a>
       </div>
     </div>
   </sc-if>
@@ -446,7 +466,7 @@ a:hover{color:#ffffff;}
   &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false };
+  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
   renderVals() {
     const p = this.props;
     const wa = 'https://wa.me/79896500005';
@@ -530,8 +550,6 @@ class Component extends DCLogic {
       accentColor: p.accentColor ?? '#ffb780',
       gridStyle: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(8px,2vw,24px)' },
       raffles: all.slice(0, 4),
-      girlsRaffles: [all[0], all[3]],
-      menRaffles: [all[1], all[2]],
       services: all.slice(4),
       netLinks: [
         { name: 'WhatsApp', href: wa },
@@ -543,10 +561,13 @@ class Component extends DCLogic {
       stopClick: (e) => e.stopPropagation(),
       rafflesOpen: this.state.rafflesOpen,
       showRaffleCats: this.state.raffleCat == null,
-      showGirlsList: this.state.raffleCat === 'girls',
-      showMenList: this.state.raffleCat === 'men',
       // «Розыгрыш для девушек» открывает поп-ап женского сообщества, а не список призов
       pickGirls: () => this.setState({ girlsOpen: true }),
+      // Номера организатора Seruleb — одинаковые для обоих сообществ, ссылки tel: для перехода в звонок
+      organizerPhones: [
+        { label: '+7 989 896-66-66', tel: 'tel:+79898966666' },
+        { label: '+7 989 650-00-05', tel: 'tel:+79896500005' },
+      ],
       girlsOpen: this.state.girlsOpen,
       closeGirls: () => this.setState({ girlsOpen: false }),
       // Ссылки-приглашения в WhatsApp-сообщества
@@ -562,7 +583,7 @@ class Component extends DCLogic {
         ],
         rulesTitle: '🎁 Условия участия в розыгрышах:',
         rules: [
-          { n: '1', t: 'Сохраните номер Seruleb и контакты наших спонсоров.' },
+          { n: '1', t: 'Сохраните номера организатора Seruleb и контакты наших спонсоров:', phones: true, note: 'Контакты наших спонсоров я буду отправлять в сообщество для взаимного сохранения.' },
           { n: '2', t: '📹 Видеоролики для публикации в ваших статусах WhatsApp мы будем отправлять прямо в это сообщество. Для участия в розыгрышах вам необходимо публиковать их в своих статусах на 24 часа.' },
           { n: '3', t: 'Примерно через 20 часов после публикации сделайте скриншот статуса.' },
           { n: '4', t: 'Не удаляйте скриншоты! Они понадобятся во время розыгрыша, чтобы подтвердить, что вы выполнили все условия участия.' },
@@ -570,7 +591,27 @@ class Component extends DCLogic {
         important: '⚠️ Важно: выполнение всех условий обязательно для участия в розыгрышах.',
         closing: '🎉 Участвуйте бесплатно, расширяйте свою женскую аудиторию и выигрывайте подарки!',
       },
-      pickMen: () => this.setState({ raffleCat: 'men' }),
+      pickMen: () => this.setState({ menOpen: true }),
+      menOpen: this.state.menOpen,
+      closeMen: () => this.setState({ menOpen: false }),
+      men: {
+        titleEmoji: '🤝',
+        lead: '🧡 Это сообщество создано исключительно для мужской аудитории.',
+        blocks: [
+          { title: '🔒 Безопасность и конфиденциальность', text: 'Участники не видят номера друг друга. Вся информация о розыгрышах публикуется в сообществе.' },
+          { title: '👔 Наши спонсоры', text: 'В этом сообществе представлены только мужские спонсоры. Все контакты спонсоров, которые вы будете сохранять, относятся исключительно к мужской аудитории.' },
+          { title: '📈 Польза для вас', text: 'Сохраняя контакты спонсоров, вы расширяете свою мужскую аудиторию. При взаимном сохранении номеров ваши статусы WhatsApp смогут видеть больше заинтересованных мужчин, что поможет увеличить просмотры.' },
+        ],
+        rulesTitle: '🎁 Условия участия в розыгрышах:',
+        rules: [
+          { n: '1', t: 'Сохраните два номера организатора Seruleb:', phones: true, note: 'Контакты наших спонсоров я буду отправлять в сообщество для взаимного сохранения.' },
+          { n: '2', t: '📹 Видеоролики для публикации в ваших статусах WhatsApp мы будем отправлять прямо в это сообщество. Для участия в розыгрышах вам необходимо публиковать их в своих статусах на 24 часа.' },
+          { n: '3', t: 'Примерно через 20 часов после публикации сделайте скриншот статуса.' },
+          { n: '4', t: 'Не удаляйте скриншоты! Они понадобятся во время розыгрыша, чтобы подтвердить, что вы выполнили все условия участия.' },
+        ],
+        important: '⚠️ Важно: выполнение всех условий обязательно для участия в розыгрышах.',
+        closing: '🎉 Участвуйте бесплатно, расширяйте свою мужскую аудиторию и выигрывайте подарки!',
+      },
       // Слайдер с фото в футболках Seruleb. Порядок массива = порядок слайдов.
       teamPhotos: ['assets/img/team/team-01.webp', 'assets/img/team/team-02.webp', 'assets/img/team/team-03.webp', 'assets/img/team/team-04.webp', 'assets/img/team/team-05.webp', 'assets/img/team/team-06.webp', 'assets/img/team/team-07.webp', 'assets/img/team/team-08.webp', 'assets/img/team/team-09.webp', 'assets/img/team/team-10.webp', 'assets/img/team/team-11.webp'],
       tshirtOpen: this.state.tshirtOpen,
@@ -621,7 +662,6 @@ class Component extends DCLogic {
           '🎁 Мы будем проводить розыгрыши в течение всего года, чтобы поддерживать интерес и активность аудитории. Благодаря этому участники смогут регулярно видеть ваши статусы, знакомиться с вашими товарами и услугами, узнавать о вашем бизнесе и со временем становиться вашими клиентами.',
         ],
       },
-      backToCats: () => this.setState({ raffleCat: null }),
       openRaffles: () => this.setState({ rafflesOpen: true, raffleCat: null }),
       closeRaffles: () => this.setState({ rafflesOpen: false }),
       reelsOpen: this.state.reelsOpen,
