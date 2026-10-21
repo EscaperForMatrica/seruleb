@@ -251,10 +251,7 @@ a:hover{color:#ffffff;}
 
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
 
-        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,2vw,14px);">
-          <a href="{{ earnOnlineCta }}" style="display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); border-radius:999px; padding:13px 16px; font-size:clamp(12.5px,1.8vw,14px); font-weight:700; color:#ffffff; text-align:center;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780;">💻 Заработок онлайн</a>
-          <a href="{{ earnOfflineCta }}" style="display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); border-radius:999px; padding:13px 16px; font-size:clamp(12.5px,1.8vw,14px); font-weight:700; color:#ffffff; text-align:center;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780;">🏠 Заработок офлайн</a>
-        </div>
+        <a href="{{ tshirtCta }}" style="align-self:center; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 30px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35); text-align:center;" style-hover="filter:brightness(1.06);">🛍️ Приобрести футболку</a>
 
         <h2 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(20px,4.6vw,28px); line-height:1.3;">{{ tshirt.giftTitle }}</h2>
         <div style="background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:15px; padding:22px 20px; display:flex; flex-direction:column; gap:14px;">
@@ -265,7 +262,6 @@ a:hover{color:#ffffff;}
 
         <div style="background:#ffb780; border-radius:10px; padding:16px 18px; font-size:14px; font-weight:700; line-height:1.6; color:#292929;">{{ tshirt.choose }}</div>
         <div style="font-size:15px; font-weight:600; line-height:1.6; color:#ffb780; text-align:center;">{{ tshirt.join }}</div>
-        <a href="{{ tshirtCta }}" style="align-self:center; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 30px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35); text-align:center;" style-hover="filter:brightness(1.06);">🛍️ Приобрести футболку</a>
 
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
 
@@ -274,6 +270,8 @@ a:hover{color:#ffffff;}
         <sc-for list="{{ tshirt.about }}" as="ab" hint-placeholder-count="4">
           <p style="font-size:14px; line-height:1.7; color:#ffffff; margin:0;">{{ ab }}</p>
         </sc-for>
+
+        <a href="{{ tshirtCta }}" style="align-self:center; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 30px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35); text-align:center;" style-hover="filter:brightness(1.06);">🛍️ Приобрести футболку</a>
       </div>
     </div>
   </sc-if>
@@ -439,6 +437,7 @@ class Component extends DCLogic {
       land: 'M12 21s-6-5.5-6-10a6 6 0 0 1 12 0c0 4.5-6 10-6 10Z M12 12.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
       key: 'M15 7a3 3 0 1 1-2.9 3.7L7 15.8V18H5v-2H3v-2.2l6.3-6.3A3 3 0 0 1 15 7Z',
       card: 'M3 6h18v12H3z M3 10h18 M6 15h4',
+      tshirt: 'M8 3 4 5 2 9.5l3 1.5V21h14V11l3-1.5L20 5l-4-2c0 1.7-1.8 3-4 3S8 4.7 8 3Z',
     };
     const all = [
       { title: 'Розыгрыш iPhone', net: 'WhatsApp', netHref: wa, icon: icons.phone, details: 'Регулярные розыгрыши техники Apple среди участников сообщества. Подпишитесь на Telegram-канал, чтобы узнать условия участия и не пропустить розыгрыш.', cta: 'Участвовать', href: tg },
@@ -466,7 +465,7 @@ class Component extends DCLogic {
           shoes: ['assets/img/best/shoe1.webp', 'assets/img/best/shoe2.webp', 'assets/img/best/shoe3.webp', 'assets/img/best/shoe4.webp', 'assets/img/best/shoe5.webp', 'assets/img/best/shoe6.webp'],
           href: waText('Здравствуйте! Интересует магазин Best — одежда и обувь.'),
         } },
-      { title: 'Футболка Seruleb', net: 'WhatsApp', netHref: wa, icon: icons.card, tshirtTile: true },
+      { title: 'Футболка Seruleb', net: 'WhatsApp', netHref: wa, icon: icons.tshirt, tshirtTile: true },
     ].map((s, i) => ({ ...s, open: () => s.page ? (window.location.href = s.page) : s.tshirtTile ? this.setState({ tshirtOpen: true }) : this.setState({ open: i, bestPlay: false }) }));
 
     const vw = (typeof window !== 'undefined' ? window.innerWidth : 1200);
@@ -537,8 +536,6 @@ class Component extends DCLogic {
       openTshirt: () => this.setState({ tshirtOpen: true }),
       closeTshirt: () => this.setState({ tshirtOpen: false }),
       tshirtCta: waText('Ассаляму Алейкум! Хочу приобрести футболку Seruleb, для участия в розыгрыше, и получить ваши услуги по продвижению WhatsApp.'),
-      earnOnlineCta: waText('Ассаляму Алейкум! Интересует заработок онлайн через Seruleb.'),
-      earnOfflineCta: waText('Ассаляму Алейкум! Интересует заработок офлайн через Seruleb.'),
       // Текст поп-апа «Приобрести футболку Seruleb»
       tshirt: {
         intro: '👕 Приобретая футболку Seruleb, вы получаете доступ к возможностям нашего сообщества и участвуете в розыгрышах призов в течение всего года!',
