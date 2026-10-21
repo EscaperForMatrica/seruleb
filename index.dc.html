@@ -41,7 +41,7 @@ a:hover{color:#ffffff;}
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeMenu }}" style="position:fixed; inset:0; z-index:60;">
       <div onClick="{{ stopClick }}" style="position:absolute; top:88px; left:clamp(16px,4vw,48px); min-width:220px; background:rgba(24,24,24,.92); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,213,138,.24); border-radius:18px; padding:10px; box-shadow:0 24px 60px rgba(0,0,0,.5); display:flex; flex-direction:column; gap:2px;">
-        <a href="video.dc.html" style="display:block; padding:14px 18px; border-radius:14px; font-size:clamp(14px, 3.4vw, 16px); font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">Видео</a>
+        <a href="video.dc.html" style="display:block; padding:14px 18px; border-radius:14px; font-size:clamp(14px, 3.4vw, 16px); font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">Отзывы</a>
         <a href="obuchenie.dc.html" style="display:block; padding:14px 18px; border-radius:14px; font-size:clamp(14px, 3.4vw, 16px); font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">Обучение</a>
         <a href="https://t.me/+poiUb7z8ShE3Yzcy" onClick="{{ closeMenu }}" style="display:block; padding:14px 18px; border-radius:14px; font-size:clamp(14px, 3.4vw, 16px); font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">Telegram</a>
         <a href="https://wa.me/79896500005" onClick="{{ closeMenu }}" style="display:block; padding:14px 18px; border-radius:14px; font-size:clamp(14px, 3.4vw, 16px); font-weight:600; color:#ffffff;" style-hover="background:rgba(255,255,255,.10); color:#ffffff;">WhatsApp</a>
@@ -262,29 +262,6 @@ a:hover{color:#ffffff;}
     </div>
   </sc-if>
 
-  <sc-if value="{{ reelsOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeReels }}" style="position:fixed; inset:0; z-index:55; background:rgba(0,0,0,.7); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:max(28px, calc(env(safe-area-inset-top) + 16px)) 12px max(28px, calc(env(safe-area-inset-bottom) + 16px));">
-      <div onClick="{{ stopClick }}" style="width:min(400px, 100%); background:rgba(24,24,24,.92); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(16px,3vw,22px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.5); display:flex; flex-direction:column; gap:14px; position:relative; margin:auto 0; box-sizing:border-box;">
-        <div onClick="{{ closeReels }}" style="position:absolute; top:16px; right:16px; z-index:3; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.45); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.65);">✕</div>
-        <div style="position:relative; width:100%; aspect-ratio:9/16; max-height:64vh; border-radius:14px; overflow:hidden; background:#000;">
-          <video controls="controls" playsinline preload="metadata" poster="assets/video/kamil-poster.webp" onClick="{{ toggleReels }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000; display:block; cursor:pointer;">
-            <source src="assets/video/kamil.mp4" type="video/mp4">
-          </video>
-          <sc-if value="{{ reelsShowPlay }}" hint-placeholder-val="{{ true }}">
-            <div onClick="{{ playReels }}" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; cursor:pointer; background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.35));">
-              <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,183,128,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(0,0,0,.4); transition:transform .2s ease;" style-hover="transform:scale(1.08);">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="#101010" stroke="none"><path d="M8 5.5v13l11-6.5z"></path></svg>
-              </div>
-            </div>
-          </sc-if>
-        </div>
-        <div style="font-family:'Oswald',sans-serif; font-size:clamp(15px, 3.4vw, 18px); font-weight:600; color:#ffffff; text-transform:uppercase; padding:0 4px;">Камиль — reels-продюсер</div>
-        <div style="{{ reelsDescStyle }}">{{ reelsDesc }}</div>
-        <div onClick="{{ toggleReelsDesc }}" style="cursor:pointer; align-self:flex-start; font-size:13px; font-weight:600; color:var(--accent); padding:0 4px;" style-hover="color:#ffffff;">{{ reelsDescLabel }}</div>
-      </div>
-    </div>
-  </sc-if>
-
   <sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:50; background:rgba(0,0,0,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:max(28px, calc(env(safe-area-inset-top) + 16px)) 12px max(28px, calc(env(safe-area-inset-bottom) + 16px));">
       <div onClick="{{ stopClick }}" style="width:min(620px, 100%); margin:auto 0; box-sizing:border-box; background:rgba(24,24,24,.9); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(20px,3.5vw,32px) clamp(16px,3vw,26px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:18px; position:relative;">
@@ -295,14 +272,6 @@ a:hover{color:#ffffff;}
         <sc-if value="{{ modal.extras }}" hint-placeholder-val="{{ false }}">
           <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:clamp(8px,1.5vw,14px);">
             <sc-for list="{{ modal.extras }}" as="ex" hint-placeholder-count="3">
-              <sc-if value="{{ ex.reels }}" hint-placeholder-val="{{ false }}">
-                <div onClick="{{ openReels }}" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,18px) clamp(8px,1.5vw,14px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.45);">
-                  <div style="flex-shrink:0; width:42px; height:42px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ex.icon }}"></path></svg>
-                  </div>
-                  <div style="font-size:clamp(12px,1.5vw,14px); font-weight:600; line-height:1.35; color:#ffffff;">{{ ex.label }}</div>
-                </div>
-              </sc-if>
               <sc-if value="{{ ex.href }}" hint-placeholder-val="{{ true }}">
                 <a href="{{ ex.href }}" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,18px) clamp(8px,1.5vw,14px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-3px); border-color:rgba(255,217,106,.45);">
                   <div style="flex-shrink:0; width:42px; height:42px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
@@ -431,7 +400,7 @@ a:hover{color:#ffffff;}
   &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
+  state = { open: null, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
   renderVals() {
     const p = this.props;
     const wa = 'https://wa.me/79896500005';
@@ -472,7 +441,6 @@ class Component extends DCLogic {
           { label: 'Разработка сайтов', icon: 'M3 5h18v12H3z M3 9h18 M6 7h.5 M8.5 7h.5 M9 21h6 M12 17v4', href: waText('Здравствуйте! Хочу заказать разработку сайта.') },
           { label: 'Увеличение просмотров в WhatsApp', icon: 'M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z M14.5 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z', href: waText('Здравствуйте! Хочу увеличить просмотры в WhatsApp.') },
           { label: 'Продвижение Instagram', icon: 'M4 8h3l2-3h6l2 3h3v12H4z M15.5 13.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z', href: waText('Здравствуйте! Хочу заказать продвижение Instagram.') },
-          { label: 'Рилс', reels: true, icon: 'M3 5h18v14H3z M3 9h18 M7.5 5 5.5 9 M12.5 5l-2 4 M17.5 5l-2 4 M10 12.5v4l3.5-2z' },
         ] },
       { title: 'Одежда', net: 'WhatsApp', netHref: wa, icon: icons.shoe,
         store: {
@@ -599,24 +567,6 @@ class Component extends DCLogic {
           '🎁 Мы будем проводить розыгрыши в течение всего года, чтобы поддерживать интерес и активность аудитории. Благодаря этому участники смогут регулярно видеть ваши статусы, знакомиться с вашими товарами и услугами, узнавать о вашем бизнесе и со временем становиться вашими клиентами.',
         ],
       },
-      reelsOpen: this.state.reelsOpen,
-      openReels: () => this.setState({ reelsOpen: true, reelsPlay: false, reelsExpanded: false }),
-      closeReels: () => this.setState({ reelsOpen: false }),
-      reelsShowPlay: !this.state.reelsPlay,
-      playReels: (e) => {
-        const vid = e.currentTarget.parentElement.querySelector('video');
-        if (vid) { vid.play(); }
-        this.setState({ reelsPlay: true });
-      },
-      toggleReels: (e) => {
-        const vid = e.currentTarget;
-        if (vid.paused) { vid.play(); this.setState({ reelsPlay: true }); }
-        else { vid.pause(); }
-      },
-      reelsDesc: 'Меня зовут Камиль. Я reels-продюсер — создаю короткий видеоконтент, который не просто красиво смотрится, а реально работает: удерживает внимание, вызывает доверие и приносит результат.\n\nМой путь начался с монтажа — я учился на практике, снимая и монтируя сотни роликов. Со временем пришло понимание, что хороший рилс — это не только качественный монтаж, а целая система: идея, сценарий, съёмка, подача и монтаж, работающие вместе. Так я и стал продюсером — человеком, который отвечает за весь процесс создания видео от начала до конца.\n\nЗа время работы я построил аудиторию в десятки тысяч человек, изучил, что действительно заставляет людей досматривать видео до конца, и продолжаю развиваться в этой сфере каждый день.\n\nВ своей работе я ценю честность и качество — без хайпа ради хайпа и без обмана аудитории. Я верю, что доверие — это главный актив в контенте, и строю свою репутацию именно на нём.',
-      reelsDescStyle: 'font-size:13px; line-height:1.6; color:#e3e3e3; white-space:pre-line; overflow:hidden; padding:0 4px; transition:max-height .5s cubic-bezier(.2,.6,.2,1); max-height:' + (this.state.reelsExpanded ? '1400px' : '62px') + '; -webkit-mask-image:' + (this.state.reelsExpanded ? 'none' : 'linear-gradient(180deg, #000 55%, transparent 100%)') + '; mask-image:' + (this.state.reelsExpanded ? 'none' : 'linear-gradient(180deg, #000 55%, transparent 100%)') + ';',
-      reelsDescLabel: this.state.reelsExpanded ? 'Свернуть' : 'Читать полностью',
-      toggleReelsDesc: () => this.setState(s => ({ reelsExpanded: !s.reelsExpanded })),
       modal: this.state.open == null ? null : all[this.state.open],
       modalFooter: this.state.open != null && !all[this.state.open].list && !all[this.state.open].extras && !all[this.state.open].sections && !all[this.state.open].store,
       scrollPrev: (e) => { const s = e.currentTarget.parentElement.querySelector('[data-slider]'); if (s) s.scrollBy({ left: -s.clientWidth * 0.7, behavior: 'smooth' }); },
