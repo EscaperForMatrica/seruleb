@@ -90,16 +90,16 @@ a:hover{color:#ffffff;}
         <div onClick="{{ closeRaffles }}" style="position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.45);">✕</div>
         <div style="font-size:clamp(16px, 3.6vw, 22px); font-weight:700; line-height:1.3; color:#ffffff; padding-right:40px;">Розыгрыши от Seruleb</div>
           <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.6vw,14px);">
-            <div onClick="{{ pickGirls }}" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:10px; background:linear-gradient(160deg, rgba(255,143,199,.14), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,143,199,.28); border-radius:clamp(14px,2.2vw,22px); padding:clamp(16px,2.6vw,26px) clamp(10px,1.8vw,18px); box-shadow:inset 0 1px 0 rgba(255,200,225,.26), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,143,199,.55); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+            <a href="{{ girlsCta }}" style="display:flex; flex-direction:column; align-items:center; gap:10px; background:linear-gradient(160deg, rgba(255,143,199,.14), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,143,199,.28); border-radius:clamp(14px,2.2vw,22px); padding:clamp(16px,2.6vw,26px) clamp(10px,1.8vw,18px); box-shadow:inset 0 1px 0 rgba(255,200,225,.26), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,143,199,.55); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
               <svg style="width:clamp(26px,4vw,40px); height:clamp(26px,4vw,40px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
               <div style="width:100px; max-width:42%; height:clamp(6px,1.2vw,12px); border-radius:50%; background:linear-gradient(180deg, #ff8fc7, #e0559a); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,200,225,.30);"></div>
               <div style="text-align:center; font-size:clamp(12px,1.6vw,15px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Розыгрыш для женской аудитории</div>
-            </div>
-            <div onClick="{{ pickMen }}" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.14), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.28); border-radius:clamp(14px,2.2vw,22px); padding:clamp(16px,2.6vw,26px) clamp(10px,1.8vw,18px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.55); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+            </a>
+            <a href="{{ menCta }}" style="display:flex; flex-direction:column; align-items:center; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.14), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.28); border-radius:clamp(14px,2.2vw,22px); padding:clamp(16px,2.6vw,26px) clamp(10px,1.8vw,18px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.55); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
               <svg style="width:clamp(26px,4vw,40px); height:clamp(26px,4vw,40px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
               <div style="width:100px; max-width:42%; height:clamp(6px,1.2vw,12px); border-radius:50%; background:linear-gradient(180deg, #ffd96a, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30);"></div>
               <div style="text-align:center; font-size:clamp(12px,1.6vw,15px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Розыгрыш для мужской аудитории</div>
-            </div>
+            </a>
           </div>
       </div>
     </div>
@@ -488,7 +488,6 @@ class Component extends DCLogic {
       rafflesOpen: this.state.rafflesOpen,
       openRaffles: () => this.setState({ rafflesOpen: true }),
       closeRaffles: () => this.setState({ rafflesOpen: false }),
-      pickGirls: () => this.setState({ rafflesOpen: false, girlsOpen: true }),
       girlsOpen: this.state.girlsOpen,
       closeGirls: () => this.setState({ girlsOpen: false }),
       // Ссылки-приглашения в WhatsApp-сообщества
@@ -512,7 +511,6 @@ class Component extends DCLogic {
         important: '⚠️ Важно: выполнение всех условий обязательно для участия в розыгрышах.',
         closing: '🎉 Участвуйте бесплатно, расширяйте свою женскую аудиторию и выигрывайте подарки!',
       },
-      pickMen: () => this.setState({ rafflesOpen: false, menOpen: true }),
       menOpen: this.state.menOpen,
       closeMen: () => this.setState({ menOpen: false }),
       men: {
