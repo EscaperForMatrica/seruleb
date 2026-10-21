@@ -59,12 +59,17 @@ a:hover{color:#ffffff;}
           <a href="{{ nl.href }}" style="font-size:clamp(11px,1.3vw,14px); font-weight:400; color:#e3e3e3; letter-spacing:.04em;" style-hover="color:#ffffff;">{{ nl.name }}</a>
         </sc-for>
       </div>
-      <div onClick="{{ openRaffles }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2.2vw,22px); padding:clamp(14px,2.4vw,28px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
-        <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1.2vw,14px) 0 clamp(4px,1vw,10px);">
-          <svg style="width:clamp(30px,4.5vw,48px); height:clamp(30px,4.5vw,48px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
-          <div style="width:120px; max-width:40%; height:clamp(8px,1.4vw,16px); border-radius:50%; background:linear-gradient(180deg, #ffb780, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.8vw,8px);"></div>
+      <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,1.6vw,14px);">
+        <div onClick="{{ pickGirls }}" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:10px; background:linear-gradient(160deg, rgba(255,143,199,.14), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,143,199,.28); border-radius:clamp(14px,2.2vw,22px); padding:clamp(16px,2.6vw,26px) clamp(10px,1.8vw,18px); box-shadow:inset 0 1px 0 rgba(255,200,225,.26), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,143,199,.55); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+          <svg style="width:clamp(26px,4vw,40px); height:clamp(26px,4vw,40px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
+          <div style="width:100px; max-width:42%; height:clamp(6px,1.2vw,12px); border-radius:50%; background:linear-gradient(180deg, #ff8fc7, #e0559a); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,200,225,.30);"></div>
+          <div style="text-align:center; font-size:clamp(12px,1.6vw,15px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Розыгрыш для женской аудитории</div>
         </div>
-        <div style="text-align:center; font-size:clamp(13px,1.8vw,18px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Розыгрыши от Seruleb</div>
+        <div onClick="{{ pickMen }}" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:10px; background:linear-gradient(160deg, rgba(255,217,106,.14), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.28); border-radius:clamp(14px,2.2vw,22px); padding:clamp(16px,2.6vw,26px) clamp(10px,1.8vw,18px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.55); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+          <svg style="width:clamp(26px,4vw,40px); height:clamp(26px,4vw,40px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
+          <div style="width:100px; max-width:42%; height:clamp(6px,1.2vw,12px); border-radius:50%; background:linear-gradient(180deg, #ffd96a, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30);"></div>
+          <div style="text-align:center; font-size:clamp(12px,1.6vw,15px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Розыгрыш для мужской аудитории</div>
+        </div>
       </div>
     </section>
 
@@ -83,52 +88,6 @@ a:hover{color:#ffffff;}
     </section>
   </main>
 
-  <sc-if value="{{ rafflesOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeRaffles }}" style="position:fixed; inset:0; z-index:49; background:rgba(0,0,0,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:max(28px, calc(env(safe-area-inset-top) + 16px)) 12px max(28px, calc(env(safe-area-inset-bottom) + 16px));">
-      <div onClick="{{ stopClick }}" style="width:min(620px, 100%); margin:auto 0; box-sizing:border-box; background:rgba(24,24,24,.9); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(20px,3.5vw,32px) clamp(16px,3vw,26px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:18px; position:relative;">
-        <div onClick="{{ closeRaffles }}" style="position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.45);">✕</div>
-        <div style="font-size:clamp(16px, 3.6vw, 22px); font-weight:700; line-height:1.3; color:#ffffff; padding-right:40px;">Бесплатные розыгрыши от Seruleb</div>
-
-        <sc-if value="{{ showRaffleCats }}" hint-placeholder-val="{{ true }}">
-          <div style="display:grid; grid-template-columns:repeat(2, 1fr); grid-auto-rows:1fr; gap:clamp(8px,1.6vw,14px);">
-            <div onClick="{{ pickGirls }}" style="cursor:pointer; justify-content:center; background:linear-gradient(160deg, rgba(255,143,199,.20), rgba(255,143,199,.05)); border:1px solid rgba(255,143,199,.38); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(255,200,225,.24); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,143,199,.65); background:linear-gradient(160deg, rgba(255,143,199,.30), rgba(255,143,199,.10));">
-              <div style="background:#ff8fc7; color:#3d0d25; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Девушки</div>
-              <svg style="width:clamp(30px,4.5vw,42px); height:clamp(30px,4.5vw,42px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
-              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Розыгрыш для девушек</div>
-            </div>
-            <div onClick="{{ pickMen }}" style="cursor:pointer; justify-content:center; background:linear-gradient(160deg, rgba(255,217,106,.20), rgba(255,217,106,.05)); border:1px solid rgba(255,217,106,.38); border-radius:clamp(14px,2vw,20px); padding:clamp(20px,3vw,30px) clamp(14px,2vw,20px); display:flex; flex-direction:column; align-items:center; gap:14px; box-shadow:inset 0 1px 0 rgba(255,231,168,.24); transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.65); background:linear-gradient(160deg, rgba(255,217,106,.30), rgba(255,217,106,.10));">
-              <div style="background:#ffd96a; color:#2a1c07; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:999px;">Мужчины</div>
-              <svg style="width:clamp(30px,4.5vw,42px); height:clamp(30px,4.5vw,42px);" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z"></path></svg>
-              <div style="text-align:center; font-size:clamp(13px,1.7vw,16px); font-weight:600; color:#ffffff;">Розыгрыш для мужчин</div>
-            </div>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:12px; margin-top:4px;">
-            <div style="position:relative;">
-              <div onClick="{{ scrollPrev }}" style="position:absolute; left:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></div>
-              <div onClick="{{ scrollNext }}" style="position:absolute; right:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
-              <div data-slider="team" style="display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; padding:2px 0;">
-                <sc-for list="{{ teamPhotos }}" as="img" hint-placeholder-count="4">
-                  <div style="flex:0 0 auto; width:clamp(150px,46%,220px); scroll-snap-align:center;">
-                    <img src="{{ img }}" alt="Футболка Seruleb" loading="lazy" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:16px; border:1px solid rgba(255,213,138,.22); display:block;">
-                  </div>
-                </sc-for>
-              </div>
-            </div>
-            <div onClick="{{ openTshirt }}" style="cursor:pointer; display:flex; flex-direction:column; gap:16px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2.2vw,22px); padding:clamp(10px,1.8vw,24px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); box-shadow:inset 0 1px 0 rgba(255,255,255,.20), 0 24px 56px rgba(0,0,0,.32);">
-              <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1.2vw,14px) 0 clamp(4px,1vw,10px);">
-                <svg style="width:clamp(30px,4.5vw,48px); height:clamp(30px,4.5vw,48px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>
-                <div style="width:120px; max-width:40%; height:clamp(8px,1.4vw,16px); border-radius:50%; background:linear-gradient(180deg, #ffb780, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.8vw,8px);"></div>
-              </div>
-              <div style="margin-top:auto; text-align:center; font-size:clamp(10px,1.3vw,15px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Приобрести футболку Seruleb</div>
-              <div style="text-align:center; font-size:clamp(10px,1.1vw,12px); color:#b1b1b1; margin-top:-8px;">Узнать стоимость и услуги</div>
-            </div>
-          </div>
-        </sc-if>
-
-
-      </div>
-    </div>
-  </sc-if>
 
   <sc-if value="{{ girlsOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeGirls }}" style="position:fixed; inset:0; z-index:58; background:rgba(0,0,0,.7); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:max(28px, calc(env(safe-area-inset-top) + 16px)) 12px max(28px, calc(env(safe-area-inset-bottom) + 16px));">
@@ -162,14 +121,6 @@ a:hover{color:#ffffff;}
                 <div style="flex-shrink:0; width:30px; height:30px; border-radius:7px; background:#ff8fc7; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; color:#3d0d25;">{{ rl.n }}</div>
                 <div style="font-size:14px; line-height:1.55; color:#ffffff; padding-top:4px;">{{ rl.t }}</div>
               </div>
-              <sc-if value="{{ rl.phones }}" hint-placeholder-val="{{ false }}">
-                <div style="display:flex; flex-wrap:wrap; gap:8px; padding-left:44px;">
-                  <sc-for list="{{ organizerPhones }}" as="ph" hint-placeholder-count="2">
-                    <a href="{{ ph.tel }}" style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,143,199,.35); border-radius:999px; padding:8px 14px; font-size:13px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,143,199,.18); border-color:#ff8fc7;">📞 {{ ph.label }}</a>
-                  </sc-for>
-                </div>
-                <div style="font-size:13px; line-height:1.5; color:#b1b1b1; padding-left:44px;">{{ rl.note }}</div>
-              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -213,14 +164,6 @@ a:hover{color:#ffffff;}
                 <div style="flex-shrink:0; width:30px; height:30px; border-radius:7px; background:#ffd96a; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; color:#2a1c07;">{{ rl.n }}</div>
                 <div style="font-size:14px; line-height:1.55; color:#ffffff; padding-top:4px;">{{ rl.t }}</div>
               </div>
-              <sc-if value="{{ rl.phones }}" hint-placeholder-val="{{ false }}">
-                <div style="display:flex; flex-wrap:wrap; gap:8px; padding-left:44px;">
-                  <sc-for list="{{ organizerPhones }}" as="ph" hint-placeholder-count="2">
-                    <a href="{{ ph.tel }}" style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,217,106,.35); border-radius:999px; padding:8px 14px; font-size:13px; font-weight:600; color:#ffffff;" style-hover="background:rgba(255,217,106,.18); border-color:#ffd96a;">📞 {{ ph.label }}</a>
-                  </sc-for>
-                </div>
-                <div style="font-size:13px; line-height:1.5; color:#b1b1b1; padding-left:44px;">{{ rl.note }}</div>
-              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -241,8 +184,22 @@ a:hover{color:#ffffff;}
           <div style="font-family:'Oswald',sans-serif; font-size:clamp(24px,5vw,32px); font-weight:600; color:#ffffff; letter-spacing:.12em;">SERULEB</div>
         </div>
 
-        <h1 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(22px,4.8vw,30px); line-height:1.3;">Приобретите футболку <span style="color:#ffb780;">Seruleb</span></h1>
+        <h1 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(22px,4.8vw,30px); line-height:1.3;">Приобретая футболку <span style="color:#ffb780;">Seruleb</span></h1>
         <div style="font-size:clamp(14px,2vw,16px); font-weight:500; line-height:1.6; color:#e3e3e3; text-align:center;">{{ tshirt.intro }}</div>
+
+        <a href="{{ tshirtCta }}" style="align-self:center; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 30px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35); text-align:center;" style-hover="filter:brightness(1.06);">🛍️ Приобрести футболку</a>
+
+        <div style="position:relative;">
+          <div onClick="{{ scrollPrev }}" style="position:absolute; left:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></div>
+          <div onClick="{{ scrollNext }}" style="position:absolute; right:-6px; top:50%; transform:translateY(-50%); z-index:3; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.6); border:1px solid rgba(255,213,138,.3); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ffffff;" style-hover="background:var(--accent); color:#000000;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+          <div data-slider="team" style="display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; padding:2px 0;">
+            <sc-for list="{{ teamPhotos }}" as="img" hint-placeholder-count="4">
+              <div style="flex:0 0 auto; width:clamp(150px,46%,220px); scroll-snap-align:center;">
+                <img src="{{ img }}" alt="Футболка Seruleb" loading="lazy" style="width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:16px; border:1px solid rgba(255,213,138,.22); display:block;">
+              </div>
+            </sc-for>
+          </div>
+        </div>
 
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
 
@@ -278,6 +235,11 @@ a:hover{color:#ffffff;}
 
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
 
+        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:clamp(8px,2vw,14px);">
+          <a href="{{ earnOnlineCta }}" style="display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); border-radius:999px; padding:13px 16px; font-size:clamp(12.5px,1.8vw,14px); font-weight:700; color:#ffffff; text-align:center;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780;">💻 Заработок онлайн</a>
+          <a href="{{ earnOfflineCta }}" style="display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); border-radius:999px; padding:13px 16px; font-size:clamp(12.5px,1.8vw,14px); font-weight:700; color:#ffffff; text-align:center;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780;">🏠 Заработок офлайн</a>
+        </div>
+
         <h2 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(20px,4.6vw,28px); line-height:1.3;">{{ tshirt.giftTitle }}</h2>
         <div style="background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:15px; padding:22px 20px; display:flex; flex-direction:column; gap:14px;">
           <sc-for list="{{ tshirt.gift }}" as="g" hint-placeholder-count="2">
@@ -287,7 +249,7 @@ a:hover{color:#ffffff;}
 
         <div style="background:#ffb780; border-radius:10px; padding:16px 18px; font-size:14px; font-weight:700; line-height:1.6; color:#292929;">{{ tshirt.choose }}</div>
         <div style="font-size:15px; font-weight:600; line-height:1.6; color:#ffb780; text-align:center;">{{ tshirt.join }}</div>
-        <a href="{{ tshirtCta }}" style="align-self:center; font-family:'Oswald',sans-serif; font-size:clamp(20px,4vw,28px); font-weight:500; text-transform:uppercase; color:#ffb780; border:1px solid #ffb780; border-radius:3px; padding:12px 24px; text-align:center;" style-hover="border-color:#ffffff; color:#ffffff;">Вступить в сообщество</a>
+        <a href="{{ tshirtCta }}" style="align-self:center; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 30px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35); text-align:center;" style-hover="filter:brightness(1.06);">🛍️ Приобрести футболку</a>
 
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
 
@@ -469,7 +431,7 @@ a:hover{color:#ffffff;}
   &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: null, rafflesOpen: false, raffleCat: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
+  state = { open: null, reelsOpen: false, reelsPlay: false, reelsExpanded: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
   renderVals() {
     const p = this.props;
     const wa = 'https://wa.me/79896500005';
@@ -512,21 +474,6 @@ class Component extends DCLogic {
           { label: 'Продвижение Instagram', icon: 'M4 8h3l2-3h6l2 3h3v12H4z M15.5 13.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z', href: waText('Здравствуйте! Хочу заказать продвижение Instagram.') },
           { label: 'Рилс', reels: true, icon: 'M3 5h18v14H3z M3 9h18 M7.5 5 5.5 9 M12.5 5l-2 4 M17.5 5l-2 4 M10 12.5v4l3.5-2z' },
         ] },
-      { title: 'Недвижимость', net: 'WhatsApp', netHref: wa, icon: icons.realty, details: 'Аренда и продажа недвижимости — выберите категорию, и мы подберём подходящий вариант.',
-        sections: [
-          { title: 'Аренда', items: [
-            { label: 'Квартиры', icon: icons.apt, href: waText('Здравствуйте! Интересует аренда квартиры.') },
-            { label: 'Комнаты', icon: icons.room, href: waText('Здравствуйте! Интересует аренда комнаты.') },
-            { label: 'Дома', icon: icons.home, href: waText('Здравствуйте! Интересует аренда дома.') },
-            { label: 'Коммерция', icon: icons.shop, href: waText('Здравствуйте! Интересует аренда коммерческой недвижимости.') },
-          ] },
-          { title: 'Продажа', items: [
-            { label: 'Квартиры', icon: icons.apt, href: waText('Здравствуйте! Интересует покупка квартиры.') },
-            { label: 'Дома', icon: icons.home, href: waText('Здравствуйте! Интересует покупка дома.') },
-            { label: 'Участки', icon: icons.land, href: waText('Здравствуйте! Интересует покупка участка.') },
-            { label: 'Коммерция', icon: icons.shop, href: waText('Здравствуйте! Интересует покупка коммерческой недвижимости.') },
-          ] },
-        ] },
       { title: 'Одежда', net: 'WhatsApp', netHref: wa, icon: icons.shoe,
         store: {
           name: 'Best',
@@ -535,16 +482,8 @@ class Component extends DCLogic {
           shoes: ['assets/img/best/shoe1.webp', 'assets/img/best/shoe2.webp', 'assets/img/best/shoe3.webp', 'assets/img/best/shoe4.webp', 'assets/img/best/shoe5.webp', 'assets/img/best/shoe6.webp'],
           href: waText('Здравствуйте! Интересует магазин Best — одежда и обувь.'),
         } },
-      { title: 'Авто', net: 'WhatsApp', netHref: wa, icon: icons.car, details: 'Всё для авто — аренда, продажа, рассрочка и детские электромобили. Выберите нужное:',
-        sections: [
-          { title: '', items: [
-            { label: 'Детские электромобили', icon: icons.car, href: waText('Здравствуйте! Интересуют детские электромобили.') },
-            { label: 'Аренда авто', icon: icons.key, href: waText('Здравствуйте! Интересует аренда авто.') },
-            { label: 'Продажа авто', icon: icons.car, href: waText('Здравствуйте! Интересует продажа авто.') },
-            { label: 'Рассрочка авто', icon: icons.card, href: waText('Здравствуйте! Интересует рассрочка на авто.') },
-          ] },
-        ] },
-    ].map((s, i) => ({ ...s, open: () => s.page ? (window.location.href = s.page) : this.setState({ open: i, rafflesOpen: false, bestPlay: false }) }));
+      { title: 'Футболка Seruleb', net: 'WhatsApp', netHref: wa, icon: icons.card, tshirtTile: true },
+    ].map((s, i) => ({ ...s, open: () => s.page ? (window.location.href = s.page) : s.tshirtTile ? this.setState({ tshirtOpen: true }) : this.setState({ open: i, bestPlay: false }) }));
 
     const vw = (typeof window !== 'undefined' ? window.innerWidth : 1200);
     return {
@@ -562,15 +501,8 @@ class Component extends DCLogic {
       openMenu: () => this.setState({ menuOpen: true }),
       closeMenu: () => this.setState({ menuOpen: false }),
       stopClick: (e) => e.stopPropagation(),
-      rafflesOpen: this.state.rafflesOpen,
-      showRaffleCats: this.state.raffleCat == null,
-      // «Розыгрыш для девушек/мужчин» открывает поп-ап сообщества напрямую
+      // «Розыгрыш для женской/мужской аудитории» открывает поп-ап сообщества напрямую
       pickGirls: () => this.setState({ girlsOpen: true }),
-      // Номера организатора Seruleb — одинаковые для обоих сообществ, ссылки ведут в чат WhatsApp
-      organizerPhones: [
-        { label: '+7 989 896-66-66', tel: 'https://wa.me/79898966666' },
-        { label: '+7 989 650-00-05', tel: 'https://wa.me/79896500005' },
-      ],
       girlsOpen: this.state.girlsOpen,
       closeGirls: () => this.setState({ girlsOpen: false }),
       // Ссылки-приглашения в WhatsApp-сообщества
@@ -586,7 +518,7 @@ class Component extends DCLogic {
         ],
         rulesTitle: '🎁 Условия участия в розыгрышах:',
         rules: [
-          { n: '1', t: 'Сохраните номера организатора Seruleb и контакты наших спонсоров:', phones: true, note: 'Контакты наших спонсоров я буду отправлять в сообщество для взаимного сохранения.' },
+          { n: '1', t: 'Контакты наших спонсоров я буду отправлять в сообщество для взаимного сохранения.' },
           { n: '2', t: '📹 Видеоролики для публикации в ваших статусах WhatsApp мы будем отправлять прямо в это сообщество. Для участия в розыгрышах вам необходимо публиковать их в своих статусах на 24 часа.' },
           { n: '3', t: 'Примерно через 20 часов после публикации сделайте скриншот статуса.' },
           { n: '4', t: 'Не удаляйте скриншоты! Они понадобятся во время розыгрыша, чтобы подтвердить, что вы выполнили все условия участия.' },
@@ -607,7 +539,7 @@ class Component extends DCLogic {
         ],
         rulesTitle: '🎁 Условия участия в розыгрышах:',
         rules: [
-          { n: '1', t: 'Сохраните два номера организатора Seruleb:', phones: true, note: 'Контакты наших спонсоров я буду отправлять в сообщество для взаимного сохранения.' },
+          { n: '1', t: 'Контакты наших спонсоров я буду отправлять в сообщество для взаимного сохранения.' },
           { n: '2', t: '📹 Видеоролики для публикации в ваших статусах WhatsApp мы будем отправлять прямо в это сообщество. Для участия в розыгрышах вам необходимо публиковать их в своих статусах на 24 часа.' },
           { n: '3', t: 'Примерно через 20 часов после публикации сделайте скриншот статуса.' },
           { n: '4', t: 'Не удаляйте скриншоты! Они понадобятся во время розыгрыша, чтобы подтвердить, что вы выполнили все условия участия.' },
@@ -620,7 +552,9 @@ class Component extends DCLogic {
       tshirtOpen: this.state.tshirtOpen,
       openTshirt: () => this.setState({ tshirtOpen: true }),
       closeTshirt: () => this.setState({ tshirtOpen: false }),
-      tshirtCta: waText('Здравствуйте! Хочу приобрести футболку Seruleb и вступить в бизнес-сообщество. Моё имя: ... Мои услуги: ...'),
+      tshirtCta: waText('Ассаляму Алейкум! Хочу приобрести футболку Seruleb, для участия в розыгрыше, и получить ваши услуги по продвижению WhatsApp.'),
+      earnOnlineCta: waText('Ассаляму Алейкум! Интересует заработок онлайн через Seruleb.'),
+      earnOfflineCta: waText('Ассаляму Алейкум! Интересует заработок офлайн через Seruleb.'),
       // Текст поп-апа «Приобрести футболку Seruleb»
       tshirt: {
         intro: '👕 Приобретая футболку Seruleb, вы получаете доступ к возможностям нашего сообщества и участвуете в розыгрышах призов в течение всего года!',
@@ -665,8 +599,6 @@ class Component extends DCLogic {
           '🎁 Мы будем проводить розыгрыши в течение всего года, чтобы поддерживать интерес и активность аудитории. Благодаря этому участники смогут регулярно видеть ваши статусы, знакомиться с вашими товарами и услугами, узнавать о вашем бизнесе и со временем становиться вашими клиентами.',
         ],
       },
-      openRaffles: () => this.setState({ rafflesOpen: true, raffleCat: null }),
-      closeRaffles: () => this.setState({ rafflesOpen: false }),
       reelsOpen: this.state.reelsOpen,
       openReels: () => this.setState({ reelsOpen: true, reelsPlay: false, reelsExpanded: false }),
       closeReels: () => this.setState({ reelsOpen: false }),
