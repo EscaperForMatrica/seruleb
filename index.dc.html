@@ -129,20 +129,23 @@ a:hover{color:#ffffff;}
           <div style="font-size:clamp(16px, 3.6vw, 22px); font-weight:700; line-height:1.3; color:#ffffff;">Выберите интересующее направление</div>
           <div style="font-size:clamp(13px,1.8vw,15px); line-height:1.5; color:#b1b1b1;">Ознакомьтесь с нашими предложениями и выберите подходящую услугу</div>
         </div>
+          <sc-for list="{{ buySections }}" as="sec" hint-placeholder-count="5">
           <div style="display:flex; flex-direction:column; gap:10px;">
-          <sc-for list="{{ buyItems }}" as="bi" hint-placeholder-count="5">
-            <a href="{{ bi.href }}" style="display:flex; align-items:center; gap:14px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-2px); border-color:rgba(255,217,106,.45);">
-              <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ bi.icon }}"></path></svg>
-              </div>
-              <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px;">
-                <div style="font-size:clamp(15px,2.2vw,17px); font-weight:700; color:#ffffff;">{{ bi.title }}</div>
-                <div style="font-size:clamp(12.5px,1.8vw,14px); line-height:1.4; color:#b1b1b1;">{{ bi.desc }}</div>
-              </div>
-              <svg style="flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
-            </a>
-          </sc-for>
-        </div>
+            <div style="font-size:clamp(13px,1.8vw,15px); font-weight:600; color:#b1b1b1; padding:6px 2px 0;">{{ sec.title }}</div>
+              <sc-for list="{{ sec.items }}" as="bi" hint-placeholder-count="3">
+                <a href="{{ bi.href }}" style="display:flex; align-items:center; gap:14px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-2px); border-color:rgba(255,217,106,.45);">
+                  <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ bi.icon }}"></path></svg>
+                  </div>
+                  <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px;">
+                    <div style="font-size:clamp(15px,2.2vw,17px); font-weight:700; color:#ffffff;">{{ bi.title }}</div>
+                    <div style="font-size:clamp(12.5px,1.8vw,14px); line-height:1.4; color:#b1b1b1;">{{ bi.desc }}</div>
+                  </div>
+                  <svg style="flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                </a>
+              </sc-for>
+          </div>
+        </sc-for>
       </div>
     </div>
   </sc-if>
@@ -564,12 +567,34 @@ class Component extends DCLogic {
       buyOpen: this.state.buyOpen,
       openBuy: () => this.setState({ buyOpen: true }),
       closeBuy: () => this.setState({ buyOpen: false }),
-      buyItems: [
-        { title: 'Сотрудничество', desc: 'Совместные проекты и деловые предложения', icon: 'm11 17 2 2a1 1 0 1 0 3-3 M14 14l2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4 M21 3l1 11h-2 M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3 M3 4h8', href: waText('Ассаляму Алейкум! Интересует сотрудничество с Seruleb.') },
-        { title: 'Реклама', desc: 'Рекламные размещения и продвижение', icon: 'M3 11l14-5v12L3 13v-2z M6.5 13.5V18a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-3.5 M18 9a3 3 0 0 1 0 6', href: waText('Ассаляму Алейкум! Интересует реклама в Seruleb.') },
-        { title: 'Спонсорство', desc: 'Спонсорские предложения и поддержка проектов', icon: 'M6 3h12l4 6-10 12L2 9z M2 9h20 M12 21 8 9l4-6 4 6-4 12', href: waText('Ассаляму Алейкум! Интересует спонсорство в Seruleb.') },
-        { title: 'Онлайн-обучение', desc: 'Дистанционные занятия и образовательные программы', icon: 'M3 4h18v12H3z M8 20h8 M12 16v4', href: waText('Ассаляму Алейкум! Интересует онлайн-обучение в Seruleb.') },
-        { title: 'Офлайн-обучение', desc: 'Очное обучение и практические занятия', icon: 'M12 4 2 9l10 5 10-5-10-5Z M6 11.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5 M22 9v5', href: waText('Ассаляму Алейкум! Интересует офлайн-обучение в Seruleb.') },
+      buySections: [
+        { title: 'Товары Seruleb', items: [
+          { title: 'Футболка Seruleb', desc: 'Фирменная футболка бренда', icon: 'M8 3 4 5 2 9.5l3 1.5V21h14V11l3-1.5L20 5l-4-2c0 1.7-1.8 3-4 3S8 4.7 8 3Z', href: waText('Ассаляму алейкум! Хотел бы приобрести футболку Seruleb. Интересует стоимость футболки отдельно, а также варианты с участием в розыгрыше и продвижением WhatsApp. Какие есть расценки?') },
+        ] },
+        { title: 'Реклама и сотрудничество', items: [
+          { title: 'Сотрудничество', desc: 'Совместные проекты и деловые предложения', icon: 'm11 17 2 2a1 1 0 1 0 3-3 M14 14l2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4 M21 3l1 11h-2 M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3 M3 4h8', href: waText('Ассаляму Алейкум! Интересует: Сотрудничество.') },
+          { title: 'Реклама', desc: 'Рекламные размещения и продвижение', icon: 'M3 11l14-5v12L3 13v-2z M6.5 13.5V18a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-3.5 M18 9a3 3 0 0 1 0 6', href: waText('Ассаляму Алейкум! Интересует: Реклама.') },
+          { title: 'Спонсорство', desc: 'Спонсорские предложения и поддержка проектов', icon: 'M6 3h12l4 6-10 12L2 9z M2 9h20 M12 21 8 9l4-6 4 6-4 12', href: waText('Ассаляму Алейкум! Интересует: Спонсорство.') },
+        ] },
+        { title: 'WhatsApp и цифровые услуги', items: [
+          { title: 'Просмотры для бизнеса', desc: 'Увеличение просмотров статусов WhatsApp среди бизнес-аудитории', icon: 'M4 20h16 M7 16v-4 M12 16V8 M17 16V5', href: waText('Ассаляму Алейкум! Интересует: Просмотры для бизнеса.') },
+          { title: 'Просмотры для розыгрышей', desc: 'Увеличение просмотров статусов WhatsApp среди участников розыгрышей', icon: 'M20 12v9H4v-9 M2 7h20v5H2z M12 7v14 M12 7S10.4 2.6 7.6 2.6C5.8 2.6 5 4 5.2 5c.3 1.6 3.8 2 6.8 2Z M12 7s1.6-4.4 4.4-4.4C18.2 2.6 19 4 18.8 5c-.3 1.6-3.8 2-6.8 2Z', href: waText('Ассаляму Алейкум! Интересует: Просмотры для розыгрышей.') },
+          { title: 'Зависание WhatsApp', desc: 'Помощь в устранении зависаний приложения', icon: 'M7 2h10v20H7z M11 18h2', href: waText('Ассаляму Алейкум! Интересует: Зависание WhatsApp.') },
+          { title: 'Восстановление WhatsApp', desc: 'Помощь с восстановлением доступа', icon: 'M5 11h14v10H5z M8 11V7a4 4 0 0 1 8 0v4 M12 15v2', href: waText('Ассаляму Алейкум! Интересует: Восстановление WhatsApp.') },
+        ] },
+        { title: 'Обучение и заработок', items: [
+          { title: 'Обучение нейросетям', desc: 'Работа с искусственным интеллектом', icon: 'M5 8h14v11H5z M12 4v4 M9 13h.01 M15 13h.01 M9.5 16.5h5 M2 13h3 M19 13h3', href: waText('Ассаляму Алейкум! Интересует: Обучение нейросетям.') },
+          { title: 'Онлайн-обучение', desc: 'Обучение заработку через интернет', icon: 'M3 4h18v12H3z M8 20h8 M12 16v4', href: waText('Ассаляму Алейкум! Интересует: Онлайн-обучение.') },
+          { title: 'Офлайн-обучение', desc: 'Очные занятия и практическое обучение', icon: 'M12 4 2 9l10 5 10-5-10-5Z M6 11.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5 M22 9v5', href: waText('Ассаляму Алейкум! Интересует: Офлайн-обучение.') },
+        ] },
+        { title: 'Ремонт под ключ', items: [
+          { title: 'Ремонт под ключ', desc: 'Комплексный ремонт домов и квартир', icon: 'M3 11 12 4l9 7 M5 10v10h14V10 M10 20v-5h4v5', href: waText('Ассаляму Алейкум! Интересует: Ремонт под ключ.') },
+          { title: 'Ремонтные работы', desc: 'Отдельные виды ремонтных работ', icon: 'M15 12l-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9 M17.6 15 22 10.6 M20 13l-6-6 2-2 6 6z M12 9l3-3', href: waText('Ассаляму Алейкум! Интересует: Ремонтные работы.') },
+          { title: 'Строительная бригада', desc: 'Поиск строительной команды', icon: 'M2 18h20 M4 18v-2a8 8 0 0 1 16 0v2 M10 8V5h4v3', href: waText('Ассаляму Алейкум! Интересует: Строительная бригада.') },
+          { title: 'Мастер по ремонту', desc: 'Поиск специалиста по ремонту', icon: 'M14.7 6.3a4 4 0 0 0 5 5l-9.4 9.4a2.1 2.1 0 0 1-3-3z', href: waText('Ассаляму Алейкум! Интересует: Мастер по ремонту.') },
+          { title: 'Разнорабочий', desc: 'Помощь с различными видами работ', icon: 'M3 21l6-6 M7 3l4 4-2 2-4-4z M14 4l6 6 M17 7l-8 8 M15 17l4 4 2-2-4-4', href: waText('Ассаляму Алейкум! Интересует: Разнорабочий.') },
+          { title: 'Услуги разнорабочего', desc: 'Предложение своих услуг', icon: 'M18 11V6a2 2 0 0 0-4 0v5 M14 10V4a2 2 0 0 0-4 0v6 M10 10.5V6a2 2 0 0 0-4 0v8 M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.4l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15', href: waText('Ассаляму Алейкум! Интересует: Услуги разнорабочего.') },
+        ] },
       ],
       otherOpen: this.state.otherOpen,
       openOther: () => this.setState({ otherOpen: true }),
