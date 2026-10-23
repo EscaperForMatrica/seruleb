@@ -235,6 +235,15 @@ a:hover{color:#ffffff;}
             </sc-for>
           </div>
         </sc-if>
+        <sc-if value="{{ videoCat.hasPhotos }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(160px, 100%), 1fr)); gap:clamp(8px,1.5vw,12px);">
+            <sc-for list="{{ videoCat.photos }}" as="ph" hint-placeholder-count="6">
+              <a href="{{ ph }}" target="_blank" rel="noopener" style="display:block; aspect-ratio:3/4; border-radius:12px; overflow:hidden; border:1px solid rgba(255,213,138,.22); background:#111;">
+                <img src="{{ ph }}" alt="Фото отчёт" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+              </a>
+            </sc-for>
+          </div>
+        </sc-if>
         <sc-if value="{{ videoCat.empty }}" hint-placeholder-val="{{ false }}">
           <div style="background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:15px; padding:28px 20px; text-align:center; font-size:14px; line-height:1.6; color:#e3e3e3;">{{ videoCat.emptyText }}</div>
         </sc-if>
@@ -571,7 +580,7 @@ a:hover{color:#ffffff;}
   &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: null, rafflesOpen: false, buyOpen: false, videosOpen: false, videoCatKey: null, sponsorOpen: false, otherOpen: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
+  state = { open: null, rafflesOpen: false, buyOpen: false, videosOpen: false, videoCatKey: null, sponsorKey: null, otherOpen: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
   renderVals() {
     const p = this.props;
     const wa = 'https://wa.me/79896500005';
@@ -639,10 +648,14 @@ class Component extends DCLogic {
         { key: 'hobby', title: 'Моё хобби | Seruleb', desc: 'Мои увлечения, интересные моменты и личные видеоролики', icon: 'M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z', videos: [] },
       ] },
     ];
-    const sponsorCats = [
-      { key: 'washVideo', title: 'Видеоуслуги — Ремонт стиральных машин', desc: 'Видео работ нашего спонсора', videos: [], emptyText: 'Видео в этом разделе скоро появятся.', backLabel: 'Назад' },
-      { key: 'washPhoto', title: 'Фото отчёты — Ремонт стиральных машин', desc: 'Фотографии выполненных работ нашего спонсора', videos: [], emptyText: 'Фото отчёты скоро появятся.', backLabel: 'Назад' },
+    const sponsorList = [
+      { key: 'wash', title: 'Ремонт стиральных машин', icon: 'M5 3h14v18H5z M5 7h14 M8 5h.01 M11 5h.01 M12 17.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z', phone: '8 (928) 838-88-86', num: '79288388886', msg: 'Нужен ремонт стиральной машины.', videos: [], photos: [] },
+      { key: 'electric', title: 'Электрик', icon: 'M13 2 4 14h7l-1 8 9-12h-7z', phone: '+7 (913) 165-05-05', num: '79131650505', msg: 'Нужны услуги электрика.', videos: [], photos: Array.from({ length: 26 }, (_, i) => 'assets/img/sponsors/electric/foto-' + String(i + 1).padStart(2, '0') + '.jpg') },
     ];
+    const sponsorCats = sponsorList.flatMap(sp => [
+      { key: sp.key + 'Video', title: 'Видеоуслуги — ' + sp.title, desc: 'Видео работ нашего спонсора', videos: sp.videos, emptyText: 'Видео в этом разделе скоро появятся.', backLabel: 'Назад' },
+      { key: sp.key + 'Photo', title: 'Фото отчёты — ' + sp.title, desc: 'Фотографии выполненных работ нашего спонсора', videos: [], photos: sp.photos, emptyText: 'Фото отчёты скоро появятся.', backLabel: 'Назад' },
+    ]);
     const videoCat = [...videoSections.flatMap(sec => sec.items), ...sponsorCats].find(it => it.key === this.state.videoCatKey) || null;
 
     const vw = (typeof window !== 'undefined' ? window.innerWidth : 1200);
@@ -651,25 +664,29 @@ class Component extends DCLogic {
       radiusCss: (p.cardRadius ?? 15) + 'px',
       accentColor: p.accentColor ?? '#ffb780',
       raffles: all.slice(0, 4),
-      otherServices: [all[7], { title: 'Ремонт стиральных машин', icon: 'M5 3h14v18H5z M5 7h14 M8 5h.01 M11 5h.01 M12 17.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z', open: () => this.setState({ otherOpen: false, sponsorOpen: true }) }],
-      sponsorOpen: this.state.sponsorOpen,
-      closeSponsor: () => this.setState({ sponsorOpen: false, videoCatKey: null }),
-      sponsor: {
-        title: 'Ремонт стиральных машин',
-        icon: 'M5 3h14v18H5z M5 7h14 M8 5h.01 M11 5h.01 M12 17.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
-        phone: '8 (928) 838-88-86',
-        tel: 'tel:+79288388886',
-        wa: 'https://wa.me/79288388886?text=' + encodeURIComponent('Ассаляму алейкум! Нашли вас на сайте Seruleb. Нужен ремонт стиральной машины.'),
-        buttons: [
-          { title: 'Видеоуслуги', icon: 'M3 5h18v14H3z M10 9.5v5l4-2.5z', open: () => this.setState({ videoCatKey: 'washVideo' }) },
-          { title: 'Фото отчёты', icon: 'M4 7h3l2-3h6l2 3h3v12H4z M15.5 13a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z', open: () => this.setState({ videoCatKey: 'washPhoto' }) },
-        ],
-      },
+      otherServices: [all[7], ...sponsorList.map(sp => ({ title: sp.title, icon: sp.icon, open: () => this.setState({ otherOpen: false, sponsorKey: sp.key }) }))],
+      sponsorOpen: this.state.sponsorKey != null,
+      closeSponsor: () => this.setState({ sponsorKey: null, videoCatKey: null }),
+      sponsor: (() => {
+        const sp = sponsorList.find(x => x.key === this.state.sponsorKey);
+        if (!sp) return null;
+        return {
+          title: sp.title,
+          icon: sp.icon,
+          phone: sp.phone,
+          tel: 'tel:+' + sp.num,
+          wa: 'https://wa.me/' + sp.num + '?text=' + encodeURIComponent('Ассаляму алейкум! Нашли вас на сайте Seruleb. ' + sp.msg),
+          buttons: [
+            { title: 'Видеоуслуги', icon: 'M3 5h18v14H3z M10 9.5v5l4-2.5z', open: () => this.setState({ videoCatKey: sp.key + 'Video' }) },
+            { title: 'Фото отчёты', icon: 'M4 7h3l2-3h6l2 3h3v12H4z M15.5 13a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z', open: () => this.setState({ videoCatKey: sp.key + 'Photo' }) },
+          ],
+        };
+      })(),
       videosOpen: this.state.videosOpen,
       openVideos: () => this.setState({ videosOpen: true, videoCatKey: null }),
       closeVideos: () => this.setState({ videosOpen: false, videoCatKey: null }),
       videoSections: videoSections.map(sec => ({ ...sec, items: sec.items.map(it => ({ ...it, open: () => this.setState({ videoCatKey: it.key }) })) })),
-      videoCat: videoCat ? { emptyText: 'Видео в этом разделе скоро появятся.', backLabel: 'Все темы', ...videoCat, has: videoCat.videos.length > 0, empty: videoCat.videos.length === 0 } : null,
+      videoCat: videoCat ? { emptyText: 'Видео в этом разделе скоро появятся.', backLabel: 'Все темы', ...videoCat, has: videoCat.videos.length > 0, hasPhotos: (videoCat.photos || []).length > 0, empty: videoCat.videos.length === 0 && !(videoCat.photos || []).length } : null,
       closeVideoCat: () => this.setState({ videoCatKey: null }),
       buyOpen: this.state.buyOpen,
       openBuy: () => this.setState({ buyOpen: true }),
