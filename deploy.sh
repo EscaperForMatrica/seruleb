@@ -16,10 +16,24 @@ echo "==> Сборка"
 node build.js
 
 echo "==> Загрузка на $HOST"
-# cgi-bin — служебный каталог хостинга, его не трогаем
-rsync -az --delete --exclude 'cgi-bin' --stats \
-  -e 'ssh -o BatchMode=yes' \
-  dist/ "$HOST:$REMOTE" | grep -E 'Number of files transferred|Total transferred file size'
+# cgi-bin — служебный каталог хостинга, его не трогаем.
+# --checksum: сборка каждый раз пересоздаёт dist/ с новыми датами файлов,
+# поэтому сравниваем по содержимому — уходят только реально изменённые файлы.
+# Beget иногда теряет временный файл rsync (код 23/24) — повторяем до 3 раз.
+for attempt in 1 2 3; do
+  set +e
+  rsync -az --checksum --delete --exclude 'cgi-bin' --stats \
+    -e 'ssh -o BatchMode=yes' \
+    dist/ "$HOST:$REMOTE" | grep -E 'Number of regular files transferred|Number of files transferred|Total transferred file size'
+  code=${PIPESTATUS[0]}
+  set -e
+  [ "$code" -eq 0 ] && break
+  if [ "$code" -ne 23 ] && [ "$code" -ne 24 ] || [ "$attempt" -eq 3 ]; then
+    echo "rsync завершился с кодом $code" >&2
+    exit "$code"
+  fi
+  echo "  сбой загрузки (код $code), повтор $((attempt + 1))/3"
+done
 
 echo "==> Права доступа"
 ssh -o BatchMode=yes "$HOST" \
