@@ -650,7 +650,7 @@ class Component extends DCLogic {
     ];
     const sponsorList = [
       { key: 'wash', title: 'Ремонт стиральных машин', icon: 'M5 3h14v18H5z M5 7h14 M8 5h.01 M11 5h.01 M12 17.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z', phone: '8 (928) 838-88-86', num: '79288388886', msg: 'Нужен ремонт стиральной машины.', videos: [], photos: [] },
-      { key: 'electric', title: 'Электрик', icon: 'M13 2 4 14h7l-1 8 9-12h-7z', phone: '+7 (913) 165-05-05', num: '79131650505', msg: 'Нужны услуги электрика.', videos: [], photos: Array.from({ length: 26 }, (_, i) => 'assets/img/sponsors/electric/foto-' + String(i + 1).padStart(2, '0') + '.jpg') },
+      { key: 'electric', title: 'Электрик', icon: 'M13 2 4 14h7l-1 8 9-12h-7z', phone: '+7 (913) 165-05-05', num: '79131650505', msg: 'Нужны услуги электрика.', videos: [{ src: 'assets/video/sponsors/electric/video-1.mp4', poster: 'assets/video/sponsors/electric/video-1.jpg' }], photos: Array.from({ length: 26 }, (_, i) => 'assets/img/sponsors/electric/foto-' + String(i + 1).padStart(2, '0') + '.jpg') },
     ];
     const sponsorCats = sponsorList.flatMap(sp => [
       { key: sp.key + 'Video', title: 'Видеоуслуги — ' + sp.title, desc: 'Видео работ нашего спонсора', videos: sp.videos, emptyText: 'Видео в этом разделе скоро появятся.', backLabel: 'Назад' },
