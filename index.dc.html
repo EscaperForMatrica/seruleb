@@ -157,17 +157,19 @@ a:hover{color:#ffffff;}
           <a href="{{ repairCta }}" style="display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); color:#ffffff; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 24px; border-radius:999px;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780; color:#ffffff;">Написать в WhatsApp</a>
         </div>
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.35);"></div>
-        <div style="font-size:clamp(13px,1.8vw,15px); font-weight:600; color:#b1b1b1; padding:0 2px;">Наши специалисты</div>
-        <div onClick="{{ openElectric }}" style="cursor:pointer; display:flex; align-items:center; gap:14px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-2px); border-color:rgba(255,217,106,.45);">
+        <div style="font-size:clamp(13px,1.8vw,15px); font-weight:600; color:#b1b1b1; padding:0 2px;">Нанять наших специалистов</div>
+        <sc-for list="{{ specialists }}" as="spc" hint-placeholder-count="4">
+        <div onClick="{{ spc.open }}" style="cursor:pointer; display:flex; align-items:center; gap:14px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-2px); border-color:rgba(255,217,106,.45);">
           <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ spc.icon }}"></path></svg>
           </div>
           <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px;">
-            <div style="font-size:clamp(15px,2.2vw,17px); font-weight:700; color:#ffffff;">Электрик</div>
-            <div style="font-size:clamp(12.5px,1.8vw,14px); line-height:1.4; color:#b1b1b1;">Электромонтаж, щиты и проводка — фото и видео работ</div>
+            <div style="font-size:clamp(15px,2.2vw,17px); font-weight:700; color:#ffffff;">{{ spc.title }}</div>
+            <div style="font-size:clamp(12.5px,1.8vw,14px); line-height:1.4; color:#b1b1b1;">{{ spc.desc }}</div>
           </div>
           <svg style="flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
         </div>
+        </sc-for>
       </div>
     </div>
   </sc-if>
@@ -238,7 +240,7 @@ a:hover{color:#ffffff;}
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ sponsor.icon }}"></path></svg>
           </div>
           <div style="display:flex; flex-direction:column; gap:4px;">
-            <div style="font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#ffb780;">Спонсор Seruleb</div>
+            <div style="font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#ffb780;">{{ sponsor.label }}</div>
             <div style="font-size:clamp(17px, 3.6vw, 22px); font-weight:700; line-height:1.3; color:#ffffff;">{{ sponsor.title }}</div>
             <sc-if value="{{ sponsor.address }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:13px; line-height:1.4; color:#b1b1b1;">{{ sponsor.address }}</div>
@@ -246,24 +248,29 @@ a:hover{color:#ffffff;}
           </div>
         </div>
         <div style="display:flex; flex-direction:column; gap:10px;">
-          <sc-if value="{{ sponsor.contactName }}" hint-placeholder-val="{{ false }}">
-            <div style="display:flex; align-items:center; gap:14px; background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:16px; padding:14px 16px;">
-              <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0"></path></svg>
+          <sc-if value="{{ sponsor.hasContacts }}" hint-placeholder-val="{{ true }}">
+            <sc-if value="{{ sponsor.contactName }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; align-items:center; gap:14px; background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:16px; padding:14px 16px;">
+                <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0"></path></svg>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:4px;">
+                  <div style="font-size:clamp(16px,2.4vw,18px); font-weight:700; color:#ffffff;">{{ sponsor.contactName }}</div>
+                  <div style="font-size:14px; color:#b1b1b1;">{{ sponsor.phone }}</div>
+                </div>
               </div>
-              <div style="display:flex; flex-direction:column; gap:4px;">
-                <div style="font-size:clamp(16px,2.4vw,18px); font-weight:700; color:#ffffff;">{{ sponsor.contactName }}</div>
-                <div style="font-size:14px; color:#b1b1b1;">{{ sponsor.phone }}</div>
-              </div>
-            </div>
+            </sc-if>
+            <a href="{{ sponsor.tel }}" style="display:flex; align-items:center; justify-content:center; gap:10px; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:15px 24px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35);" style-hover="filter:brightness(1.06); color:#000000;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
+              {{ sponsor.callLabel }}
+            </a>
+            <a href="{{ sponsor.wa }}" style="display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); color:#ffffff; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 24px; border-radius:999px;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780; color:#ffffff;">Написать в WhatsApp</a>
+            <sc-if value="{{ sponsor.tg }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ sponsor.tg }}" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); color:#ffffff; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 24px; border-radius:999px;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780; color:#ffffff;">Telegram-канал</a>
+            </sc-if>
           </sc-if>
-          <a href="{{ sponsor.tel }}" style="display:flex; align-items:center; justify-content:center; gap:10px; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:15px 24px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35);" style-hover="filter:brightness(1.06); color:#000000;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
-            {{ sponsor.callLabel }}
-          </a>
-          <a href="{{ sponsor.wa }}" style="display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); color:#ffffff; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 24px; border-radius:999px;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780; color:#ffffff;">Написать в WhatsApp</a>
-          <sc-if value="{{ sponsor.tg }}" hint-placeholder-val="{{ false }}">
-            <a href="{{ sponsor.tg }}" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); color:#ffffff; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 24px; border-radius:999px;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780; color:#ffffff;">Telegram-канал</a>
+          <sc-if value="{{ sponsor.noContacts }}" hint-placeholder-val="{{ false }}">
+            <div style="background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:15px; padding:18px 16px; text-align:center; font-size:14px; line-height:1.6; color:#e3e3e3;">Контакты спонсора скоро появятся.</div>
           </sc-if>
         </div>
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.35);"></div>
@@ -714,9 +721,16 @@ class Component extends DCLogic {
     ];
     const sponsorList = [
       { key: 'wash', title: 'Ремонт стиральных машин', icon: 'M5 3h14v18H5z M5 7h14 M8 5h.01 M11 5h.01 M12 17.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z', phone: '8 (928) 838-88-86', num: '79288388886', msg: 'Нужен ремонт стиральной машины.', videos: [], photos: [] },
-      { key: 'electric', title: 'Электрик', icon: 'M13 2 4 14h7l-1 8 9-12h-7z', phone: '+7 989 650-00-05', num: '79896500005', contactName: 'Seruleb', waMsg: 'Ассаляму алейкум! Интересуют услуги электрика. Хотели бы узнать подробности и стоимость.', msg: 'Нужны услуги электрика.', videos: [{ src: 'assets/video/sponsors/electric/video-1.mp4', poster: 'assets/video/sponsors/electric/video-1.jpg' }], photos: Array.from({ length: 26 }, (_, i) => 'assets/img/sponsors/electric/foto-' + String(i + 1).padStart(2, '0') + '.jpg') },
+      { key: 'electric', group: 'specialist', desc: 'Электромонтаж, щиты и проводка — фото и видео работ', title: 'Электрик', icon: 'M13 2 4 14h7l-1 8 9-12h-7z', phone: '+7 989 650-00-05', num: '79896500005', contactName: 'Seruleb', waMsg: 'Ассаляму алейкум! Интересуют услуги электрика. Хотели бы узнать подробности и стоимость.', msg: 'Нужны услуги электрика.', videos: [{ src: 'assets/video/sponsors/electric/video-1.mp4', poster: 'assets/video/sponsors/electric/video-1.jpg' }], photos: Array.from({ length: 26 }, (_, i) => 'assets/img/sponsors/electric/foto-' + String(i + 1).padStart(2, '0') + '.jpg') },
       { key: 'himiya', title: 'Бытовая химия', videoDesc: 'Видео товаров нашего спонсора', icon: 'M9 2h4v4H9z M13 3h3l2 2 M8 6h6l1 3v12H7V9z M7 13h8', phone: '+7 (922) 454-44-11', num: '79224544411', msg: 'Интересует бытовая химия.', videos: [1, 2, 3].map(n => ({ src: 'assets/video/sponsors/himiya/video-' + n + '.mp4', poster: 'assets/video/sponsors/himiya/video-' + n + '.jpg' })), photos: [] },
       { key: 'jamal', title: 'Jamal — оптовая мужская одежда', videoDesc: 'Видео товаров нашего спонсора', photoDesc: 'Фото товаров нашего спонсора', address: 'Рынок «Империя», 8', tg: 'https://t.me/JamalOptovik05', icon: 'M8 3 4 5 2 9.5l3 1.5V21h14V11l3-1.5L20 5l-4-2c0 1.7-1.8 3-4 3S8 4.7 8 3Z', phone: '+7 (928) 555-33-07', num: '79285553307', msg: 'Интересует оптовая мужская одежда.', videos: [1, 2, 3, 4].map(n => ({ src: 'assets/video/sponsors/jamal/video-' + n + '.mp4', poster: 'assets/video/sponsors/jamal/video-' + n + '.jpg' })), photos: [1, 2, 3, 4, 5, 6].map(n => 'assets/img/sponsors/jamal/foto-0' + n + '.jpg') },
+      { key: 'workers', group: 'specialist', title: 'Нанять разнорабочих', desc: 'Помощь на объекте: демонтаж, погрузка, уборка и другие работы', icon: 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M2 21a7 7 0 0 1 14 0 M16 3.2a4 4 0 0 1 0 7.6 M22 21a7 7 0 0 0-4-6.3', phone: '+7 989 650-00-05', num: '79896500005', contactName: 'Seruleb', waMsg: 'Ассаляму алейкум! Хотели бы нанять разнорабочих. Подскажите условия и стоимость.', videos: [], photos: [] },
+      { key: 'roof', group: 'specialist', title: 'Утепление крыши', desc: 'Утепление и гидроизоляция кровли', icon: 'M2 12 12 4l10 8 M5 10v10h14V10 M5 14h14 M5 17h14', phone: '+7 989 650-00-05', num: '79896500005', contactName: 'Seruleb', waMsg: 'Ассаляму алейкум! Интересует утепление крыши. Хотели бы узнать подробности и стоимость.', videos: [], photos: [] },
+      { key: 'welder', group: 'specialist', title: 'Услуги сварщика', desc: 'Сварочные работы любой сложности', icon: 'M3 12a7 7 0 0 1 14 0v4l-3 4H6l-3-4z M6 12h8v3H6z M19 3.5l1.5-1.5 M20.5 7.5H23 M18.5 5.5l2.5-1.5 M21.5 11l1.5.8', phone: '+7 989 650-00-05', num: '79896500005', contactName: 'Seruleb', waMsg: 'Ассаляму алейкум! Нужны услуги сварщика. Хотели бы узнать подробности и стоимость.', videos: [], photos: [] },
+      { key: 'hozmag', title: 'Магазин техники ХозМаг', icon: 'M3 9l1.5-5h15L21 9 M3 9h18v11H3z M9 20v-6h6v6', videos: [], photos: [] },
+      { key: 'detailing', title: 'Детейлинг', icon: 'M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z M19 14l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z M5 16l.6 1.4 1.4.6-1.4.6L5 20l-.6-1.4L3 18l1.4-.6z', videos: [], photos: [] },
+      { key: 'autosale', title: 'Продажа авто', icon: 'M5 16h14 M3 16v-4l2-5h14l2 5v4 M3 16v3h3v-3 M18 16v3h3v-3 M7 13h.01 M17 13h.01', videos: [], photos: [] },
+      { key: 'beauty', title: 'Красота, здоровье и доход', icon: 'M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z', videos: [], photos: [] },
     ];
     const sponsorCats = sponsorList.flatMap(sp => [
       { key: sp.key + 'Video', title: 'Видеоуслуги — ' + sp.title, desc: sp.videoDesc || 'Видео работ нашего спонсора', videos: sp.videos, emptyText: 'Видео в этом разделе скоро появятся.', backLabel: 'Назад' },
@@ -730,7 +744,7 @@ class Component extends DCLogic {
       radiusCss: (p.cardRadius ?? 15) + 'px',
       accentColor: p.accentColor ?? '#ffb780',
       raffles: all.slice(0, 4),
-      otherServices: [all[7], ...sponsorList.map(sp => ({ title: sp.title, icon: sp.icon, open: () => this.setState({ otherOpen: false, sponsorKey: sp.key }) }))],
+      otherServices: [all[7], ...sponsorList.filter(sp => sp.group !== 'specialist').map(sp => ({ title: sp.title, icon: sp.icon, open: () => this.setState({ otherOpen: false, sponsorKey: sp.key }) }))],
       sponsorOpen: this.state.sponsorKey != null,
       closeSponsor: () => this.setState({ sponsorKey: null, videoCatKey: null }),
       sponsor: (() => {
@@ -738,12 +752,15 @@ class Component extends DCLogic {
         if (!sp) return null;
         return {
           title: sp.title,
+          label: sp.group === 'specialist' ? 'Специалист Seruleb' : 'Спонсор Seruleb',
+          hasContacts: !!sp.num,
+          noContacts: !sp.num,
           address: sp.address || '',
           tg: sp.tg || '',
           icon: sp.icon,
           phone: sp.phone,
-          tel: 'tel:+' + sp.num,
-          wa: 'https://wa.me/' + sp.num + '?text=' + encodeURIComponent(sp.waMsg || ('Ассаляму алейкум! Нашли вас на сайте Seruleb. ' + sp.msg)),
+          tel: sp.num ? 'tel:+' + sp.num : '',
+          wa: !sp.num ? '' : 'https://wa.me/' + sp.num + '?text=' + encodeURIComponent(sp.waMsg || ('Ассаляму алейкум! Нашли вас на сайте Seruleb. ' + sp.msg)),
           contactName: sp.contactName || '',
           callLabel: sp.contactName ? 'Позвонить' : 'Позвонить: ' + sp.phone,
           buttons: [
@@ -826,7 +843,7 @@ class Component extends DCLogic {
       repairOpen: this.state.repairOpen,
       openRepair: () => this.setState({ repairOpen: true }),
       closeRepair: () => this.setState({ repairOpen: false }),
-      openElectric: () => this.setState({ repairOpen: false, sponsorKey: 'electric' }),
+      specialists: sponsorList.filter(sp => sp.group === 'specialist').map(sp => ({ title: sp.title, desc: sp.desc, icon: sp.icon, open: () => this.setState({ repairOpen: false, sponsorKey: sp.key }) })),
       repairCta: waText('Ассаляму алейкум! Интересует ремонт под ключ. Хотели бы узнать подробности и стоимость.'),
       sponsorCta: waText('Ассаляму алейкум! Хотел бы стать спонсором проекта Seruleb и обсудить рекламное сотрудничество для продвижения моего бизнеса и услуг. Какие форматы рекламы вы предлагаете, на каких условиях и по какой стоимости?'),
       openRaffles: () => this.setState({ rafflesOpen: true }),
