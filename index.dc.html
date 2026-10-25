@@ -146,7 +146,7 @@ a:hover{color:#ffffff;}
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0"></path></svg>
             </div>
             <div style="display:flex; flex-direction:column; gap:4px;">
-              <div style="font-size:clamp(16px,2.4vw,18px); font-weight:700; color:#ffffff;">Seruleb Pro</div>
+              <div style="font-size:clamp(16px,2.4vw,18px); font-weight:700; color:#ffffff;">Seruleb</div>
               <div style="font-size:14px; color:#b1b1b1;">+7 989 650-00-05</div>
             </div>
           </div>
@@ -246,9 +246,20 @@ a:hover{color:#ffffff;}
           </div>
         </div>
         <div style="display:flex; flex-direction:column; gap:10px;">
+          <sc-if value="{{ sponsor.contactName }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; align-items:center; gap:14px; background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:16px; padding:14px 16px;">
+              <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0"></path></svg>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="font-size:clamp(16px,2.4vw,18px); font-weight:700; color:#ffffff;">{{ sponsor.contactName }}</div>
+                <div style="font-size:14px; color:#b1b1b1;">{{ sponsor.phone }}</div>
+              </div>
+            </div>
+          </sc-if>
           <a href="{{ sponsor.tel }}" style="display:flex; align-items:center; justify-content:center; gap:10px; background:var(--accent); color:#000000; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:15px 24px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.35);" style-hover="filter:brightness(1.06); color:#000000;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
-            Позвонить: {{ sponsor.phone }}
+            {{ sponsor.callLabel }}
           </a>
           <a href="{{ sponsor.wa }}" style="display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,183,128,.14); border:1px solid rgba(255,183,128,.40); color:#ffffff; font-weight:700; font-size:clamp(14px,1.9vw,16px); padding:14px 24px; border-radius:999px;" style-hover="background:rgba(255,183,128,.26); border-color:#ffb780; color:#ffffff;">Написать в WhatsApp</a>
           <sc-if value="{{ sponsor.tg }}" hint-placeholder-val="{{ false }}">
@@ -703,7 +714,7 @@ class Component extends DCLogic {
     ];
     const sponsorList = [
       { key: 'wash', title: 'Ремонт стиральных машин', icon: 'M5 3h14v18H5z M5 7h14 M8 5h.01 M11 5h.01 M12 17.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z', phone: '8 (928) 838-88-86', num: '79288388886', msg: 'Нужен ремонт стиральной машины.', videos: [], photos: [] },
-      { key: 'electric', title: 'Электрик', icon: 'M13 2 4 14h7l-1 8 9-12h-7z', phone: '+7 (913) 165-05-05', num: '79131650505', msg: 'Нужны услуги электрика.', videos: [{ src: 'assets/video/sponsors/electric/video-1.mp4', poster: 'assets/video/sponsors/electric/video-1.jpg' }], photos: Array.from({ length: 26 }, (_, i) => 'assets/img/sponsors/electric/foto-' + String(i + 1).padStart(2, '0') + '.jpg') },
+      { key: 'electric', title: 'Электрик', icon: 'M13 2 4 14h7l-1 8 9-12h-7z', phone: '+7 989 650-00-05', num: '79896500005', contactName: 'Seruleb', waMsg: 'Ассаляму алейкум! Интересуют услуги электрика. Хотели бы узнать подробности и стоимость.', msg: 'Нужны услуги электрика.', videos: [{ src: 'assets/video/sponsors/electric/video-1.mp4', poster: 'assets/video/sponsors/electric/video-1.jpg' }], photos: Array.from({ length: 26 }, (_, i) => 'assets/img/sponsors/electric/foto-' + String(i + 1).padStart(2, '0') + '.jpg') },
       { key: 'himiya', title: 'Бытовая химия', videoDesc: 'Видео товаров нашего спонсора', icon: 'M9 2h4v4H9z M13 3h3l2 2 M8 6h6l1 3v12H7V9z M7 13h8', phone: '+7 (922) 454-44-11', num: '79224544411', msg: 'Интересует бытовая химия.', videos: [1, 2, 3].map(n => ({ src: 'assets/video/sponsors/himiya/video-' + n + '.mp4', poster: 'assets/video/sponsors/himiya/video-' + n + '.jpg' })), photos: [] },
       { key: 'jamal', title: 'Jamal — оптовая мужская одежда', videoDesc: 'Видео товаров нашего спонсора', photoDesc: 'Фото товаров нашего спонсора', address: 'Рынок «Империя», 8', tg: 'https://t.me/JamalOptovik05', icon: 'M8 3 4 5 2 9.5l3 1.5V21h14V11l3-1.5L20 5l-4-2c0 1.7-1.8 3-4 3S8 4.7 8 3Z', phone: '+7 (928) 555-33-07', num: '79285553307', msg: 'Интересует оптовая мужская одежда.', videos: [1, 2, 3, 4].map(n => ({ src: 'assets/video/sponsors/jamal/video-' + n + '.mp4', poster: 'assets/video/sponsors/jamal/video-' + n + '.jpg' })), photos: [1, 2, 3, 4, 5, 6].map(n => 'assets/img/sponsors/jamal/foto-0' + n + '.jpg') },
     ];
@@ -732,7 +743,9 @@ class Component extends DCLogic {
           icon: sp.icon,
           phone: sp.phone,
           tel: 'tel:+' + sp.num,
-          wa: 'https://wa.me/' + sp.num + '?text=' + encodeURIComponent('Ассаляму алейкум! Нашли вас на сайте Seruleb. ' + sp.msg),
+          wa: 'https://wa.me/' + sp.num + '?text=' + encodeURIComponent(sp.waMsg || ('Ассаляму алейкум! Нашли вас на сайте Seruleb. ' + sp.msg)),
+          contactName: sp.contactName || '',
+          callLabel: sp.contactName ? 'Позвонить' : 'Позвонить: ' + sp.phone,
           buttons: [
             { title: 'Видеоуслуги', icon: 'M3 5h18v14H3z M10 9.5v5l4-2.5z', open: () => this.setState({ videoCatKey: sp.key + 'Video' }) },
             { title: 'Фото отчёты', icon: 'M4 7h3l2-3h6l2 3h3v12H4z M15.5 13a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z', open: () => this.setState({ videoCatKey: sp.key + 'Photo' }) },
