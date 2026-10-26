@@ -170,6 +170,16 @@ a:hover{color:#ffffff;}
           <svg style="flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
         </div>
         </sc-for>
+        <a href="{{ jobCta }}" style="display:flex; align-items:center; gap:14px; background:linear-gradient(160deg, rgba(255,183,128,.22), rgba(255,183,128,.06)); border:1px solid rgba(255,183,128,.60); border-radius:16px; padding:clamp(12px,2vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.30), 0 10px 30px rgba(255,183,128,.10); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-2px); border-color:#ffb780;">
+          <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,183,128,.45); display:flex; align-items:center; justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18v12H3z M8 8V5h8v3 M3 13h18 M11 13v2h2v-2"></path></svg>
+          </div>
+          <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px;">
+            <div style="font-size:clamp(15px,2.2vw,17px); font-weight:700; color:#ffffff;">Ищу работу</div>
+            <div style="font-size:clamp(12.5px,1.8vw,14px); line-height:1.4; color:#e3e3e3;">Напишите в WhatsApp, кем хотите работать: мастером или разнорабочим</div>
+          </div>
+          <svg style="flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+        </a>
       </div>
     </div>
   </sc-if>
@@ -845,6 +855,7 @@ class Component extends DCLogic {
       openRepair: () => this.setState({ repairOpen: true }),
       closeRepair: () => this.setState({ repairOpen: false }),
       specialists: sponsorList.filter(sp => sp.group === 'specialist').map(sp => ({ title: sp.title, desc: sp.desc, icon: sp.icon, open: () => this.setState({ repairOpen: false, sponsorKey: sp.key }) })),
+      jobCta: waText('Ассаляму алейкум! Ищу работу. Хочу работать (мастером или разнорабочим): '),
       repairCta: waText('Ассаляму алейкум! Интересует ремонт под ключ. Хотели бы узнать подробности и стоимость.'),
       sponsorCta: waText('Ассаляму алейкум! Хотел бы стать спонсором проекта Seruleb и обсудить рекламное сотрудничество для продвижения моего бизнеса и услуг. Какие форматы рекламы вы предлагаете, на каких условиях и по какой стоимости?'),
       openRaffles: () => this.setState({ rafflesOpen: true }),
