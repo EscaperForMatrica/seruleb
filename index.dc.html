@@ -484,7 +484,7 @@ a:hover{color:#ffffff;}
         <div style="flex-shrink:0; height:1px; background:rgba(177,177,177,.5);"></div>
 
         <h2 style="flex-shrink:0; font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase; margin:0; text-align:center; color:#ffffff; font-size:clamp(20px,4.6vw,28px); line-height:1.3;">{{ tshirt.prizesTitle }}</h2>
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:clamp(8px,2vw,14px);">
+        <div style="display:grid; grid-template-columns:min(320px, 100%); justify-content:center; gap:clamp(8px,2vw,14px);">
           <sc-for list="{{ tshirt.prizes }}" as="pz" hint-placeholder-count="3">
             <div style="background:rgba(92,92,92,.15); border:1px solid rgba(226,226,226,.11); border-radius:15px; padding:clamp(14px,2.6vw,22px) 8px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
               <div style="font-size:clamp(30px,6vw,40px); line-height:1;">{{ pz.e }}</div>
@@ -928,9 +928,7 @@ class Component extends DCLogic {
         intro: '👕 Приобретая футболку Seruleb, вы получаете доступ к возможностям нашего сообщества и участвуете в розыгрышах призов в течение всего года!',
         prizesTitle: '🎁 Розыгрыши',
         prizes: [
-          { e: '📱', t: 'iPhone', s: '6 месяцев' },
-          { e: '🕋', t: 'Умра', s: '5 месяцев' },
-          { e: '🚗', t: 'Автомобиль', s: 'в конце года' },
+          { e: '📱', t: 'iPhone 18', s: '6 месяцев' },
         ],
         audienceTitle: '👀 Сообщества для просмотров ваших WhatsApp-статусов!',
         women: '👩 Женская аудитория — отдельно.',
