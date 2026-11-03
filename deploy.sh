@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Публикация сайта на хостинг Beget (seruleb.com).
+# Публикация сайта на хостинг Lite Host (seruleb.com, cPanel, addon-домен).
 #
 #   ./deploy.sh
 #
@@ -9,8 +9,9 @@
 
 set -euo pipefail
 
-HOST="petranv6@petranv6.beget.tech"
-REMOTE="~/seruleb.com/public_html/"
+HOST="mars.lite-host.in"   # пользователь и ключ — в ~/.ssh/config
+REMOTE="~/seruleb.com/"
+IP="46.8.141.128"
 
 echo "==> Сборка"
 node build.js
@@ -19,7 +20,7 @@ echo "==> Загрузка на $HOST"
 # cgi-bin — служебный каталог хостинга, его не трогаем.
 # --checksum: сборка каждый раз пересоздаёт dist/ с новыми датами файлов,
 # поэтому сравниваем по содержимому — уходят только реально изменённые файлы.
-# Beget иногда теряет временный файл rsync (код 23/24) — повторяем до 3 раз.
+# Если хостинг теряет временный файл rsync (код 23/24) — повторяем до 3 раз.
 for attempt in 1 2 3; do
   set +e
   rsync -az --checksum --delete --exclude 'cgi-bin' --stats \
@@ -41,7 +42,8 @@ ssh -o BatchMode=yes "$HOST" \
 
 echo "==> Проверка"
 for p in / /obuchenie /video /madina/; do
-  printf '  %-12s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 "https://seruleb.com$p")"
+  # --resolve: проверяем именно этот сервер, даже пока DNS ещё смотрит в другое место.
+  printf '  %-12s %s\n' "$p" "$(curl -sk -o /dev/null -w '%{http_code}' --max-time 25 --resolve "seruleb.com:443:$IP" "https://seruleb.com$p")"
 done
 
 echo "==> Готово: https://seruleb.com"
