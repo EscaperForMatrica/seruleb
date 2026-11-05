@@ -65,13 +65,13 @@ a:hover{color:#ffffff;}
         </div>
         <div style="text-align:center; font-size:clamp(13px,1.8vw,18px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Бесплатные розыгрыши Seruleb</div>
       </div>
-      <a href="{{ audienceCta }}" style="text-decoration:none; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2.2vw,22px); padding:clamp(14px,2.4vw,28px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
+      <div onClick="{{ openAudience }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2.2vw,22px); padding:clamp(14px,2.4vw,28px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
         <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1.2vw,14px) 0 clamp(4px,1vw,10px);">
           <svg style="width:clamp(30px,4.5vw,48px); height:clamp(30px,4.5vw,48px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M2 21a7 7 0 0 1 14 0 M19 8v6 M16 11h6"></path></svg>
           <div style="width:120px; max-width:40%; height:clamp(8px,1.4vw,16px); border-radius:50%; background:linear-gradient(180deg, #ffb780, #c98c5d); box-shadow:0 8px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,231,168,.30); margin-top:clamp(4px,0.8vw,8px);"></div>
         </div>
         <div style="text-align:center; font-size:clamp(13px,1.8vw,18px); font-weight:500; line-height:1.3; color:#ffffff; letter-spacing:-.01em;">Привлечь аудиторию</div>
-      </a>
+      </div>
       <div onClick="{{ openTshirt }}" style="cursor:pointer; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); backdrop-filter:blur(var(--gblur)); -webkit-backdrop-filter:blur(var(--gblur)); border:1px solid rgba(255,213,138,.24); border-radius:clamp(14px,2.2vw,22px); padding:clamp(14px,2.4vw,28px); box-shadow:inset 0 1px 0 rgba(255,231,168,.28), 0 16px 40px rgba(0,0,0,.25); display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .25s ease, border-color .25s ease, background .25s ease;" style-hover="transform:translateY(-4px); border-color:rgba(255,217,106,.45); background:linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.06));">
         <div style="display:flex; flex-direction:column; align-items:center; padding:clamp(6px,1.2vw,14px) 0 clamp(4px,1vw,10px);">
           <svg style="width:clamp(30px,4.5vw,48px); height:clamp(30px,4.5vw,48px); position:relative; z-index:2;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 5 2 9.5l3 1.5V21h14V11l3-1.5L20 5l-4-2c0 1.7-1.8 3-4 3S8 4.7 8 3Z"></path></svg>
@@ -230,6 +230,35 @@ a:hover{color:#ffffff;}
           <sc-for list="{{ buySections }}" as="sec" hint-placeholder-count="5">
           <div style="display:flex; flex-direction:column; gap:10px;">
             <div style="font-size:clamp(13px,1.8vw,15px); font-weight:600; color:#b1b1b1; padding:6px 2px 0;">{{ sec.title }}</div>
+              <sc-for list="{{ sec.items }}" as="bi" hint-placeholder-count="3">
+                <a href="{{ bi.href }}" style="display:flex; align-items:center; gap:14px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-2px); border-color:rgba(255,217,106,.45);">
+                  <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ bi.icon }}"></path></svg>
+                  </div>
+                  <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px;">
+                    <div style="font-size:clamp(15px,2.2vw,17px); font-weight:700; color:#ffffff;">{{ bi.title }}</div>
+                    <div style="font-size:clamp(12.5px,1.8vw,14px); line-height:1.4; color:#b1b1b1;">{{ bi.desc }}</div>
+                  </div>
+                  <svg style="flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                </a>
+              </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ audienceOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeAudience }}" style="position:fixed; inset:0; z-index:49; background:rgba(0,0,0,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:max(28px, calc(env(safe-area-inset-top) + 16px)) 12px max(28px, calc(env(safe-area-inset-bottom) + 16px));">
+      <div onClick="{{ stopClick }}" style="width:min(620px, 100%); margin:auto 0; box-sizing:border-box; background:rgba(24,24,24,.9); backdrop-filter:blur(calc(var(--gblur) + 10px)); -webkit-backdrop-filter:blur(calc(var(--gblur) + 10px)); border:1px solid rgba(255,255,255,.22); border-radius:var(--grad); padding:clamp(20px,3.5vw,32px) clamp(16px,3vw,26px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 32px 80px rgba(0,0,0,.45); display:flex; flex-direction:column; gap:18px; position:relative;">
+        <div onClick="{{ closeAudience }}" style="position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.20); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#ffffff;" style-hover="background:rgba(0,0,0,.45);">✕</div>
+        <div style="display:flex; flex-direction:column; gap:6px; padding-right:40px;">
+          <div style="font-size:clamp(16px, 3.6vw, 22px); font-weight:700; line-height:1.3; color:#ffffff;">Привлечь аудиторию</div>
+          <div style="font-size:clamp(13px,1.8vw,15px); line-height:1.5; color:#b1b1b1;">Выберите услугу для продвижения вашего бизнеса</div>
+        </div>
+          <sc-for list="{{ audienceSections }}" as="sec" hint-placeholder-count="3">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="font-size:clamp(13px,1.8vw,15px); font-weight:600; color:#b1b1b1; padding:6px 2px 0; text-transform:uppercase; letter-spacing:.04em;">{{ sec.title }}</div>
               <sc-for list="{{ sec.items }}" as="bi" hint-placeholder-count="3">
                 <a href="{{ bi.href }}" style="display:flex; align-items:center; gap:14px; background:linear-gradient(160deg, rgba(255,217,106,.12), rgba(255,255,255,.04)); border:1px solid rgba(255,213,138,.24); border-radius:16px; padding:clamp(12px,2vw,16px); box-shadow:inset 0 1px 0 rgba(255,231,168,.26); transition:transform .25s ease, border-color .25s ease;" style-hover="transform:translateY(-2px); border-color:rgba(255,217,106,.45);">
                   <div style="flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); display:flex; align-items:center; justify-content:center;">
@@ -684,7 +713,7 @@ a:hover{color:#ffffff;}
   &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ffb780&quot;, &quot;options&quot;: [&quot;#ffb780&quot;, &quot;#ffd96a&quot;, &quot;#c98c5d&quot;, &quot;#ffffff&quot;], &quot;section&quot;: &quot;Цвет&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: null, rafflesOpen: false, jobsOpen: false, repairOpen: false, buyOpen: false, videoCatKey: null, photoView: null, sponsorKey: null, otherOpen: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
+  state = { open: null, rafflesOpen: false, jobsOpen: false, repairOpen: false, buyOpen: false, audienceOpen: false, videoCatKey: null, photoView: null, sponsorKey: null, otherOpen: false, bestPlay: false, menuOpen: false, tshirtOpen: false, girlsOpen: false, menOpen: false };
   renderVals() {
     const p = this.props;
     const wa = 'https://wa.me/79896500005';
@@ -794,6 +823,26 @@ class Component extends DCLogic {
       buyOpen: this.state.buyOpen,
       openBuy: () => this.setState({ buyOpen: true }),
       closeBuy: () => this.setState({ buyOpen: false }),
+      audienceOpen: this.state.audienceOpen,
+      openAudience: () => this.setState({ audienceOpen: true }),
+      closeAudience: () => this.setState({ audienceOpen: false }),
+      // Поп-ап «Привлечь аудиторию»: разделы и кнопки, каждая ведёт в WhatsApp
+      audienceSections: [
+        { title: 'Набор аудитории', items: [
+          { title: 'Набор аудитории в WhatsApp', desc: 'Привлекаем подписчиков для просмотра ваших статусов WhatsApp и потенциальных клиентов для вашего бизнеса.', icon: 'M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z', href: waText('Ассаляму алейкум! Интересует: Набор аудитории в WhatsApp. Хотели бы узнать подробности и стоимость.') },
+          { title: 'Набор аудитории в Telegram', desc: 'Привлекаем подписчиков в ваш Telegram-канал.', icon: 'M22 2 11 13 M22 2l-7 20-4-9-9-4 20-7z', href: waText('Ассаляму алейкум! Интересует: Набор аудитории в Telegram. Хотели бы узнать подробности и стоимость.') },
+          { title: 'Набор аудитории в соцсетях', desc: 'Привлечение подписчиков и новой аудитории в другие соцсети.', icon: 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M2 21a7 7 0 0 1 14 0 M16 3.1a4 4 0 0 1 0 7.8 M22 21a7 7 0 0 0-4-6.3', href: waText('Ассаляму алейкум! Интересует: Набор аудитории в соцсетях. Хотели бы узнать подробности и стоимость.') },
+        ] },
+        { title: 'Съёмка Reels', items: [
+          { title: 'Reels для вашего бизнеса под ключ', desc: 'Создаём сценарий о вашем бизнесе, приезжаем, снимаем, монтируем и отдаём готовый ролик.', icon: 'M4 11h16v9H4z M4 11l-.8-3.6L18.6 4l.8 3.5L4 11 M8.5 6.6l2.2 2.9 M13.6 5.4l2.2 2.9', href: waText('Ассаляму алейкум! Интересует: Reels для вашего бизнеса под ключ. Хотели бы узнать подробности и стоимость.') },
+          { title: 'Съёмка и монтаж Reels', desc: 'Приезжаем, снимаем видео по вашей идее, монтируем и отдаём готовый ролик.', icon: 'M2 7h13v10H2z M15 10.5 22 7v10l-7-3.5', href: waText('Ассаляму алейкум! Интересует: Съёмка и монтаж Reels. Хотели бы узнать подробности и стоимость.') },
+        ] },
+        { title: 'Размещение рекламы', items: [
+          { title: 'Реклама в статусах WhatsApp', desc: 'Размещаем рекламу вашего бизнеса в WhatsApp-статусах.', icon: 'M7 2h10v20H7z M11 18h2', href: waText('Ассаляму алейкум! Интересует: Реклама в статусах WhatsApp. Хотели бы узнать подробности и стоимость.') },
+          { title: 'Реклама в Telegram', desc: 'Размещаем вашу рекламу в Telegram-каналах.', icon: 'M22 2 11 13 M22 2l-7 20-4-9-9-4 20-7z', href: waText('Ассаляму алейкум! Интересует: Реклама в Telegram. Хотели бы узнать подробности и стоимость.') },
+          { title: 'Реклама в других соцсетях', desc: 'Рекламируем ваши товары и услуги в социальных сетях.', icon: 'M3 11l14-5v12L3 13v-2z M6.5 13.5V18a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-3.5 M18 9a3 3 0 0 1 0 6', href: waText('Ассаляму алейкум! Интересует: Реклама в других соцсетях. Хотели бы узнать подробности и стоимость.') },
+        ] },
+      ],
       buySections: [
         { title: 'Товары Seruleb', items: [
           { title: 'Футболка Seruleb', desc: 'Фирменная футболка бренда', icon: 'M8 3 4 5 2 9.5l3 1.5V21h14V11l3-1.5L20 5l-4-2c0 1.7-1.8 3-4 3S8 4.7 8 3Z', href: waText('Ассаляму алейкум! Хотели бы приобрести футболку Seruleb. Интересует стоимость футболки отдельно, а также варианты с участием в розыгрыше и продвижением WhatsApp. Какие есть расценки?') },
@@ -860,7 +909,6 @@ class Component extends DCLogic {
       openJobs: () => this.setState({ jobsOpen: true }),
       closeJobs: () => this.setState({ jobsOpen: false }),
       jobCta2: waText('Ассаляму алейкум! Ищу работу.\n\nИмя: \nВозраст: \nГород: \nФормат работы (онлайн / офлайн): \nСфера, в которой хочу работать: \nОпыт работы: '),
-      audienceCta: waText('Ассаляму алейкум! Хотели бы привлечь аудиторию для нашего бизнеса через Seruleb. Подскажите варианты и стоимость.'),
       photoView: this.state.photoView,
       zoomPhoto: (e) => { e.stopPropagation(); this.setState({ photoView: e.currentTarget.getAttribute('data-full') || e.currentTarget.getAttribute('src') }); },
       closePhoto: () => this.setState({ photoView: null }),
