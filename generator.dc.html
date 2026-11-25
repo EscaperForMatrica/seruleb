@@ -95,10 +95,6 @@ a:hover{color:#ffffff;}
           </div>
         </sc-if>
       </sc-if>
-      <sc-if value="{{ fileStatus }}" hint-placeholder-val="{{ false }}">
-        <div style="text-align:center; font-size:13px; line-height:1.5; color:#ffcf9c;">{{ fileStatus }}</div>
-      </sc-if>
-
       <div style="height:1px; background:rgba(255,213,138,.15);"></div>
       <div style="display:flex; flex-direction:column; gap:7px;">
         <div style="font-size:17px; font-weight:700;">2. Проведите розыгрыш</div>
@@ -237,16 +233,24 @@ class Component extends DCLogic {
         if (!audio) return;
         try {
           const now = audio.currentTime;
-          const oscillator = audio.createOscillator();
+          const length = Math.floor(audio.sampleRate * 0.045);
+          const buffer = audio.createBuffer(1, length, audio.sampleRate);
+          const samples = buffer.getChannelData(0);
+          for (let i = 0; i < length; i++) samples[i] = Math.random() * 2 - 1;
+          const click = audio.createBufferSource();
+          const filter = audio.createBiquadFilter();
           const gain = audio.createGain();
-          oscillator.type = 'triangle';
-          oscillator.frequency.setValueAtTime(Math.max(240, 760 - step * 12), now);
-          gain.gain.setValueAtTime(0.045, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.065);
-          oscillator.connect(gain);
+          click.buffer = buffer;
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(Math.max(700, 1900 - step * 24), now);
+          filter.Q.setValueAtTime(0.7, now);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          click.connect(filter);
+          filter.connect(gain);
           gain.connect(audio.destination);
-          oscillator.start(now);
-          oscillator.stop(now + 0.07);
+          click.start(now);
+          click.stop(now + 0.045);
         } catch (_) {}
       };
 
