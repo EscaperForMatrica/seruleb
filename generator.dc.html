@@ -71,6 +71,23 @@ a:hover{color:#ffffff;}
           <div style="font-size:12px; color:#bdbdbd;">Номер выбран случайно из списка</div>
         </div>
       </sc-if>
+
+      <sc-if value="{{ winners.length }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:12px; padding-top:4px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <div style="font-size:16px; font-weight:700;">Список победителей <span style="font-size:12px; font-weight:500; color:#bdbdbd;">({{ winners.length }})</span></div>
+            <button type="button" onClick="{{ clearWinners }}" style="border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:8px 13px; cursor:pointer; background:rgba(255,255,255,.06); color:#e3e3e3; font:600 12px 'Montserrat',sans-serif;">Очистить список</button>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <sc-for list="{{ winners }}" as="entry" hint-placeholder-count="3">
+              <div style="display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid rgba(255,213,138,.16); border-radius:12px; background:rgba(0,0,0,.2);">
+                <div style="width:28px; height:28px; flex:0 0 auto; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(255,183,128,.14); color:#ffcf9c; font-size:12px; font-weight:700;">{{ entry.index }}</div>
+                <div style="font-size:15px; font-weight:600; color:#ffffff; overflow-wrap:anywhere;">{{ entry.phone }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
     </section>
 
     <div style="display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border-radius:14px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09); color:#bdbdbd; font-size:12px; line-height:1.6;">
@@ -82,7 +99,7 @@ a:hover{color:#ffffff;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { numbers: [], winner: '', fileStatus: 'Файл не выбран.' };
+  state = { numbers: [], winner: '', winners: [], fileStatus: 'Файл не выбран.' };
 
   renderVals() {
     const loadContacts = (event) => {
@@ -139,14 +156,19 @@ class Component extends DCLogic {
         window.crypto.getRandomValues(buffer);
         random = buffer[0];
       } while (random >= limit);
-      this.setState({ winner: numbers[random % numbers.length] });
+      const winner = numbers[random % numbers.length];
+      this.setState({ winner, winners: [...this.state.winners, { phone: winner, index: this.state.winners.length + 1 }] });
     };
+
+    const clearWinners = () => this.setState({ winners: [], winner: '' });
 
     return {
       fileStatus: this.state.fileStatus,
       winner: this.state.winner,
+      winners: this.state.winners,
       loadContacts,
       drawWinner,
+      clearWinners,
     };
   }
 }
