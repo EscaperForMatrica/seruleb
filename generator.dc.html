@@ -28,7 +28,26 @@ a:hover{color:#ffffff;}
 .raffle-drum-number{font-family:'Oswald',sans-serif; font-size:clamp(25px,6vw,38px); font-weight:600; letter-spacing:.04em; color:#ffcf9c; overflow-wrap:anywhere; font-variant-numeric:tabular-nums;}
 .raffle-drum.spinning .raffle-drum-number{animation:drum-jiggle .12s linear infinite; text-shadow:0 0 22px rgba(255,183,128,.42);}
 @keyframes drum-jiggle{0%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}50%{transform:translateY(2px) rotate(.5deg);filter:blur(1px)}100%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}}
-@media(prefers-reduced-motion:reduce){.raffle-drum.spinning .raffle-drum-number{animation:none}}
+.egg-overlay{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:max(20px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom)); box-sizing:border-box; background:radial-gradient(ellipse at 50% 46%,rgba(104,63,29,.43),rgba(8,7,6,.97) 68%); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); animation:egg-screen-in .45s ease both;}
+.egg-content{position:relative; width:min(100%,520px); min-height:min(76vh,680px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; text-align:center; overflow:hidden;}
+.egg-heading{font-family:'Oswald',sans-serif; font-size:clamp(22px,5vw,34px); font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:#ffffff; animation:egg-heading-in .55s .12s both;}
+.egg-stage{position:relative; width:min(72vw,310px); height:min(61vh,430px); min-height:290px; display:flex; align-items:center; justify-content:center;}
+.egg-halo{position:absolute; width:78%; aspect-ratio:1; border-radius:50%; background:rgba(255,183,128,.24); filter:blur(50px); animation:egg-halo-pulse 2.4s ease-in-out infinite alternate;}
+.egg-number{position:absolute; z-index:1; max-width:96%; padding:14px 10px; color:#ffe0bd; font-family:'Oswald',sans-serif; font-size:clamp(24px,7vw,40px); font-weight:600; letter-spacing:.025em; overflow-wrap:anywhere; text-shadow:0 0 26px rgba(255,183,128,.8); opacity:0; transform:scale(.45) translateY(18px); animation:egg-number-reveal .8s 1.08s cubic-bezier(.16,1,.3,1) forwards;}
+.egg-shell{position:absolute; z-index:2; left:50%; width:min(66vw,236px); height:min(45vh,300px); overflow:visible; filter:drop-shadow(0 15px 25px rgba(0,0,0,.5));}
+.egg-shell path{stroke:rgba(255,231,198,.8); stroke-width:1.2;}
+.egg-top{top:50%; transform:translate(-50%,-50%); transform-origin:50% 51%; animation:egg-shell-top-open 1.05s .38s cubic-bezier(.2,.7,.2,1) forwards;}
+.egg-bottom{top:50%; transform:translate(-50%,-50%); transform-origin:50% 49%; animation:egg-shell-bottom-open 1.05s .38s cubic-bezier(.2,.7,.2,1) forwards;}
+.egg-close{position:absolute; top:12px; right:4px; width:44px; height:44px; border:1px solid rgba(255,255,255,.23); border-radius:50%; background:rgba(255,255,255,.08); color:#ffffff; font:22px 'Montserrat',sans-serif; cursor:pointer;}
+.egg-close:hover{background:rgba(255,255,255,.16);}
+.egg-close-button{border:1px solid rgba(255,183,128,.64); border-radius:999px; padding:13px 26px; background:rgba(255,183,128,.14); color:#ffffff; font:700 14px 'Montserrat',sans-serif; cursor:pointer; animation:egg-heading-in .5s 1.5s both;}
+@keyframes egg-screen-in{from{opacity:0}to{opacity:1}}
+@keyframes egg-heading-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes egg-halo-pulse{from{transform:scale(.78);opacity:.45}to{transform:scale(1.2);opacity:.9}}
+@keyframes egg-shell-top-open{0%{transform:translate(-50%,-50%) rotate(0) scale(1);opacity:1}100%{transform:translate(calc(-50% - 75px),calc(-50% - 115px)) rotate(-30deg) scale(.88);opacity:.12}}
+@keyframes egg-shell-bottom-open{0%{transform:translate(-50%,-50%) rotate(0) scale(1);opacity:1}100%{transform:translate(calc(-50% + 76px),calc(-50% + 110px)) rotate(28deg) scale(.88);opacity:.12}}
+@keyframes egg-number-reveal{0%{opacity:0;transform:scale(.45) translateY(18px);filter:blur(12px)}65%{opacity:1;transform:scale(1.12) translateY(-5px);filter:blur(0)}100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){.raffle-drum.spinning .raffle-drum-number{animation:none}.egg-halo,.egg-shell,.egg-number,.egg-heading,.egg-close-button{animation-duration:.01ms!important;animation-delay:0s!important}}
 </style>
 </helmet>
 <div style="min-height:100vh; background:radial-gradient(130% 90% at 50% -25%, #201709 0%, #0d0a04 48%, #000000 100%); color:#ffffff;">
@@ -108,11 +127,26 @@ a:hover{color:#ffffff;}
       Файл обрабатывается только в вашем браузере: список не отправляется на сайт и не сохраняется. Можно загрузить TXT, CSV или VCF; из VCF считываются поля телефонов. Повторяющиеся номера учитываются один раз.
     </div>
   </main>
+  <sc-if value="{{ revealOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="egg-overlay" onClick="{{ closeReveal }}">
+      <div class="egg-content" onClick="{{ stopRevealClick }}" role="dialog" aria-modal="true" aria-label="Номер победителя">
+        <button type="button" class="egg-close" onClick="{{ closeReveal }}" aria-label="Закрыть">×</button>
+        <div class="egg-heading">Ваш победитель</div>
+        <div class="egg-stage" aria-live="polite">
+          <div class="egg-halo"></div>
+          <div class="egg-number">{{ winner }}</div>
+          <svg class="egg-shell egg-top" viewBox="0 0 100 140" aria-hidden="true"><defs><linearGradient id="eggTopGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff8eb"></stop><stop offset=".46" stop-color="#e9c99e"></stop><stop offset="1" stop-color="#b98654"></stop></linearGradient></defs><path fill="url(#eggTopGradient)" d="M50 4C25 4 10 30 8 62L14 70 21 63 28 71 35 63 42 71 49 63 56 71 63 63 70 71 77 63 84 70 91 62C89 30 75 4 50 4Z"></path></svg>
+          <svg class="egg-shell egg-bottom" viewBox="0 0 100 140" aria-hidden="true"><defs><linearGradient id="eggBottomGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff4df"></stop><stop offset=".5" stop-color="#dfbd91"></stop><stop offset="1" stop-color="#a87342"></stop></linearGradient></defs><path fill="url(#eggBottomGradient)" d="M14 70 21 63 28 71 35 63 42 71 49 63 56 71 63 63 70 71 77 63 84 70 91 62C89 100 74 132 50 137 26 132 11 100 14 70Z"></path></svg>
+        </div>
+        <button type="button" class="egg-close-button" onClick="{{ closeReveal }}">Закрыть</button>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { numbers: [], winner: '', winners: [], fileStatus: 'Файл не выбран.', rolling: false, drumNumber: '' };
+  state = { numbers: [], winner: '', winners: [], fileStatus: 'Файл не выбран.', rolling: false, drumNumber: '', revealOpen: false };
 
   renderVals() {
     const loadContacts = (event) => {
@@ -199,7 +233,7 @@ class Component extends DCLogic {
         } catch (_) {}
       };
 
-      this.setState({ winner: '', rolling: true, drumNumber: numbers[randomIndex()] });
+      this.setState({ winner: '', rolling: true, drumNumber: numbers[randomIndex()], revealOpen: false });
       let step = 0;
       let delay = 42;
       const spin = () => {
@@ -208,9 +242,26 @@ class Component extends DCLogic {
             winner,
             rolling: false,
             drumNumber: winner,
+            revealOpen: true,
             winners: [...this.state.winners, { phone: winner, index: this.state.winners.length + 1 }],
           });
-          if (audio) audio.close().catch(() => {});
+          if (audio) {
+            try {
+              const now = audio.currentTime;
+              const pop = audio.createOscillator();
+              const gain = audio.createGain();
+              pop.type = 'triangle';
+              pop.frequency.setValueAtTime(440, now);
+              pop.frequency.exponentialRampToValueAtTime(95, now + 0.22);
+              gain.gain.setValueAtTime(0.09, now);
+              gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+              pop.connect(gain);
+              gain.connect(audio.destination);
+              pop.start(now);
+              pop.stop(now + 0.25);
+            } catch (_) {}
+            setTimeout(() => audio.close().catch(() => {}), 350);
+          }
           return;
         }
         this.setState({ drumNumber: numbers[randomIndex()] });
@@ -223,17 +274,21 @@ class Component extends DCLogic {
     };
 
     const clearWinners = () => this.setState({ winners: [], winner: '' });
+    const closeReveal = () => this.setState({ revealOpen: false });
 
     return {
       fileStatus: this.state.fileStatus,
       winner: this.state.winner,
       winners: this.state.winners,
       rolling: this.state.rolling,
+      revealOpen: this.state.revealOpen,
       drumNumber: this.state.drumNumber,
       drawLabel: this.state.rolling ? 'Барабан вращается…' : 'Выбрать случайный номер',
       loadContacts,
       drawWinner,
       clearWinners,
+      closeReveal,
+      stopRevealClick: (event) => event.stopPropagation(),
     };
   }
 }
