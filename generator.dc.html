@@ -79,7 +79,25 @@ a:hover{color:#ffffff;}
         <input type="file" accept=".txt,.csv,.vcf,text/plain,text/csv,text/vcard,text/x-vcard" onChange="{{ loadContacts }}" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
       </label>
 
-      <div style="min-height:20px; text-align:center; font-size:13px; line-height:1.5; color:#bdbdbd;">{{ fileStatus }}</div>
+      <sc-if value="{{ numbers.length }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ toggleParticipants }}" aria-expanded="{{ participantsOpen }}" style="width:100%; min-height:48px; border:1px solid rgba(255,183,128,.38); border-radius:14px; padding:11px 16px; cursor:pointer; background:rgba(255,183,128,.08); color:#ffcf9c; font:700 14px 'Montserrat',sans-serif;">{{ participantsLabel }}</button>
+        <sc-if value="{{ participantsOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border:1px solid rgba(255,213,138,.18); border-radius:14px; background:rgba(0,0,0,.2);">
+            <div style="font-size:13px; font-weight:700; color:#e3e3e3;">Участники: {{ numbers.length }}</div>
+            <div style="display:flex; flex-direction:column; gap:6px; max-height:min(40vh,320px); overflow-y:auto; overscroll-behavior:contain;">
+              <sc-for list="{{ participants }}" as="person" hint-placeholder-count="3">
+                <div style="display:flex; gap:10px; align-items:center; padding:8px 10px; border-radius:9px; background:rgba(255,255,255,.035); font-size:13px;">
+                  <span style="width:24px; flex:0 0 auto; color:#ffb780;">{{ person.index }}.</span>
+                  <span style="color:#ffffff; overflow-wrap:anywhere;">{{ person.phone }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </sc-if>
+      <sc-if value="{{ fileStatus }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; font-size:13px; line-height:1.5; color:#ffcf9c;">{{ fileStatus }}</div>
+      </sc-if>
 
       <div style="height:1px; background:rgba(255,213,138,.15);"></div>
       <div style="display:flex; flex-direction:column; gap:7px;">
@@ -146,14 +164,14 @@ a:hover{color:#ffffff;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { numbers: [], winner: '', winners: [], fileStatus: 'Файл не выбран.', rolling: false, drumNumber: '', revealOpen: false };
+  state = { numbers: [], winner: '', winners: [], fileStatus: '', rolling: false, drumNumber: '', revealOpen: false, participantsOpen: false };
 
   renderVals() {
     const loadContacts = (event) => {
       const file = event?.target?.files?.[0];
       if (!file) return;
       if (file.size > 10 * 1024 * 1024) {
-        this.setState({ numbers: [], winner: '', fileStatus: 'Файл больше 10 МБ. Разделите список и загрузите файл меньшего размера.' });
+        this.setState({ numbers: [], winner: '', participantsOpen: false, fileStatus: 'Файл больше 10 МБ. Разделите список и загрузите файл меньшего размера.' });
         event.target.value = '';
         return;
       }
@@ -176,9 +194,8 @@ class Component extends DCLogic {
         this.setState({
           numbers,
           winner: '',
-          fileStatus: numbers.length
-            ? 'Загружен файл «' + file.name + '». Найдено уникальных номеров: ' + numbers.length + '.'
-            : 'В файле не найдено номеров. Проверьте, что это TXT, CSV или VCF с телефонами.',
+          participantsOpen: false,
+          fileStatus: numbers.length ? '' : 'В файле не найдено номеров. Проверьте, что это TXT, CSV или VCF с телефонами.',
         });
         event.target.value = '';
       };
@@ -222,22 +239,22 @@ class Component extends DCLogic {
           const now = audio.currentTime;
           const oscillator = audio.createOscillator();
           const gain = audio.createGain();
-          oscillator.type = 'square';
-          oscillator.frequency.setValueAtTime(Math.max(260, 920 - step * 17), now);
-          gain.gain.setValueAtTime(0.028, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+          oscillator.type = 'triangle';
+          oscillator.frequency.setValueAtTime(Math.max(240, 760 - step * 12), now);
+          gain.gain.setValueAtTime(0.045, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.065);
           oscillator.connect(gain);
           gain.connect(audio.destination);
           oscillator.start(now);
-          oscillator.stop(now + 0.04);
+          oscillator.stop(now + 0.07);
         } catch (_) {}
       };
 
       this.setState({ winner: '', rolling: true, drumNumber: numbers[randomIndex()], revealOpen: false });
       let step = 0;
-      let delay = 42;
+      let delay = 50;
       const spin = () => {
-        if (step >= 36) {
+        if (step >= 42) {
           this.setState({
             winner,
             rolling: false,
@@ -267,7 +284,7 @@ class Component extends DCLogic {
         this.setState({ drumNumber: numbers[randomIndex()] });
         playTick(step);
         step++;
-        delay *= 1.075;
+        delay *= 1.055;
         setTimeout(spin, delay);
       };
       setTimeout(spin, delay);
@@ -275,11 +292,15 @@ class Component extends DCLogic {
 
     const clearWinners = () => this.setState({ winners: [], winner: '' });
     const closeReveal = () => this.setState({ revealOpen: false });
+    const toggleParticipants = () => this.setState({ participantsOpen: !this.state.participantsOpen });
 
     return {
       fileStatus: this.state.fileStatus,
       winner: this.state.winner,
       winners: this.state.winners,
+      participants: this.state.numbers.map((phone, index) => ({ phone, index: index + 1 })),
+      participantsOpen: this.state.participantsOpen,
+      participantsLabel: this.state.participantsOpen ? 'Скрыть список участников' : 'Показать список участников',
       rolling: this.state.rolling,
       revealOpen: this.state.revealOpen,
       drumNumber: this.state.drumNumber,
@@ -287,6 +308,7 @@ class Component extends DCLogic {
       loadContacts,
       drawWinner,
       clearWinners,
+      toggleParticipants,
       closeReveal,
       stopRevealClick: (event) => event.stopPropagation(),
     };
