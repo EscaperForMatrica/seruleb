@@ -9,7 +9,7 @@
 <x-dc>
 <helmet>
 <title>Генератор розыгрыша — Seruleb</title>
-<meta name="description" content="Загрузите список участников в CSV или TXT и выберите случайный номер телефона.">
+<meta name="description" content="Загрузите список участников в CSV, TXT или VCF и выберите случайный номер телефона.">
 <meta property="og:title" content="Генератор розыгрыша — Seruleb">
 <meta property="og:description" content="Случайный выбор номера телефона из списка участников.">
 <meta property="og:type" content="website">
@@ -47,12 +47,12 @@ a:hover{color:#ffffff;}
     <section style="display:flex; flex-direction:column; gap:18px; padding:clamp(18px,4vw,28px); background:linear-gradient(160deg,rgba(255,217,106,.10),rgba(255,255,255,.035)); border:1px solid rgba(255,213,138,.24); border-radius:20px; box-shadow:inset 0 1px 0 rgba(255,231,168,.18),0 16px 40px rgba(0,0,0,.25);">
       <div style="display:flex; flex-direction:column; gap:7px;">
         <div style="font-size:17px; font-weight:700;">1. Загрузите список</div>
-        <div style="font-size:13px; line-height:1.55; color:#bdbdbd;">Поддерживаются текстовые файлы TXT и таблицы CSV. Номера могут быть указаны вместе с именами.</div>
+        <div style="font-size:13px; line-height:1.55; color:#bdbdbd;">Поддерживаются файлы TXT, CSV и контакты vCard (VCF). Номера могут быть указаны вместе с именами.</div>
       </div>
       <label style="display:flex; align-items:center; justify-content:center; gap:10px; min-height:54px; padding:10px 16px; box-sizing:border-box; cursor:pointer; text-align:center; background:rgba(255,183,128,.13); border:1px solid rgba(255,183,128,.48); border-radius:14px; color:#ffffff; font-size:14px; font-weight:700;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4 M7 9l5-5 5 5 M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"></path></svg>
         Выбрать файл участников
-        <input type="file" accept=".txt,.csv,text/plain,text/csv" onChange="{{ loadContacts }}" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
+        <input type="file" accept=".txt,.csv,.vcf,text/plain,text/csv,text/vcard,text/x-vcard" onChange="{{ loadContacts }}" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
       </label>
 
       <div style="min-height:20px; text-align:center; font-size:13px; line-height:1.5; color:#bdbdbd;">{{ fileStatus }}</div>
@@ -75,7 +75,7 @@ a:hover{color:#ffffff;}
 
     <div style="display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border-radius:14px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09); color:#bdbdbd; font-size:12px; line-height:1.6;">
       <svg style="flex:0 0 auto; margin-top:1px;" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z M9 12l2 2 4-4"></path></svg>
-      Файл обрабатывается только в вашем браузере: список не отправляется на сайт и не сохраняется. Подготовьте CSV или TXT с номерами телефонов; повторяющиеся номера учитываются один раз.
+      Файл обрабатывается только в вашем браузере: список не отправляется на сайт и не сохраняется. Можно загрузить TXT, CSV или VCF; из VCF считываются поля телефонов. Повторяющиеся номера учитываются один раз.
     </div>
   </main>
 </div>
@@ -97,8 +97,12 @@ class Component extends DCLogic {
       reader.onload = () => {
         const text = String(reader.result || '');
         const found = new Map();
-        for (const line of text.split(/\r?\n/)) {
-          const candidates = line.match(/\+?\d[\d\s().-]{5,}\d/g) || [];
+        const isVcf = /\.vcf$/i.test(file.name);
+        const lines = text.replace(/\r?\n[ \t]/g, '').split(/\r?\n/);
+        for (const line of lines) {
+          if (isVcf && !/(?:^|\.)TEL(?:;[^:]*)?:/i.test(line)) continue;
+          const value = isVcf ? line.slice(line.indexOf(':') + 1).replace(/^tel:/i, '') : line;
+          const candidates = value.match(/\+?\d[\d\s().-]{5,}\d/g) || [];
           for (const candidate of candidates) {
             const digits = candidate.replace(/\D/g, '');
             if (digits.length >= 7 && digits.length <= 15 && !found.has(digits)) found.set(digits, candidate.trim());
@@ -110,12 +114,12 @@ class Component extends DCLogic {
           winner: '',
           fileStatus: numbers.length
             ? 'Загружен файл «' + file.name + '». Найдено уникальных номеров: ' + numbers.length + '.'
-            : 'В файле не найдено номеров. Проверьте, что это TXT или CSV с телефонами.',
+            : 'В файле не найдено номеров. Проверьте, что это TXT, CSV или VCF с телефонами.',
         });
         event.target.value = '';
       };
       reader.onerror = () => {
-        this.setState({ numbers: [], winner: '', fileStatus: 'Не удалось прочитать файл. Попробуйте сохранить его в формате TXT или CSV.' });
+        this.setState({ numbers: [], winner: '', fileStatus: 'Не удалось прочитать файл. Попробуйте загрузить TXT, CSV или VCF.' });
         event.target.value = '';
       };
       reader.readAsText(file);
@@ -124,7 +128,7 @@ class Component extends DCLogic {
     const drawWinner = () => {
       const { numbers } = this.state;
       if (!numbers.length) {
-        this.setState({ fileStatus: 'Сначала загрузите TXT или CSV файл с номерами участников.' });
+        this.setState({ fileStatus: 'Сначала загрузите TXT, CSV или VCF файл с номерами участников.' });
         return;
       }
       const range = 0x100000000;
