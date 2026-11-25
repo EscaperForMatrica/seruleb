@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Генератор розыгрыша — Seruleb</title>
+<meta name="description" content="Загрузите список участников в CSV или TXT и выберите случайный номер телефона.">
+<meta property="og:title" content="Генератор розыгрыша — Seruleb">
+<meta property="og:description" content="Случайный выбор номера телефона из списка участников.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seruleb.com/generator">
+<link rel="canonical" href="https://seruleb.com/generator">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#000000;}
+body{font-family:'Montserrat',sans-serif;}
+a{color:#ffb780;text-decoration:none;}
+a:hover{color:#ffffff;}
+::selection{background:rgba(255,183,128,.35);}
+</style>
+</helmet>
+<div style="min-height:100vh; background:radial-gradient(130% 90% at 50% -25%, #201709 0%, #0d0a04 48%, #000000 100%); color:#ffffff;">
+  <header style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px clamp(16px,4vw,40px); max-width:800px; margin:0 auto; box-sizing:border-box;">
+    <a href="index.html" style="display:flex; align-items:center; gap:8px; font-family:'Oswald',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:#ffb780; border:1px solid #ffb780; border-radius:3px; padding:8px 16px;" style-hover="border-color:#ffffff; color:#ffffff;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5 M11 6l-6 6 6 6"></path></svg>
+      На главную
+    </a>
+    <div style="font-size:13px; letter-spacing:.14em; color:#b1b1b1; font-weight:600;">SERULEB</div>
+  </header>
+
+  <main data-screen-label="Генератор розыгрыша" style="max-width:680px; margin:0 auto; padding:clamp(20px,5vw,44px) clamp(16px,4vw,28px) 80px; box-sizing:border-box; display:flex; flex-direction:column; gap:24px;">
+    <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;">
+      <div style="width:54px; height:54px; border-radius:16px; display:flex; align-items:center; justify-content:center; background:rgba(255,183,128,.12); border:1px solid rgba(255,183,128,.28);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z M8 8h.01 M12 8h.01 M16 8h.01 M8 12h.01 M12 12h.01 M16 12h.01 M8 16h.01 M12 16h.01 M16 16h.01"></path></svg>
+      </div>
+      <h1 style="font-family:'Oswald',sans-serif; font-size:clamp(25px,5vw,38px); font-weight:600; line-height:1.2; margin:0; text-transform:uppercase;">Генератор <span style="color:#ffb780;">розыгрыша</span></h1>
+      <p style="font-size:clamp(14px,1.8vw,16px); line-height:1.6; color:#d0d0d0; margin:0;">Загрузите файл со списком участников — сайт выберет один номер случайным образом.</p>
+    </div>
+
+    <section style="display:flex; flex-direction:column; gap:18px; padding:clamp(18px,4vw,28px); background:linear-gradient(160deg,rgba(255,217,106,.10),rgba(255,255,255,.035)); border:1px solid rgba(255,213,138,.24); border-radius:20px; box-shadow:inset 0 1px 0 rgba(255,231,168,.18),0 16px 40px rgba(0,0,0,.25);">
+      <div style="display:flex; flex-direction:column; gap:7px;">
+        <div style="font-size:17px; font-weight:700;">1. Загрузите список</div>
+        <div style="font-size:13px; line-height:1.55; color:#bdbdbd;">Поддерживаются текстовые файлы TXT и таблицы CSV. Номера могут быть указаны вместе с именами.</div>
+      </div>
+      <label style="display:flex; align-items:center; justify-content:center; gap:10px; min-height:54px; padding:10px 16px; box-sizing:border-box; cursor:pointer; text-align:center; background:rgba(255,183,128,.13); border:1px solid rgba(255,183,128,.48); border-radius:14px; color:#ffffff; font-size:14px; font-weight:700;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4 M7 9l5-5 5 5 M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"></path></svg>
+        Выбрать файл участников
+        <input type="file" accept=".txt,.csv,text/plain,text/csv" onChange="{{ loadContacts }}" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
+      </label>
+
+      <div style="min-height:20px; text-align:center; font-size:13px; line-height:1.5; color:#bdbdbd;">{{ fileStatus }}</div>
+
+      <div style="height:1px; background:rgba(255,213,138,.15);"></div>
+      <div style="display:flex; flex-direction:column; gap:7px;">
+        <div style="font-size:17px; font-weight:700;">2. Проведите розыгрыш</div>
+        <div style="font-size:13px; line-height:1.55; color:#bdbdbd;">Каждый найденный уникальный номер имеет одинаковый шанс быть выбранным.</div>
+      </div>
+      <button type="button" onClick="{{ drawWinner }}" style="width:100%; min-height:52px; border:0; border-radius:999px; padding:13px 20px; cursor:pointer; background:linear-gradient(180deg,#ffca9c,#ffb780); color:#21150e; font:700 15px 'Montserrat',sans-serif; box-shadow:0 10px 26px rgba(0,0,0,.3);" style-hover="filter:brightness(1.08);">Выбрать случайный номер</button>
+
+      <sc-if value="{{ winner }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:20px 12px; background:rgba(0,0,0,.28); border:1px solid rgba(255,213,138,.22); border-radius:16px; text-align:center;">
+          <div style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#bdbdbd;">Победитель</div>
+          <div style="font-size:clamp(25px,6vw,36px); font-weight:700; color:#ffcf9c; overflow-wrap:anywhere;">{{ winner }}</div>
+          <div style="font-size:12px; color:#bdbdbd;">Номер выбран случайно из списка</div>
+        </div>
+      </sc-if>
+    </section>
+
+    <div style="display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border-radius:14px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09); color:#bdbdbd; font-size:12px; line-height:1.6;">
+      <svg style="flex:0 0 auto; margin-top:1px;" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffb780" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z M9 12l2 2 4-4"></path></svg>
+      Файл обрабатывается только в вашем браузере: список не отправляется на сайт и не сохраняется. Подготовьте CSV или TXT с номерами телефонов; повторяющиеся номера учитываются один раз.
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { numbers: [], winner: '', fileStatus: 'Файл не выбран.' };
+
+  renderVals() {
+    const loadContacts = (event) => {
+      const file = event?.target?.files?.[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) {
+        this.setState({ numbers: [], winner: '', fileStatus: 'Файл больше 10 МБ. Разделите список и загрузите файл меньшего размера.' });
+        event.target.value = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const text = String(reader.result || '');
+        const found = new Map();
+        for (const line of text.split(/\r?\n/)) {
+          const candidates = line.match(/\+?\d[\d\s().-]{5,}\d/g) || [];
+          for (const candidate of candidates) {
+            const digits = candidate.replace(/\D/g, '');
+            if (digits.length >= 7 && digits.length <= 15 && !found.has(digits)) found.set(digits, candidate.trim());
+          }
+        }
+        const numbers = [...found.values()];
+        this.setState({
+          numbers,
+          winner: '',
+          fileStatus: numbers.length
+            ? 'Загружен файл «' + file.name + '». Найдено уникальных номеров: ' + numbers.length + '.'
+            : 'В файле не найдено номеров. Проверьте, что это TXT или CSV с телефонами.',
+        });
+        event.target.value = '';
+      };
+      reader.onerror = () => {
+        this.setState({ numbers: [], winner: '', fileStatus: 'Не удалось прочитать файл. Попробуйте сохранить его в формате TXT или CSV.' });
+        event.target.value = '';
+      };
+      reader.readAsText(file);
+    };
+
+    const drawWinner = () => {
+      const { numbers } = this.state;
+      if (!numbers.length) {
+        this.setState({ fileStatus: 'Сначала загрузите TXT или CSV файл с номерами участников.' });
+        return;
+      }
+      const range = 0x100000000;
+      const limit = Math.floor(range / numbers.length) * numbers.length;
+      const buffer = new Uint32Array(1);
+      let random;
+      do {
+        window.crypto.getRandomValues(buffer);
+        random = buffer[0];
+      } while (random >= limit);
+      this.setState({ winner: numbers[random % numbers.length] });
+    };
+
+    return {
+      fileStatus: this.state.fileStatus,
+      winner: this.state.winner,
+      loadContacts,
+      drawWinner,
+    };
+  }
+}
+</script>
+</body>
+</html>
