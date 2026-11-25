@@ -79,11 +79,11 @@ a:hover{color:#ffffff;}
         <input type="file" accept=".txt,.csv,.vcf,text/plain,text/csv,text/vcard,text/x-vcard" onChange="{{ loadContacts }}" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
       </label>
 
-      <sc-if value="{{ numbers.length }}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{ hasParticipants }}" hint-placeholder-val="{{ false }}">
         <button type="button" onClick="{{ toggleParticipants }}" aria-expanded="{{ participantsOpen }}" style="width:100%; min-height:48px; border:1px solid rgba(255,183,128,.38); border-radius:14px; padding:11px 16px; cursor:pointer; background:rgba(255,183,128,.08); color:#ffcf9c; font:700 14px 'Montserrat',sans-serif;">{{ participantsLabel }}</button>
         <sc-if value="{{ participantsOpen }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border:1px solid rgba(255,213,138,.18); border-radius:14px; background:rgba(0,0,0,.2);">
-            <div style="font-size:13px; font-weight:700; color:#e3e3e3;">Участники: {{ numbers.length }}</div>
+            <div style="font-size:13px; font-weight:700; color:#e3e3e3;">Участники: {{ participantCount }}</div>
             <div style="display:flex; flex-direction:column; gap:6px; max-height:min(40vh,320px); overflow-y:auto; overscroll-behavior:contain;">
               <sc-for list="{{ participants }}" as="person" hint-placeholder-count="3">
                 <div style="display:flex; gap:10px; align-items:center; padding:8px 10px; border-radius:9px; background:rgba(255,255,255,.035); font-size:13px;">
@@ -303,6 +303,8 @@ class Component extends DCLogic {
       winner: this.state.winner,
       winners: this.state.winners,
       participants: this.state.numbers.map((phone, index) => ({ phone, index: index + 1 })),
+      participantCount: this.state.numbers.length,
+      hasParticipants: this.state.numbers.length > 0,
       participantsOpen: this.state.participantsOpen,
       participantsLabel: this.state.participantsOpen ? 'Скрыть список участников' : 'Показать список участников',
       rolling: this.state.rolling,
