@@ -27,12 +27,13 @@ a:hover{color:#ffffff;}
 .raffle-drum{display:flex; flex-direction:column; align-items:center; gap:8px; padding:22px 14px; border-radius:18px; border:1px solid rgba(255,213,138,.3); background:radial-gradient(ellipse at center,rgba(255,183,128,.14),rgba(0,0,0,.32) 72%); box-shadow:inset 0 1px 0 rgba(255,231,168,.16),0 14px 34px rgba(0,0,0,.28); text-align:center;}
 .raffle-drum-number{font-family:'Oswald',sans-serif; font-size:clamp(25px,6vw,38px); font-weight:600; letter-spacing:.04em; color:#ffcf9c; overflow-wrap:anywhere; font-variant-numeric:tabular-nums;}
 .raffle-drum.spinning .raffle-drum-number{animation:drum-jiggle .12s linear infinite; text-shadow:0 0 22px rgba(255,183,128,.42);}
-.roulette-window{position:relative; width:100%; height:220px; overflow:hidden; border:1px solid rgba(255,213,138,.22); border-radius:14px; background:linear-gradient(90deg,rgba(0,0,0,.30),rgba(255,183,128,.055),rgba(0,0,0,.30));}
-.roulette-track{position:absolute; top:0; left:0; width:100%; will-change:transform;}
-.roulette-number{height:44px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; padding:0 34px; color:rgba(255,255,255,.68); font:600 17px 'Oswald',sans-serif; font-variant-numeric:tabular-nums; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
-.raffle-drum.spinning .roulette-number{color:rgba(255,255,255,.8);}
-.roulette-pointer{position:absolute; z-index:2; left:0; right:0; top:50%; height:44px; transform:translateY(-50%); box-sizing:border-box; border-top:1px solid rgba(255,207,156,.8); border-bottom:1px solid rgba(255,207,156,.8); background:rgba(255,183,128,.11); pointer-events:none;}
-.roulette-pointer:before{content:'▶'; position:absolute; top:50%; left:9px; transform:translateY(-50%); color:#ffd3a8; font-size:15px; text-shadow:0 0 10px rgba(255,183,128,.7);}
+.roulette-window{position:relative; width:100%; height:260px; overflow:hidden; border:5px solid #765637; border-radius:24px; background:linear-gradient(90deg,#17120d 0%,#332315 10%,#21180f 25%,#342416 50%,#21180f 75%,#332315 90%,#17120d 100%); box-shadow:inset 0 0 0 1px rgba(255,225,181,.28),inset 0 14px 22px rgba(0,0,0,.48),inset 0 -14px 22px rgba(0,0,0,.48),0 14px 30px rgba(0,0,0,.36); perspective:850px;}
+.roulette-window:before{content:'';position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.68),transparent 24%,transparent 76%,rgba(0,0,0,.68)),linear-gradient(90deg,rgba(0,0,0,.25),transparent 18%,transparent 82%,rgba(0,0,0,.25));}
+.roulette-track{position:absolute; top:0; left:0; width:100%; will-change:transform; transform-style:preserve-3d;}
+.roulette-number{height:50px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; padding:0 38px; color:rgba(255,255,255,.78); font:600 19px 'Oswald',sans-serif; font-variant-numeric:tabular-nums; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; border-bottom:1px solid rgba(255,213,138,.10); text-shadow:0 1px 5px rgba(0,0,0,.7);}
+.raffle-drum.spinning .roulette-number{color:#fff2e5;}
+.roulette-pointer{position:absolute; z-index:2; left:0; right:0; top:50%; height:50px; transform:translateY(-50%); box-sizing:border-box; border-top:2px solid rgba(255,207,156,.9); border-bottom:2px solid rgba(255,207,156,.9); background:linear-gradient(90deg,rgba(255,183,128,.22),rgba(255,183,128,.08)); box-shadow:0 0 18px rgba(255,183,128,.18); pointer-events:none;}
+.roulette-pointer:before{content:'▶'; position:absolute; top:50%; left:9px; transform:translateY(-50%); color:#ffd3a8; font-size:18px; text-shadow:0 0 10px rgba(255,183,128,.8);}
 @keyframes drum-jiggle{0%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}50%{transform:translateY(2px) rotate(.5deg);filter:blur(1px)}100%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}}
 .egg-overlay{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:max(20px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom)); box-sizing:border-box; background:radial-gradient(ellipse at 50% 46%,rgba(104,63,29,.43),rgba(8,7,6,.97) 68%); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); animation:egg-screen-in .45s ease both;}
 .egg-content{position:relative; width:min(100%,520px); min-height:min(76vh,680px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; text-align:center; overflow:hidden;}
@@ -116,7 +117,7 @@ a:hover{color:#ffffff;}
 
       <sc-if value="{{ rolling }}" hint-placeholder-val="{{ false }}">
         <div class="raffle-drum spinning" aria-live="polite">
-          <div style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#bdbdbd;">Барабан вращается</div>
+          <div style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#bdbdbd;">Барабан участников</div>
           <div class="roulette-window">
             <div class="roulette-track" style="transform:translateY({{ reelTranslate }}); transition:{{ reelTransition }};">
               <sc-for list="{{ reelItems }}" as="slot" hint-placeholder-count="5">
@@ -277,11 +278,11 @@ class Component extends DCLogic {
 
       const targetIndex = numbers.length * 5 + winnerIndex;
       this.setState({ winner: '', rolling: true, drumNumber: winner, revealOpen: false, reelTargetIndex: 0, reelTransition: 'none' });
-      setTimeout(() => this.setState({ reelTargetIndex: targetIndex, reelTransition: 'transform 8.1s cubic-bezier(.08,.72,.12,1)' }), 80);
+      setTimeout(() => this.setState({ reelTargetIndex: targetIndex, reelTransition: 'transform 16s cubic-bezier(.08,.72,.12,1)' }), 80);
       let step = 0;
       let delay = 50;
       const spin = () => {
-        if (step >= 42) {
+        if (step >= 48) {
           this.setState({
             winner,
             rolling: false,
@@ -310,7 +311,7 @@ class Component extends DCLogic {
         }
         playTick(step);
         step++;
-        delay *= 1.055;
+        delay *= 1.07;
         setTimeout(spin, delay);
       };
       setTimeout(spin, delay);
@@ -341,7 +342,7 @@ class Component extends DCLogic {
       participantsOpen: this.state.participantsOpen,
       participantsLabel: this.state.participantsOpen ? 'Скрыть список участников' : 'Показать список участников',
       reelItems: Array.from({ length: 7 }, () => this.state.numbers.map(phone => ({ phone }))).flat(),
-      reelTranslate: (88 - this.state.reelTargetIndex * 44) + 'px',
+      reelTranslate: (105 - this.state.reelTargetIndex * 50) + 'px',
       reelTransition: this.state.reelTransition || 'none',
       rolling: this.state.rolling,
       revealOpen: this.state.revealOpen,
