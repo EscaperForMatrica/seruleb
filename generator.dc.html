@@ -27,9 +27,12 @@ a:hover{color:#ffffff;}
 .raffle-drum{display:flex; flex-direction:column; align-items:center; gap:8px; padding:22px 14px; border-radius:18px; border:1px solid rgba(255,213,138,.3); background:radial-gradient(ellipse at center,rgba(255,183,128,.14),rgba(0,0,0,.32) 72%); box-shadow:inset 0 1px 0 rgba(255,231,168,.16),0 14px 34px rgba(0,0,0,.28); text-align:center;}
 .raffle-drum-number{font-family:'Oswald',sans-serif; font-size:clamp(25px,6vw,38px); font-weight:600; letter-spacing:.04em; color:#ffcf9c; overflow-wrap:anywhere; font-variant-numeric:tabular-nums;}
 .raffle-drum.spinning .raffle-drum-number{animation:drum-jiggle .12s linear infinite; text-shadow:0 0 22px rgba(255,183,128,.42);}
-.roulette-window{position:relative; width:min(82vw,420px); aspect-ratio:2/1; margin:0 auto; padding:5px 5px 0; box-sizing:border-box; overflow:hidden; border:5px solid #765637; border-bottom:0; border-radius:220px 220px 0 0; background:linear-gradient(145deg,#f5d3a6,#795833 25%,#d3a66e 48%,#604426 76%,#f3d0a0); box-shadow:0 14px 30px rgba(0,0,0,.5),inset 0 2px 5px rgba(255,246,224,.55);}
-.roulette-wheel{position:absolute; top:0; left:0; display:block; width:100%; height:auto; filter:drop-shadow(0 5px 8px rgba(0,0,0,.5)); transform-origin:50% 50%; will-change:transform;}
-.roulette-wheel-label{font:700 8px 'Montserrat',sans-serif; fill:#fff2df; text-anchor:middle; dominant-baseline:middle; paint-order:stroke; stroke:rgba(15,10,5,.72); stroke-width:2px; stroke-linejoin:round;}
+.roulette-window{position:relative; width:min(82vw,420px); aspect-ratio:2/1; margin:0 auto; padding:5px 5px 0; box-sizing:border-box; overflow:hidden; border:5px solid #765637; border-bottom:0; border-radius:220px 220px 0 0; background:linear-gradient(145deg,#f5d3a6,#795833 25%,#d3a66e 48%,#604426 76%,#f3d0a0); box-shadow:0 14px 30px rgba(0,0,0,.5),inset 0 2px 5px rgba(255,246,224,.55); isolation:isolate;}
+.roulette-wheel{position:absolute; z-index:1; top:0; left:0; display:block; width:100%; height:auto; filter:drop-shadow(0 5px 8px rgba(0,0,0,.5)); transform-origin:50% 50%; will-change:transform;}
+.roulette-vignette{position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(8,6,4,.76),transparent 22%),linear-gradient(90deg,rgba(8,6,4,.72),transparent 13%,transparent 87%,rgba(8,6,4,.72)); box-shadow:inset 0 0 24px 10px rgba(0,0,0,.48);}
+.roulette-label-layer{position:absolute; z-index:3; top:0; left:0; width:100%; height:200%; transform-origin:50% 50%; will-change:transform; pointer-events:none;}
+.roulette-label{position:absolute; transform:translate(-50%,-50%); width:34px; overflow:hidden; text-align:center; color:#fff2df; font:700 9px 'Montserrat',sans-serif; letter-spacing:-.04em; white-space:nowrap; text-shadow:0 1px 3px #130c05,0 0 5px rgba(0,0,0,.9);}
+.roulette-label.is-lit{color:#ffffff; text-shadow:0 0 8px #ffe3b7,0 0 16px #ffbd69,0 1px 3px #130c05;}
 .roulette-pointer{position:absolute; z-index:3; bottom:-1px; left:50%; width:0; height:0; transform:translateX(-50%); border-left:13px solid transparent; border-right:13px solid transparent; border-top:27px solid #fff0d8; filter:drop-shadow(0 3px 5px rgba(0,0,0,.75));}
 .roulette-readout{width:min(82vw,420px); box-sizing:border-box; margin:-1px auto 0; padding:10px 12px 12px; border:1px solid rgba(255,213,138,.28); border-radius:0 0 14px 14px; background:linear-gradient(180deg,#21170e,#100c08); color:#ffcf9c; font:700 clamp(14px,3vw,18px) 'Montserrat',sans-serif; text-align:center; overflow-wrap:anywhere; font-variant-numeric:tabular-nums;}
 @keyframes drum-jiggle{0%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}50%{transform:translateY(2px) rotate(.5deg);filter:blur(1px)}100%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}}
@@ -121,9 +124,14 @@ a:hover{color:#ffffff;}
               <circle cx="200" cy="200" r="190" fill="#24180e" stroke="#f0ca95" stroke-width="3"></circle>
               <sc-for list="{{ wheelSlices }}" as="slice" hint-placeholder-count="8">
                 <path d="{{ slice.path }}" fill="{{ slice.fill }}" stroke="#eac28d" stroke-width="1"></path>
-                <text class="roulette-wheel-label" fill="{{ slice.textFill }}" x="{{ slice.x }}" y="{{ slice.y }}" transform="rotate({{ slice.labelRotation }} {{ slice.x }} {{ slice.y }})">{{ slice.label }}</text>
               </sc-for>
             </svg>
+            <div class="roulette-vignette"></div>
+            <div class="roulette-label-layer" style="transform:rotate({{ wheelRotation }}deg); transition:{{ wheelTransition }};">
+              <sc-for list="{{ wheelSlices }}" as="slice" hint-placeholder-count="8">
+                <div class="roulette-label {{ slice.labelClass }}" style="left:{{ slice.left }}; top:{{ slice.top }}; transform:translate(-50%,-50%) rotate({{ slice.labelRotation }}deg);">{{ slice.label }}</div>
+              </sc-for>
+            </div>
             <div class="roulette-pointer"></div>
           </div>
           <div class="roulette-readout">{{ drumNumber }}</div>
@@ -362,8 +370,10 @@ class Component extends DCLogic {
             ? 'M 200 12 A 188 188 0 1 1 200 388 A 188 188 0 1 1 200 12 Z'
             : 'M 200 200 L ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' A 188 188 0 0 1 ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + ' Z',
           x: x.toFixed(2), y: y.toFixed(2),
+          left: (x / 4).toFixed(3) + '%', top: (y / 4).toFixed(3) + '%',
           label: phone.replace(/\D/g, '').slice(-4),
           labelRotation: radialAngle > 90 && radialAngle < 270 ? radialAngle + 180 : radialAngle,
+          labelClass: index === this.state.litIndex ? 'is-lit' : '',
           fill: index === this.state.litIndex ? '#e7a653' : (index % 2 ? '#563b22' : '#8b6339'),
           textFill: index === this.state.litIndex ? '#fffdf8' : '#fff2df',
         };
