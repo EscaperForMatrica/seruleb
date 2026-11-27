@@ -120,7 +120,7 @@ a:hover{color:#ffffff;}
         <div class="raffle-drum spinning" aria-live="polite">
           <div style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#bdbdbd;">Барабан участников</div>
           <div class="roulette-window">
-            <svg class="roulette-wheel" viewBox="0 0 400 400" style="transform:rotate({{ wheelRotation }}deg); transition:{{ wheelTransition }};" aria-label="Колесо участников">
+            <svg class="roulette-wheel" onTransitionEnd="{{ wheelStopped }}" viewBox="0 0 400 400" style="transform:rotate({{ wheelRotation }}deg); transition:{{ wheelTransition }};" aria-label="Колесо участников">
               <circle cx="200" cy="200" r="190" fill="#24180e" stroke="#f0ca95" stroke-width="3"></circle>
               <sc-for list="{{ wheelSlices }}" as="slice" hint-placeholder-count="8">
                 <path d="{{ slice.path }}" fill="{{ slice.fill }}" stroke="#eac28d" stroke-width="1"></path>
@@ -189,7 +189,7 @@ a:hover{color:#ffffff;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { numbers: [], winner: '', winners: [], fileStatus: '', rolling: false, drumNumber: '', revealOpen: false, participantsOpen: false, participantQuery: '', wheelRotation: 0, wheelTransition: 'none', litIndex: 0 };
+  state = { numbers: [], winner: '', pendingWinner: '', winners: [], fileStatus: '', rolling: false, drumNumber: '', revealOpen: false, participantsOpen: false, participantQuery: '', wheelRotation: 0, wheelTransition: 'none', litIndex: 0 };
 
   renderVals() {
     const loadContacts = (event) => {
@@ -286,49 +286,59 @@ class Component extends DCLogic {
       };
 
       const targetRotation = 360 * 8 - winnerIndex * (360 / numbers.length);
-      this.setState({ winner: '', rolling: true, drumNumber: numbers[randomIndex()], revealOpen: false, wheelRotation: 0, wheelTransition: 'none', litIndex: 0 });
-      setTimeout(() => this.setState({ wheelTransition: 'transform 16s linear' }), 80);
+      this._raffleAudio = audio;
+      this.setState({ winner: '', pendingWinner: winner, rolling: true, drumNumber: 'Определяем победителя…', revealOpen: false, wheelRotation: 0, wheelTransition: 'none', litIndex: 0 });
+      setTimeout(() => this.setState({ wheelRotation: targetRotation, wheelTransition: 'transform 16s cubic-bezier(.16,.72,.18,1)' }), 80);
       let step = 0;
       let delay = 50;
-      const spin = () => {
-        if (step >= 48) {
-          this.setState({
-            winner,
-            rolling: false,
-            drumNumber: winner,
-            revealOpen: true,
-            winners: [...this.state.winners, { phone: winner, index: this.state.winners.length + 1 }],
-          });
-          if (audio) {
-            try {
-              const now = audio.currentTime;
-              const pop = audio.createOscillator();
-              const gain = audio.createGain();
-              pop.type = 'triangle';
-              pop.frequency.setValueAtTime(440, now);
-              pop.frequency.exponentialRampToValueAtTime(95, now + 0.22);
-              gain.gain.setValueAtTime(0.09, now);
-              gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
-              pop.connect(gain);
-              gain.connect(audio.destination);
-              pop.start(now);
-              pop.stop(now + 0.25);
-            } catch (_) {}
-            setTimeout(() => audio.close().catch(() => {}), 350);
-          }
-          return;
-        }
+      let nextDelay = delay;
+      const tick = () => {
+        if (!this.state.rolling || step >= 48) return;
         step++;
-        const nextRotation = step === 48 ? targetRotation : step * 60;
-        const nextDelay = delay * 1.07;
-        const sectorSize = 360 / numbers.length;
-        const litIndex = ((Math.round(-nextRotation / sectorSize) % numbers.length) + numbers.length) % numbers.length;
-        this.setState({ wheelRotation: nextRotation, wheelTransition: 'transform ' + Math.max(60, Math.round(nextDelay)) + 'ms linear', litIndex, drumNumber: numbers[litIndex] });
         playTick(step);
-        delay = nextDelay;
-        setTimeout(spin, delay);
+        nextDelay *= 1.07;
+        setTimeout(tick, nextDelay);
       };
-      setTimeout(spin, delay);
+      setTimeout(tick, delay);
+      setTimeout(() => finishSpin(), 18000);
+    };
+
+    const finishSpin = () => {
+      if (!this.state.rolling || !this.state.pendingWinner) return;
+      const winner = this.state.pendingWinner;
+      const winnerIndex = this.state.numbers.indexOf(winner);
+      this.setState({
+        winner,
+        pendingWinner: '',
+        rolling: false,
+        drumNumber: winner,
+        litIndex: Math.max(0, winnerIndex),
+        revealOpen: true,
+        winners: [...this.state.winners, { phone: winner, index: this.state.winners.length + 1 }],
+      });
+      const audio = this._raffleAudio;
+      this._raffleAudio = null;
+      if (audio) {
+        try {
+          const now = audio.currentTime;
+          const pop = audio.createOscillator();
+          const gain = audio.createGain();
+          pop.type = 'triangle';
+          pop.frequency.setValueAtTime(440, now);
+          pop.frequency.exponentialRampToValueAtTime(95, now + 0.22);
+          gain.gain.setValueAtTime(0.09, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+          pop.connect(gain);
+          gain.connect(audio.destination);
+          pop.start(now);
+          pop.stop(now + 0.25);
+        } catch (_) {}
+        setTimeout(() => audio.close().catch(() => {}), 350);
+      }
+    };
+    const wheelStopped = (event) => {
+      if (event?.propertyName && event.propertyName !== 'transform') return;
+      finishSpin();
     };
 
     const clearWinners = () => this.setState({ winners: [], winner: '' });
@@ -380,6 +390,7 @@ class Component extends DCLogic {
       }),
       wheelRotation: this.state.wheelRotation,
       wheelTransition: this.state.wheelTransition || 'none',
+      wheelStopped,
       rolling: this.state.rolling,
       revealOpen: this.state.revealOpen,
       drumNumber: this.state.drumNumber,
