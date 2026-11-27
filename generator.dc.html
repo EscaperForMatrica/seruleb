@@ -32,7 +32,7 @@ a:hover{color:#ffffff;}
 .flip-digit{position:relative; flex:1 1 0; min-width:0; max-width:34px; height:clamp(46px,11vw,62px); perspective:220px; overflow:hidden; border:1px solid #393939; border-radius:7px; background:linear-gradient(180deg,#333,#191919 48%,#292929 52%,#161616); box-shadow:inset 0 2px 4px rgba(255,255,255,.1),0 3px 7px rgba(0,0,0,.55);}
 .flip-digit:after{content:'';position:absolute;z-index:2;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.78);box-shadow:0 1px 0 rgba(255,255,255,.14);}
 .flip-digit-value{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#f4f4f4;font:700 clamp(23px,7vw,39px) 'Oswald',sans-serif;text-shadow:0 2px 2px rgba(0,0,0,.7);}
-.flip-digit.spinning .flip-digit-value{animation:digit-flip .11s linear infinite;}
+.flip-digit.spinning .flip-digit-value{animation:digit-flip .24s ease-in-out infinite;}
 .flip-digit.stopped{border-color:#5b4934;background:linear-gradient(180deg,#34302b,#1a1714 48%,#2a251f 52%,#15120f);}
 .flip-digit.stopped .flip-digit-value{color:#ffe1bd;text-shadow:0 0 9px rgba(255,183,128,.22);}
 .duration-select{width:100%;min-height:48px;box-sizing:border-box;padding:10px 13px;border:1px solid rgba(255,213,138,.24);border-radius:12px;background:#171411;color:#ffffff;font:600 14px 'Montserrat',sans-serif;}
@@ -291,7 +291,7 @@ class Component extends DCLogic {
 
       const digits = winner.replace(/\D/g, '');
       const durationMs = this.state.durationSeconds * 1000;
-      const lockInterval = 260;
+      const lockInterval = 600;
       const lockStart = durationMs - digits.length * lockInterval;
       this._raffleAudio = audio;
       this.setState({ winner: '', pendingWinner: winner, rolling: true, rollingDigits: Array.from({ length: digits.length }, () => String(Math.floor(Math.random() * 10))).join(''), stoppedDigitCount: 0, countdownSeconds: this.state.durationSeconds, revealOpen: false });
@@ -308,7 +308,7 @@ class Component extends DCLogic {
           return;
         }
         this.setState({ rollingDigits: nextDigits, stoppedDigitCount: stoppedCount, countdownSeconds: Math.ceil((durationMs - elapsed) / 1000) });
-        setTimeout(rollDigits, 100);
+        setTimeout(rollDigits, 240);
       };
       setTimeout(rollDigits, 50);
     };
