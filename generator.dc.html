@@ -31,9 +31,9 @@ a:hover{color:#ffffff;}
 .roulette-wheel{position:absolute; z-index:1; top:0; left:0; display:block; width:100%; height:auto; filter:drop-shadow(0 5px 8px rgba(0,0,0,.5)); transform-origin:50% 50%; will-change:transform;}
 .roulette-vignette{position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(8,6,4,.76),transparent 22%),linear-gradient(90deg,rgba(8,6,4,.72),transparent 13%,transparent 87%,rgba(8,6,4,.72)); box-shadow:inset 0 0 24px 10px rgba(0,0,0,.48);}
 .roulette-label-layer{position:absolute; z-index:3; top:0; left:0; width:100%; height:200%; transform-origin:50% 50%; will-change:transform; pointer-events:none;}
-.roulette-label{position:absolute; transform:translate(-50%,-50%); width:34px; overflow:hidden; text-align:center; color:#fff2df; font:700 9px 'Montserrat',sans-serif; letter-spacing:-.04em; white-space:nowrap; text-shadow:0 1px 3px #130c05,0 0 5px rgba(0,0,0,.9);}
+.roulette-label{position:absolute; transform:translate(-50%,-50%); width:92px; overflow:visible; text-align:center; color:#fff2df; font:700 7px 'Montserrat',sans-serif; letter-spacing:-.04em; white-space:nowrap; font-variant-numeric:tabular-nums; text-shadow:0 1px 3px #130c05,0 0 5px rgba(0,0,0,.9);}
 .roulette-label.is-lit{color:#ffffff; text-shadow:0 0 8px #ffe3b7,0 0 16px #ffbd69,0 1px 3px #130c05;}
-.roulette-pointer{position:absolute; z-index:3; bottom:-1px; left:50%; width:0; height:0; transform:translateX(-50%); border-left:13px solid transparent; border-right:13px solid transparent; border-top:27px solid #fff0d8; filter:drop-shadow(0 3px 5px rgba(0,0,0,.75));}
+.roulette-pointer{position:absolute; z-index:4; top:0; left:50%; width:0; height:0; transform:translateX(-50%); border-left:18px solid transparent; border-right:18px solid transparent; border-top:43px solid #fff0d8; filter:drop-shadow(0 3px 5px rgba(0,0,0,.85));}
 .roulette-readout{width:min(82vw,420px); box-sizing:border-box; margin:-1px auto 0; padding:10px 12px 12px; border:1px solid rgba(255,213,138,.28); border-radius:0 0 14px 14px; background:linear-gradient(180deg,#21170e,#100c08); color:#ffcf9c; font:700 clamp(14px,3vw,18px) 'Montserrat',sans-serif; text-align:center; overflow-wrap:anywhere; font-variant-numeric:tabular-nums;}
 @keyframes drum-jiggle{0%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}50%{transform:translateY(2px) rotate(.5deg);filter:blur(1px)}100%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}}
 .egg-overlay{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:max(20px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom)); box-sizing:border-box; background:radial-gradient(ellipse at 50% 46%,rgba(104,63,29,.43),rgba(8,7,6,.97) 68%); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); animation:egg-screen-in .45s ease both;}
@@ -285,7 +285,7 @@ class Component extends DCLogic {
         } catch (_) {}
       };
 
-      const targetRotation = 360 * 8 + 180 - winnerIndex * (360 / numbers.length);
+      const targetRotation = 360 * 8 - winnerIndex * (360 / numbers.length);
       this.setState({ winner: '', rolling: true, drumNumber: numbers[randomIndex()], revealOpen: false, wheelRotation: 0, wheelTransition: 'none', litIndex: 0 });
       setTimeout(() => this.setState({ wheelTransition: 'transform 16s linear' }), 80);
       let step = 0;
@@ -322,7 +322,7 @@ class Component extends DCLogic {
         const nextRotation = step === 48 ? targetRotation : step * 60;
         const nextDelay = delay * 1.07;
         const sectorSize = 360 / numbers.length;
-        const litIndex = ((Math.round((180 - nextRotation) / sectorSize) % numbers.length) + numbers.length) % numbers.length;
+        const litIndex = ((Math.round(-nextRotation / sectorSize) % numbers.length) + numbers.length) % numbers.length;
         this.setState({ wheelRotation: nextRotation, wheelTransition: 'transform ' + Math.max(60, Math.round(nextDelay)) + 'ms linear', litIndex, drumNumber: numbers[litIndex] });
         playTick(step);
         delay = nextDelay;
@@ -362,7 +362,7 @@ class Component extends DCLogic {
         const end = (index * step + step / 2 - 90) * Math.PI / 180;
         const x1 = 200 + 188 * Math.cos(start), y1 = 200 + 188 * Math.sin(start);
         const x2 = 200 + 188 * Math.cos(end), y2 = 200 + 188 * Math.sin(end);
-        const x = 200 + 139 * Math.cos(angle), y = 200 + 139 * Math.sin(angle);
+        const x = 200 + 150 * Math.cos(angle), y = 200 + 150 * Math.sin(angle);
         const normalized = (index * step + 360) % 360;
         const radialAngle = (normalized + 270) % 360;
         return {
@@ -371,7 +371,7 @@ class Component extends DCLogic {
             : 'M 200 200 L ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' A 188 188 0 0 1 ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + ' Z',
           x: x.toFixed(2), y: y.toFixed(2),
           left: (x / 4).toFixed(3) + '%', top: (y / 4).toFixed(3) + '%',
-          label: phone.replace(/\D/g, '').slice(-4),
+          label: phone,
           labelRotation: radialAngle > 90 && radialAngle < 270 ? radialAngle + 180 : radialAngle,
           labelClass: index === this.state.litIndex ? 'is-lit' : '',
           fill: index === this.state.litIndex ? '#e7a653' : (index % 2 ? '#563b22' : '#8b6339'),
