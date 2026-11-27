@@ -27,14 +27,16 @@ a:hover{color:#ffffff;}
 .raffle-drum{display:flex; flex-direction:column; align-items:center; gap:8px; padding:22px 14px; border-radius:18px; border:1px solid rgba(255,213,138,.3); background:radial-gradient(ellipse at center,rgba(255,183,128,.14),rgba(0,0,0,.32) 72%); box-shadow:inset 0 1px 0 rgba(255,231,168,.16),0 14px 34px rgba(0,0,0,.28); text-align:center;}
 .raffle-drum-number{font-family:'Oswald',sans-serif; font-size:clamp(25px,6vw,38px); font-weight:600; letter-spacing:.04em; color:#ffcf9c; overflow-wrap:anywhere; font-variant-numeric:tabular-nums;}
 .raffle-drum.spinning .raffle-drum-number{animation:drum-jiggle .12s linear infinite; text-shadow:0 0 22px rgba(255,183,128,.42);}
-.roulette-window{position:relative; width:min(82vw,420px); aspect-ratio:2/1; margin:0 auto; padding:5px 5px 0; box-sizing:border-box; overflow:hidden; border:5px solid #765637; border-bottom:0; border-radius:220px 220px 0 0; background:linear-gradient(145deg,#f5d3a6,#795833 25%,#d3a66e 48%,#604426 76%,#f3d0a0); box-shadow:0 14px 30px rgba(0,0,0,.5),inset 0 2px 5px rgba(255,246,224,.55); isolation:isolate;}
-.roulette-wheel{position:absolute; z-index:1; top:0; left:0; display:block; width:100%; height:auto; filter:drop-shadow(0 5px 8px rgba(0,0,0,.5)); transform-origin:50% 50%; will-change:transform;}
-.roulette-vignette{position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(8,6,4,.76),transparent 22%),linear-gradient(90deg,rgba(8,6,4,.72),transparent 13%,transparent 87%,rgba(8,6,4,.72)); box-shadow:inset 0 0 24px 10px rgba(0,0,0,.48);}
-.roulette-label-layer{position:absolute; z-index:3; top:0; left:0; width:100%; height:200%; transform-origin:50% 50%; will-change:transform; pointer-events:none;}
-.roulette-label{position:absolute; transform:translate(-50%,-50%); width:92px; overflow:visible; text-align:center; color:#fff2df; font:700 7px 'Montserrat',sans-serif; letter-spacing:-.04em; white-space:nowrap; font-variant-numeric:tabular-nums; text-shadow:0 1px 3px #130c05,0 0 5px rgba(0,0,0,.9);}
-.roulette-label.is-lit{color:#ffffff; text-shadow:0 0 8px #ffe3b7,0 0 16px #ffbd69,0 1px 3px #130c05;}
-.roulette-pointer{position:absolute; z-index:4; top:0; left:50%; width:0; height:0; transform:translateX(-50%); border-left:18px solid transparent; border-right:18px solid transparent; border-top:43px solid #fff0d8; filter:drop-shadow(0 3px 5px rgba(0,0,0,.85));}
-.roulette-readout{width:min(82vw,420px); box-sizing:border-box; margin:-1px auto 0; padding:10px 12px 12px; border:1px solid rgba(255,213,138,.28); border-radius:0 0 14px 14px; background:linear-gradient(180deg,#21170e,#100c08); color:#ffcf9c; font:700 clamp(14px,3vw,18px) 'Montserrat',sans-serif; text-align:center; overflow-wrap:anywhere; font-variant-numeric:tabular-nums;}
+.flip-counter{display:flex; align-items:center; justify-content:center; gap:clamp(2px,.7vw,5px); width:100%; padding:clamp(14px,3vw,22px) 8px; box-sizing:border-box; border:1px solid rgba(255,255,255,.08); border-radius:18px; background:linear-gradient(180deg,#191919,#101010); box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 28px rgba(0,0,0,.3); font-variant-numeric:tabular-nums;}
+.flip-prefix{flex:0 0 auto; color:#f1f1f1; font:700 clamp(20px,6vw,34px) 'Oswald',sans-serif;}
+.flip-digit{position:relative; flex:1 1 0; min-width:0; max-width:34px; height:clamp(46px,11vw,62px); perspective:220px; overflow:hidden; border:1px solid #393939; border-radius:7px; background:linear-gradient(180deg,#333,#191919 48%,#292929 52%,#161616); box-shadow:inset 0 2px 4px rgba(255,255,255,.1),0 3px 7px rgba(0,0,0,.55);}
+.flip-digit:after{content:'';position:absolute;z-index:2;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.78);box-shadow:0 1px 0 rgba(255,255,255,.14);}
+.flip-digit-value{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#f4f4f4;font:700 clamp(23px,7vw,39px) 'Oswald',sans-serif;text-shadow:0 2px 2px rgba(0,0,0,.7);}
+.flip-digit.spinning .flip-digit-value{animation:digit-flip .11s linear infinite;}
+.flip-digit.stopped{border-color:#5b4934;background:linear-gradient(180deg,#34302b,#1a1714 48%,#2a251f 52%,#15120f);}
+.flip-digit.stopped .flip-digit-value{color:#ffe1bd;text-shadow:0 0 9px rgba(255,183,128,.22);}
+.duration-select{width:100%;min-height:48px;box-sizing:border-box;padding:10px 13px;border:1px solid rgba(255,213,138,.24);border-radius:12px;background:#171411;color:#ffffff;font:600 14px 'Montserrat',sans-serif;}
+@keyframes digit-flip{0%{transform:translateY(-2px) rotateX(-5deg);filter:brightness(1.15)}50%{transform:translateY(2px) rotateX(5deg);filter:brightness(.8)}100%{transform:translateY(-2px) rotateX(-5deg);filter:brightness(1.15)}}
 @keyframes drum-jiggle{0%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}50%{transform:translateY(2px) rotate(.5deg);filter:blur(1px)}100%{transform:translateY(-2px) rotate(-.5deg);filter:blur(.5px)}}
 .egg-overlay{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:max(20px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom)); box-sizing:border-box; background:radial-gradient(ellipse at 50% 46%,rgba(104,63,29,.43),rgba(8,7,6,.97) 68%); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); animation:egg-screen-in .45s ease both;}
 .egg-content{position:relative; width:min(100%,520px); min-height:min(76vh,680px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; text-align:center; overflow:hidden;}
@@ -91,7 +93,13 @@ a:hover{color:#ffffff;}
         <button type="button" onClick="{{ toggleParticipants }}" aria-expanded="{{ participantsOpen }}" style="width:100%; min-height:48px; border:1px solid rgba(255,183,128,.38); border-radius:14px; padding:11px 16px; cursor:pointer; background:rgba(255,183,128,.08); color:#ffcf9c; font:700 14px 'Montserrat',sans-serif;">{{ participantsLabel }}</button>
         <sc-if value="{{ participantsOpen }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border:1px solid rgba(255,213,138,.18); border-radius:14px; background:rgba(0,0,0,.2);">
-            <div style="font-size:13px; font-weight:700; color:#e3e3e3;">Найдено: {{ filteredParticipantCount }} из {{ participantCount }}</div>
+            <sc-if value="{{ participantCountVisible }}" hint-placeholder-val="{{ true }}">
+              <div style="font-size:13px; font-weight:700; color:#e3e3e3;">Найдено: {{ filteredParticipantCount }} из {{ participantCount }}</div>
+            </sc-if>
+            <sc-if value="{{ participantCountHidden }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px; font-weight:700; color:#e3e3e3;">Количество участников скрыто</div>
+            </sc-if>
+            <button type="button" onClick="{{ toggleParticipantCount }}" style="align-self:flex-start;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 11px;background:rgba(255,255,255,.04);color:#d0d0d0;font:600 11px 'Montserrat',sans-serif;cursor:pointer;">{{ participantCountToggleLabel }}</button>
             <input type="search" value="{{ participantQuery }}" onInput="{{ searchParticipants }}" placeholder="Найти номер участника" aria-label="Поиск номера участника" style="width:100%; box-sizing:border-box; min-height:44px; padding:10px 13px; border:1px solid rgba(255,213,138,.24); border-radius:11px; outline:none; background:rgba(255,255,255,.06); color:#ffffff; font:14px 'Montserrat',sans-serif;">
             <div style="display:flex; flex-direction:column; gap:6px; max-height:min(40vh,320px); overflow-y:auto; overscroll-behavior:contain;">
               <sc-if value="{{ hasFilteredParticipants }}" hint-placeholder-val="{{ false }}">
@@ -114,28 +122,24 @@ a:hover{color:#ffffff;}
         <div style="font-size:17px; font-weight:700;">2. Проведите розыгрыш</div>
         <div style="font-size:13px; line-height:1.55; color:#bdbdbd;">Каждый найденный уникальный номер имеет одинаковый шанс быть выбранным.</div>
       </div>
+      <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; font-weight:600; color:#d0d0d0;">
+        Длительность вращения
+        <select class="duration-select" value="{{ durationSeconds }}" onChange="{{ changeDuration }}" disabled="{{ rolling }}">
+          <option value="15">15 секунд</option><option value="30">30 секунд</option><option value="60">1 минута</option><option value="120">2 минуты</option><option value="180">3 минуты</option><option value="300">5 минут</option>
+        </select>
+      </label>
       <button type="button" onClick="{{ drawWinner }}" style="width:100%; min-height:52px; border:0; border-radius:999px; padding:13px 20px; cursor:pointer; background:linear-gradient(180deg,#ffca9c,#ffb780); color:#21150e; font:700 15px 'Montserrat',sans-serif; box-shadow:0 10px 26px rgba(0,0,0,.3);" style-hover="filter:brightness(1.08);">{{ drawLabel }}</button>
 
       <sc-if value="{{ rolling }}" hint-placeholder-val="{{ false }}">
         <div class="raffle-drum spinning" aria-live="polite">
-          <div style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#bdbdbd;">Барабан участников</div>
-          <div class="roulette-window">
-            <svg class="roulette-wheel" onTransitionEnd="{{ wheelStopped }}" viewBox="0 0 400 400" style="transform:rotate({{ wheelRotation }}deg); transition:{{ wheelTransition }};" aria-label="Колесо участников">
-              <circle cx="200" cy="200" r="190" fill="#24180e" stroke="#f0ca95" stroke-width="3"></circle>
-              <sc-for list="{{ wheelSlices }}" as="slice" hint-placeholder-count="8">
-                <path d="{{ slice.path }}" fill="{{ slice.fill }}" stroke="#eac28d" stroke-width="1"></path>
-              </sc-for>
-            </svg>
-            <div class="roulette-vignette"></div>
-            <div class="roulette-label-layer" style="transform:rotate({{ wheelRotation }}deg); transition:{{ wheelTransition }};">
-              <sc-for list="{{ wheelSlices }}" as="slice" hint-placeholder-count="8">
-                <div class="roulette-label {{ slice.labelClass }}" style="left:{{ slice.left }}; top:{{ slice.top }}; transform:translate(-50%,-50%) rotate({{ slice.labelRotation }}deg);">{{ slice.label }}</div>
-              </sc-for>
-            </div>
-            <div class="roulette-pointer"></div>
+          <div style="font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#bdbdbd; text-align:center;">{{ countdownLabel }}</div>
+          <div class="flip-counter" aria-label="Номер победителя формируется">
+            <sc-if value="{{ showPhonePrefix }}" hint-placeholder-val="{{ false }}"><span class="flip-prefix">+</span></sc-if>
+            <sc-for list="{{ digitSlots }}" as="slot" hint-placeholder-count="10">
+              <div class="flip-digit {{ slot.status }}"><div class="flip-digit-value">{{ slot.value }}</div></div>
+            </sc-for>
           </div>
-          <div class="roulette-readout">{{ drumNumber }}</div>
-          <div style="font-size:12px; color:#bdbdbd;">Выбираем победителя…</div>
+          <div style="font-size:12px; color:#bdbdbd; text-align:center;">Цифры остановятся по очереди</div>
         </div>
       </sc-if>
 
@@ -189,7 +193,7 @@ a:hover{color:#ffffff;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { numbers: [], winner: '', pendingWinner: '', winners: [], fileStatus: '', rolling: false, drumNumber: '', revealOpen: false, participantsOpen: false, participantQuery: '', wheelRotation: 0, wheelTransition: 'none', litIndex: 0 };
+  state = { numbers: [], winner: '', pendingWinner: '', winners: [], fileStatus: '', rolling: false, rollingDigits: '', stoppedDigitCount: 0, countdownSeconds: 0, durationSeconds: 15, revealOpen: false, participantsOpen: false, participantQuery: '', participantCountVisible: true };
 
   renderVals() {
     const loadContacts = (event) => {
@@ -285,34 +289,40 @@ class Component extends DCLogic {
         } catch (_) {}
       };
 
-      const targetRotation = 360 * 8 - winnerIndex * (360 / numbers.length);
+      const digits = winner.replace(/\D/g, '');
+      const durationMs = this.state.durationSeconds * 1000;
+      const lockInterval = 260;
+      const lockStart = durationMs - digits.length * lockInterval;
       this._raffleAudio = audio;
-      this.setState({ winner: '', pendingWinner: winner, rolling: true, drumNumber: 'Определяем победителя…', revealOpen: false, wheelRotation: 0, wheelTransition: 'none', litIndex: 0 });
-      setTimeout(() => this.setState({ wheelRotation: targetRotation, wheelTransition: 'transform 16s cubic-bezier(.16,.72,.18,1)' }), 80);
-      let step = 0;
-      let delay = 50;
-      let nextDelay = delay;
-      const tick = () => {
-        if (!this.state.rolling || step >= 48) return;
-        step++;
-        playTick(step);
-        nextDelay *= 1.07;
-        setTimeout(tick, nextDelay);
+      this.setState({ winner: '', pendingWinner: winner, rolling: true, rollingDigits: Array.from({ length: digits.length }, () => String(Math.floor(Math.random() * 10))).join(''), stoppedDigitCount: 0, countdownSeconds: this.state.durationSeconds, revealOpen: false });
+      const startedAt = Date.now();
+      const rollDigits = () => {
+        if (!this.state.rolling) return;
+        const elapsed = Date.now() - startedAt;
+        const stoppedCount = Math.min(digits.length, Math.max(0, Math.floor((elapsed - lockStart) / lockInterval) + 1));
+        const nextDigits = Array.from({ length: digits.length }, (_, index) => index < stoppedCount ? digits[index] : String(Math.floor(Math.random() * 10))).join('');
+        if (stoppedCount > this.state.stoppedDigitCount) playTick(stoppedCount);
+        if (elapsed >= durationMs) {
+          this.setState({ rollingDigits: digits, stoppedDigitCount: digits.length, countdownSeconds: 0 });
+          finishSpin();
+          return;
+        }
+        this.setState({ rollingDigits: nextDigits, stoppedDigitCount: stoppedCount, countdownSeconds: Math.ceil((durationMs - elapsed) / 1000) });
+        setTimeout(rollDigits, 100);
       };
-      setTimeout(tick, delay);
-      setTimeout(() => finishSpin(), 18000);
+      setTimeout(rollDigits, 50);
     };
 
     const finishSpin = () => {
       if (!this.state.rolling || !this.state.pendingWinner) return;
       const winner = this.state.pendingWinner;
-      const winnerIndex = this.state.numbers.indexOf(winner);
       this.setState({
         winner,
         pendingWinner: '',
         rolling: false,
-        drumNumber: winner,
-        litIndex: Math.max(0, winnerIndex),
+        rollingDigits: winner.replace(/\D/g, ''),
+        stoppedDigitCount: winner.replace(/\D/g, '').length,
+        countdownSeconds: 0,
         revealOpen: true,
         winners: [...this.state.winners, { phone: winner, index: this.state.winners.length + 1 }],
       });
@@ -336,20 +346,22 @@ class Component extends DCLogic {
         setTimeout(() => audio.close().catch(() => {}), 350);
       }
     };
-    const wheelStopped = (event) => {
-      if (event?.propertyName && event.propertyName !== 'transform') return;
-      finishSpin();
-    };
-
     const clearWinners = () => this.setState({ winners: [], winner: '' });
     const closeReveal = () => this.setState({ revealOpen: false });
     const toggleParticipants = () => this.setState({ participantsOpen: !this.state.participantsOpen });
+    const toggleParticipantCount = () => this.setState({ participantCountVisible: !this.state.participantCountVisible });
     const searchParticipants = (event) => this.setState({ participantQuery: event?.target?.value || '' });
+    const changeDuration = (event) => {
+      const selected = Number(event?.target?.value);
+      if ([15, 30, 60, 120, 180, 300].includes(selected)) this.setState({ durationSeconds: selected });
+    };
     const participants = this.state.numbers.map((phone, index) => ({ phone, index: index + 1 }));
     const queryDigits = this.state.participantQuery.replace(/\D/g, '');
     const filteredParticipants = queryDigits
       ? participants.filter(person => person.phone.replace(/\D/g, '').includes(queryDigits))
       : participants;
+    const countdownMinutes = Math.floor(this.state.countdownSeconds / 60);
+    const countdownRemainder = String(this.state.countdownSeconds % 60).padStart(2, '0');
 
     return {
       fileStatus: this.state.fileStatus,
@@ -362,44 +374,26 @@ class Component extends DCLogic {
       hasNoFilteredParticipants: filteredParticipants.length === 0,
       participantQuery: this.state.participantQuery,
       participantCount: this.state.numbers.length,
+      participantCountVisible: this.state.participantCountVisible,
+      participantCountHidden: !this.state.participantCountVisible,
+      participantCountToggleLabel: this.state.participantCountVisible ? 'Скрыть количество участников' : 'Показать количество участников',
       hasParticipants: this.state.numbers.length > 0,
       participantsOpen: this.state.participantsOpen,
       participantsLabel: this.state.participantsOpen ? 'Скрыть список участников' : 'Показать список участников',
-      wheelSlices: this.state.numbers.map((phone, index, list) => {
-        const step = 360 / list.length;
-        const angle = (index * step - 90) * Math.PI / 180;
-        const start = (index * step - step / 2 - 90) * Math.PI / 180;
-        const end = (index * step + step / 2 - 90) * Math.PI / 180;
-        const x1 = 200 + 188 * Math.cos(start), y1 = 200 + 188 * Math.sin(start);
-        const x2 = 200 + 188 * Math.cos(end), y2 = 200 + 188 * Math.sin(end);
-        const x = 200 + 150 * Math.cos(angle), y = 200 + 150 * Math.sin(angle);
-        const normalized = (index * step + 360) % 360;
-        const radialAngle = (normalized + 270) % 360;
-        return {
-          path: list.length === 1
-            ? 'M 200 12 A 188 188 0 1 1 200 388 A 188 188 0 1 1 200 12 Z'
-            : 'M 200 200 L ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' A 188 188 0 0 1 ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + ' Z',
-          x: x.toFixed(2), y: y.toFixed(2),
-          left: (x / 4).toFixed(3) + '%', top: (y / 4).toFixed(3) + '%',
-          label: phone,
-          labelRotation: radialAngle > 90 && radialAngle < 270 ? radialAngle + 180 : radialAngle,
-          labelClass: index === this.state.litIndex ? 'is-lit' : '',
-          fill: index % 2 ? '#563b22' : '#8b6339',
-          textFill: index === this.state.litIndex ? '#fffdf8' : '#fff2df',
-        };
-      }),
-      wheelRotation: this.state.wheelRotation,
-      wheelTransition: this.state.wheelTransition || 'none',
-      wheelStopped,
+      durationSeconds: this.state.durationSeconds,
+      countdownLabel: 'До результата: ' + countdownMinutes + ':' + countdownRemainder,
+      digitSlots: this.state.rollingDigits.split('').map((value, index) => ({ value, status: index < this.state.stoppedDigitCount ? 'stopped' : 'spinning' })),
+      showPhonePrefix: (this.state.pendingWinner || this.state.winner).startsWith('+'),
       rolling: this.state.rolling,
       revealOpen: this.state.revealOpen,
-      drumNumber: this.state.drumNumber,
       drawLabel: this.state.rolling ? 'Барабан вращается…' : 'Выбрать случайный номер',
       loadContacts,
       drawWinner,
       clearWinners,
       toggleParticipants,
+      toggleParticipantCount,
       searchParticipants,
+      changeDuration,
       closeReveal,
       stopRevealClick: (event) => event.stopPropagation(),
     };
