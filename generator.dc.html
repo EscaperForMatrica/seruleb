@@ -193,7 +193,7 @@ a:hover{color:#ffffff;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { numbers: [], winner: '', pendingWinner: '', winners: [], fileStatus: '', rolling: false, rollingDigits: '', stoppedDigitCount: 0, countdownSeconds: 0, durationSeconds: 15, revealOpen: false, participantsOpen: false, participantQuery: '', participantCountVisible: true };
+  state = { numbers: [], winner: '', pendingWinner: '', winners: [], fileStatus: '', rolling: false, rollingDigits: '', stoppedDigitCount: 0, countdownSeconds: 0, durationSeconds: 15, revealOpen: false, participantsOpen: false, participantQuery: '', participantCountVisible: false };
 
   renderVals() {
     const loadContacts = (event) => {
@@ -291,15 +291,15 @@ class Component extends DCLogic {
 
       const digits = winner.replace(/\D/g, '');
       const durationMs = this.state.durationSeconds * 1000;
-      const lockInterval = 600;
-      const lockStart = durationMs - digits.length * lockInterval;
+      const firstLockAt = Math.min(5000, Math.max(500, durationMs / (digits.length + 1)));
+      const lockInterval = digits.length > 1 ? (durationMs - firstLockAt) / (digits.length - 1) : durationMs;
       this._raffleAudio = audio;
       this.setState({ winner: '', pendingWinner: winner, rolling: true, rollingDigits: Array.from({ length: digits.length }, () => String(Math.floor(Math.random() * 10))).join(''), stoppedDigitCount: 0, countdownSeconds: this.state.durationSeconds, revealOpen: false });
       const startedAt = Date.now();
       const rollDigits = () => {
         if (!this.state.rolling) return;
         const elapsed = Date.now() - startedAt;
-        const stoppedCount = Math.min(digits.length, Math.max(0, Math.floor((elapsed - lockStart) / lockInterval) + 1));
+        const stoppedCount = elapsed < firstLockAt ? 0 : Math.min(digits.length, 1 + Math.floor((elapsed - firstLockAt) / lockInterval));
         const nextDigits = Array.from({ length: digits.length }, (_, index) => index < stoppedCount ? digits[index] : String(Math.floor(Math.random() * 10))).join('');
         if (stoppedCount > this.state.stoppedDigitCount) playTick(stoppedCount);
         if (elapsed >= durationMs) {
