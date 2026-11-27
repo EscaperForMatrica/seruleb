@@ -384,7 +384,7 @@ class Component extends DCLogic {
           label: phone,
           labelRotation: radialAngle > 90 && radialAngle < 270 ? radialAngle + 180 : radialAngle,
           labelClass: index === this.state.litIndex ? 'is-lit' : '',
-          fill: index === this.state.litIndex ? '#e7a653' : (index % 2 ? '#563b22' : '#8b6339'),
+          fill: index % 2 ? '#563b22' : '#8b6339',
           textFill: index === this.state.litIndex ? '#fffdf8' : '#fff2df',
         };
       }),
